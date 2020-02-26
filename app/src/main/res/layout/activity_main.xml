@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_marginTop="180dp"
+        android:hint="Email"
+        android:drawableLeft="@drawable/icon_profile"
+        android:drawablePadding="10dp"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_below="@+id/et_email"
+        android:layout_marginTop="30dp"
+        android:hint="Password"
+        android:drawableLeft="@drawable/icon_password"
+        android:drawablePadding="10dp"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_logIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_password"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn_style1"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/tv_qtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_logIn"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="32dp"
+        android:text="Don't have an account?"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_logIn"
+        android:layout_toRightOf="@+id/tv_qtn"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:text="SignUp"
+        android:textColor="#01579B"
+        android:textSize="18sp" />
+
+</RelativeLayout>
