@@ -5,7 +5,7 @@
     android:padding="15dp">
 
     <TextView
-        android:id="@+id/tv_emailTitle"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="Register: "
