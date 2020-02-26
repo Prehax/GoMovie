@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_emailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="E-mail: "
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:id="@+id/et_remail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Input your E-mail here"
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/tv_emailTitle"
+        android:layout_marginTop="30dp"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:id="@+id/tv_passTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Password: "
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tv_emailTitle"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/et_rpass1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Set your password"
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/tv_passTitle1"
+        android:layout_below="@+id/et_remail"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/tv_passTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Password: "
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/tv_passTitle1"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/et_rpass2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Repeat your password"
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/tv_passTitle2"
+        android:layout_below="@+id/et_rpass1"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_style1"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_marginBottom="30dp" />
+
+</RelativeLayout>
