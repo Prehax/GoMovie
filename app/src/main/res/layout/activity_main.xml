@@ -46,10 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_logIn"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="32dp"
         android:text="Don't have an account?"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_signUp"
@@ -61,6 +61,6 @@
         android:layout_marginStart="8dp"
         android:text="SignUp"
         android:textColor="#01579B"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
 </RelativeLayout>
