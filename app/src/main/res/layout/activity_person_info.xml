@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personal Information: "
+        android:textSize="20sp"
+        android:textColor="#000000"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_pinfo_Fname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name: "
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/et_pinfo_Fname"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:hint="Longlong"
+            android:background="@drawable/et_style1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_pinfo_Lname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name: "
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/et_pinfo_Lname"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:hint="Xu"
+            android:background="@drawable/et_style1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Street Address: "
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/et_pinfo_address"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:hint="300 Boston Post Rd"
+            android:background="@drawable/et_style1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City: "
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/et_pinfo_city"
+            android:layout_width="130dp"
+            android:layout_height="36dp"
+            android:hint="West Haven"
+            android:background="@drawable/et_style1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State: "
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginStart="15dp"/>
+
+        <EditText
+            android:id="@+id/et_pinfo_state"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:hint="CT"
+            android:background="@drawable/et_style1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Postal Code: "
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/et_pinfo_zip"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:hint="06516"
+            android:background="@drawable/et_style1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_pinfo_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:background="@drawable/btn_style1"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:id="@+id/btn_pinfo_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:background="@drawable/btn_style1"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>

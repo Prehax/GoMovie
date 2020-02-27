@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent (MainActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
 

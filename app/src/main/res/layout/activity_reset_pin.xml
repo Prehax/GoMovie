@@ -44,8 +44,7 @@
         android:background="@drawable/btn_style1"
         android:text="Confirm"
         android:textSize="20sp"
-        android:textAllCaps="false"
-        android:layout_gravity="bottom" />
+        android:textAllCaps="false" />
     <Button
         android:layout_marginTop="20dp"
         android:id="@+id/btn_resetCancel"
@@ -54,7 +53,6 @@
         android:background="@drawable/btn_style1"
         android:text="Cancel"
         android:textSize="20sp"
-        android:textAllCaps="false"
-        android:layout_gravity="bottom" />
+        android:textAllCaps="false" />
 
 </LinearLayout>
