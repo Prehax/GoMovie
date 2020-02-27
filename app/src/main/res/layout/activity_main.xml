@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="15dp">
 
     <EditText
         android:id="@+id/et_email"
@@ -57,10 +57,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_logIn"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginStart="8dp"
         android:text="SignUp"
+        android:textColor="#01579B"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_signUp"
+        android:layout_centerHorizontal="true"
+        android:text="Forgot your password?"
+        android:layout_marginTop="20dp"
         android:textColor="#01579B"
         android:textSize="16sp" />
 
