@@ -1,5 +1,6 @@
 package com.prehax.gomovie;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,17 +24,16 @@ import java.io.IOException;
 public class SignupActivity extends AppCompatActivity {
 
     private EditText et_rem, et_rpass1, et_rpass2;
-    private TextView tv_show,tv_show1,tv_show2;
-    private Button btn_register;
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
     private String Email,password1,password2;
-    private String cline = "\n", space = "\t";
+
+    FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        //Firebase Authentication
+        mFirebaseAuth = FirebaseAuth.getInstance();
         // E-mail want to register
         et_rem = findViewById(R.id.et_remail);
 
@@ -37,13 +42,9 @@ public class SignupActivity extends AppCompatActivity {
 
         // Password must be same as above
         et_rpass2 = findViewById(R.id.et_rpass2);
+        Button btn_register = findViewById(R.id.btn_register);
 
-        tv_show = findViewById(R.id.tv_show);
-        tv_show1 = findViewById(R.id.tv_show1);
 
-        btn_register = findViewById(R.id.btn_register);
-        mSharedPreferences = this.getSharedPreferences("PersonalInformation",MODE_PRIVATE);
-        mEditor = mSharedPreferences.edit();
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,45 +56,30 @@ public class SignupActivity extends AppCompatActivity {
                 if(password1.equals("")||(password2.equals(""))){//check it is empty or not
                     Toast.makeText(SignupActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
                 }else if(password1.equals(password2)){
-                    Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    mEditor.putString("Email",Email);
-                    mEditor.putString("password",password1);
-                    mEditor.apply();
-                    save("Email: "+Email+" ");
-                    save("PassWord: "+password1);
-                    save(cline);
 
-                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    //save data
+                    mFirebaseAuth.createUserWithEmailAndPassword(Email,password1).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(!task.isSuccessful()){
+                                Toast.makeText(SignupActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+
+                }else if(Email.isEmpty()){
+                    Toast.makeText(SignupActivity.this, "Email is empty", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(SignupActivity.this, "password not match", Toast.LENGTH_SHORT).show();
                 }
-//                Toast.makeText(SignupActivity.this, "Next step", Toast.LENGTH_SHORT).show();
-                tv_show.setText(mSharedPreferences.getString("Email",""));
-                tv_show1.setText(mSharedPreferences.getString("password",""));
             }
         });
 
 
     }
-    //save data
-    private void save(String content){
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = openFileOutput("test.txt",MODE_APPEND);
-            fileOutputStream.write(content.getBytes());
-            } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(null != fileOutputStream){
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
-        }
-
-    }
 }

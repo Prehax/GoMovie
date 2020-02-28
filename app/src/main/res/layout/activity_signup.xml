@@ -85,36 +85,5 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:layout_marginBottom="30dp" />
-    <TextView
-
-        android:id="@+id/tv_show"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="null"
-        android:layout_below="@id/et_rpass2"
-        android:textColor="#000000"
-        />
-    <TextView
-
-        android:id="@+id/tv_show1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#3D1810"
-        android:layout_marginTop="20dp"
-        android:text="null"
-        android:layout_below="@id/tv_show"
-
-        />
-    <TextView
-
-        android:id="@+id/tv_show2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="null"
-        android:layout_below="@id/tv_show1"
-        android:textColor="#000000"
-        />
 
 </RelativeLayout>
