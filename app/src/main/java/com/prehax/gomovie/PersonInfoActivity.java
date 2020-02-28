@@ -21,9 +21,12 @@ public class PersonInfoActivity extends AppCompatActivity {
 
     private static final String TAG = "PersonInfoActivity";
     private EditText etFname, etLname, etAddress, etCity, etState, etZip;
+    // Objects for Database
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +43,15 @@ public class PersonInfoActivity extends AppCompatActivity {
         Button btn_confirm = findViewById(R.id.btn_pinfo_confirm);
         Button btn_cancel = findViewById(R.id.btn_pinfo_cancel);
         //database
+
         mAuth = FirebaseAuth.getInstance();
         //Firebase stuff
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+//错误出在这里， 两句
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+//        myRef = mFirebaseDatabase.getReference();
         //Authentication
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = mAuth.getCurrentUser();
@@ -59,6 +64,8 @@ public class PersonInfoActivity extends AppCompatActivity {
                 }
             }
         };
+
+
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,12 +85,11 @@ public class PersonInfoActivity extends AppCompatActivity {
                 myRef.child(userID).child("State").setValue(State);
                 myRef.child(userID).child("Zip").setValue(Zip);
 
-//                Intent intent = new Intent(PersonInfoActivity.this,showpslinfo.class);
-//                startActivity(intent);
+                finish();
             }
         });
-
     }
+
     @Override
     protected void onStart() {
         super.onStart();

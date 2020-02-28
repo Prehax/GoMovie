@@ -41,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // A temporary function for the button, I'm learning how to connect it to database
+                //
                 password1 = et_rpass1.getText().toString().trim();
                 password2 = et_rpass2.getText().toString().trim();
                 Email = et_rem.getText().toString().trim();
@@ -57,8 +57,7 @@ public class SignupActivity extends AppCompatActivity {
                                 Toast.makeText(SignupActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                                startActivity(intent);
+                                finish();
                             }
                         }
                     });
