@@ -57,9 +57,9 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
                 }else if(password1.equals(password2)){
                     Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    mEditor.putString("Email",Email);
-                    mEditor.putString("password",password1);
-                    mEditor.apply();
+//                    mEditor.putString("Email",Email);
+//                    mEditor.putString("password",password1);
+//                    mEditor.apply();
                     save(Email);
                     save(password1);
                     save(cline);
