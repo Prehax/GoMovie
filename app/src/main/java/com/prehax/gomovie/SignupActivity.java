@@ -23,7 +23,7 @@ public class SignupActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String Email,password1,password2;
-    private String cline = "\n";
+    private String cline = "\n", space = "\t";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class SignupActivity extends AppCompatActivity {
 
         tv_show = findViewById(R.id.tv_show);
         tv_show1 = findViewById(R.id.tv_show1);
-        tv_show2 = findViewById(R.id.tv_show2);
 
         btn_register = findViewById(R.id.btn_register);
         mSharedPreferences = this.getSharedPreferences("PersonalInformation",MODE_PRIVATE);
@@ -57,11 +56,11 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
                 }else if(password1.equals(password2)){
                     Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
-//                    mEditor.putString("Email",Email);
-//                    mEditor.putString("password",password1);
-//                    mEditor.apply();
-                    save(Email);
-                    save(password1);
+                    mEditor.putString("Email",Email);
+                    mEditor.putString("password",password1);
+                    mEditor.apply();
+                    save("Email: "+Email+" ");
+                    save("PassWord: "+password1);
                     save(cline);
 
                     Intent intent = new Intent(SignupActivity.this, MainActivity.class);
