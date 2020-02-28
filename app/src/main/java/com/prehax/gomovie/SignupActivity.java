@@ -2,6 +2,7 @@ package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -18,7 +23,7 @@ public class SignupActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String Email,password1,password2;
-
+    private String cline = "\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,12 @@ public class SignupActivity extends AppCompatActivity {
                     mEditor.putString("Email",Email);
                     mEditor.putString("password",password1);
                     mEditor.apply();
+                    save(Email);
+                    save(password1);
+                    save(cline);
+
+                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }else {
                     Toast.makeText(SignupActivity.this, "password not match", Toast.LENGTH_SHORT).show();
                 }
@@ -66,5 +77,24 @@ public class SignupActivity extends AppCompatActivity {
 
 
     }
+    //save data
+    private void save(String content){
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = openFileOutput("test.txt",MODE_APPEND);
+            fileOutputStream.write(content.getBytes());
+            } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(null != fileOutputStream){
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
+        }
+
+    }
 }
