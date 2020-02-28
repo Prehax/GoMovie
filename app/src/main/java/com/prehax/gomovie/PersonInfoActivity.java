@@ -1,15 +1,29 @@
 package com.prehax.gomovie;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PersonInfoActivity extends AppCompatActivity {
 
+    private static final String TAG = "PersonInfoActivity";
     private EditText etFname, etLname, etAddress, etCity, etState, etZip;
-    private Button btn_confirm, btn_cancel;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +37,65 @@ public class PersonInfoActivity extends AppCompatActivity {
         etState = findViewById(R.id.et_pinfo_state);
         etZip = findViewById(R.id.et_pinfo_zip);
         // Bind Button variable to ID
-        btn_confirm = findViewById(R.id.btn_pinfo_confirm);
-        btn_cancel = findViewById(R.id.btn_pinfo_cancel);
+        Button btn_confirm = findViewById(R.id.btn_pinfo_confirm);
+        Button btn_cancel = findViewById(R.id.btn_pinfo_cancel);
+        //database
+        mAuth = FirebaseAuth.getInstance();
+        //Firebase stuff
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        //Authentication
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null){
+                    Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
+                    Toast.makeText(PersonInfoActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
+                } else{
+                    Log.d(TAG,"onAuthStateChanged:Signed_out");
+                    Toast.makeText(PersonInfoActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"OnClick:Save Informations");
+                String Fname = etFname.getText().toString().trim();
+                String Lname = etLname.getText().toString().trim();
+                String Address = etAddress.getText().toString();
+                String City = etCity.getText().toString().trim();
+                String State = etState.getText().toString().trim();
+                String Zip = etZip.getText().toString().trim();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String userID  = user.getUid();
+                myRef.child(userID).child("Fname").setValue(Fname);
+                myRef.child(userID).child("Lname").setValue(Lname);
+                myRef.child(userID).child("Adress").setValue(Address);
+                myRef.child(userID).child("City").setValue(City);
+                myRef.child(userID).child("State").setValue(State);
+                myRef.child(userID).child("Zip").setValue(Zip);
+
+//                Intent intent = new Intent(PersonInfoActivity.this,showpslinfo.class);
+//                startActivity(intent);
+            }
+        });
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
 }

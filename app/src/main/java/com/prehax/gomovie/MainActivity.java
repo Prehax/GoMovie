@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,27 +26,32 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private Button btn_logIn;
     private TextView tv_signUp, tv_reset;
     private EditText et_email,et_password;
-    FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         btn_logIn = (Button) findViewById(R.id.btn_logIn);
 
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser mFirebaseuser = mFirebaseAuth.getCurrentUser();
-                if (mFirebaseuser != null){
-                    Toast.makeText(MainActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null){
+                    Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
+                    Toast.makeText(MainActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
+                } else{
+                    Log.d(TAG,"onAuthStateChanged:Signed_out");
+                    Toast.makeText(MainActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -60,18 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if(password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
                 }else {
-                    Task<AuthResult> login_error = mFirebaseAuth.signInWithEmailAndPassword(Email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (!task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Login Error", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                            }
-                        }
-                    });
-
+                    mAuth.signInWithEmailAndPassword(Email, password);
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
                 }
 
                
@@ -102,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }

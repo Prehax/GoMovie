@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "956304174237-enenk9hqlt9jj9dqf557089oaq967ap4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prehax.gomovie",
+            "certificate_hash": "37eafe972411c3d8ec93e21fd57f84dffaef7826"
+          }
+        },
+        {
           "client_id": "956304174237-caaoipn7m2tad6ngqchv5u5m9d07erjg.apps.googleusercontent.com",
           "client_type": 3
         }

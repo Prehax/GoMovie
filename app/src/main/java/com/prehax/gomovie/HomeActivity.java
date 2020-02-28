@@ -9,13 +9,12 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button btn_personInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btn_personInfo = findViewById(R.id.btn_personInfo);
+        Button btn_personInfo = findViewById(R.id.btn_personInfo);
         btn_personInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
