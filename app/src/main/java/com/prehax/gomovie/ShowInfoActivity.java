@@ -1,14 +1,14 @@
 package com.prehax.gomovie;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,8 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
+//import com.google.firebase.quickstart.database.java.models.Post;
 
 public class ShowInfoActivity extends AppCompatActivity {
     private static final String TAG = "PersonInfoActivity";
@@ -89,7 +88,14 @@ public class ShowInfoActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                showData(dataSnapshot);
+                // showData(dataSnapshot);
+                MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
+                tvFname.setText(movieGoer.getFname());
+                tvLname.setText(movieGoer.getLname());
+                tvAddress.setText(movieGoer.getAddress());
+                tvCity.setText(movieGoer.getCity());
+                tvState.setText(movieGoer.getState());
+                tvZip.setText(movieGoer.getZip());
             }
 
             @Override
@@ -99,18 +105,18 @@ public class ShowInfoActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     private void showData(DataSnapshot dataSnapshot) {
         for (DataSnapshot ds : dataSnapshot.getChildren()){
             MovieGoer movieGoer = new MovieGoer();
-            movieGoer.setFirstName(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getFirstName());
+            movieGoer.setFname(ds.child("MovieGoers").child(userID).getValue());
             movieGoer.setLastName(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getLastName());
             movieGoer.setAddress(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getAddress());
             movieGoer.setCity(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getCity());
             movieGoer.setState(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getState());
             movieGoer.setZipcode(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getZipcode());
 
-            tvFname.setText(movieGoer.getFirstName());
+            tvFname.setText(movieGoer.getFname());
             tvLname.setText(movieGoer.getLastName());
             tvAddress.setText(movieGoer.getAddress());
             tvCity.setText(movieGoer.getCity());
@@ -118,7 +124,7 @@ public class ShowInfoActivity extends AppCompatActivity {
             tvZip.setText(movieGoer.getZipcode());
         }
     }
-
+*/
     @Override
     protected void onStart() {
         super.onStart();

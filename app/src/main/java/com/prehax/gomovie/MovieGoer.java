@@ -3,7 +3,7 @@ package com.prehax.gomovie;
 import androidx.annotation.Nullable;
 
 public class MovieGoer {
-    private String FName="", LName="", Address="", City="", State="", Zip="";
+    private String Fname="", Lname="", Address="", City="", State="", Zip="";
 
 
     public String getAddress() {
@@ -12,16 +12,16 @@ public class MovieGoer {
     public String getCity() {
         return City;
     }
-    public String getFirstName() {
-        return FName;
+    public String getFname() {
+        return Fname;
     }
-    public String getLastName() {
-        return LName;
+    public String getLname() {
+        return Lname;
     }
     public String getState() {
         return State;
     }
-    public String getZipcode() {
+    public String getZip() {
         return Zip;
     }
     public void setAddress(String address) {
@@ -30,16 +30,16 @@ public class MovieGoer {
     public void setCity(String city) {
         this.City = city;
     }
-    public void setFirstName(String firstName) {
-        this.FName = firstName;
+    public void setFname(String firstName) {
+        this.Fname = firstName;
     }
-    public void setLastName(String lastName) {
-        this.LName = lastName;
+    public void setLname(String lastName) {
+        this.Lname = lastName;
     }
     public void setState(String state) {
         this.State = state;
     }
-    public void setZipcode(String zipcode) {
+    public void setZip(String zipcode) {
         this.Zip = zipcode;
     }
 }
