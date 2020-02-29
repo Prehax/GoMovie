@@ -105,26 +105,7 @@ public class ShowInfoActivity extends AppCompatActivity {
             }
         });
     }
-/*
-    private void showData(DataSnapshot dataSnapshot) {
-        for (DataSnapshot ds : dataSnapshot.getChildren()){
-            MovieGoer movieGoer = new MovieGoer();
-            movieGoer.setFname(ds.child("MovieGoers").child(userID).getValue());
-            movieGoer.setLastName(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getLastName());
-            movieGoer.setAddress(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getAddress());
-            movieGoer.setCity(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getCity());
-            movieGoer.setState(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getState());
-            movieGoer.setZipcode(ds.child("MovieGoers").child(userID).getValue(MovieGoer.class).getZipcode());
 
-            tvFname.setText(movieGoer.getFname());
-            tvLname.setText(movieGoer.getLastName());
-            tvAddress.setText(movieGoer.getAddress());
-            tvCity.setText(movieGoer.getCity());
-            tvState.setText(movieGoer.getState());
-            tvZip.setText(movieGoer.getZipcode());
-        }
-    }
-*/
     @Override
     protected void onStart() {
         super.onStart();
