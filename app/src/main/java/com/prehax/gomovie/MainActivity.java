@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Email is empty", Toast.LENGTH_SHORT).show();
                 }else if(password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
-                }else {
+                }else if(Email.equals("admin@123.com")&&password.equals("admin123")){
+                    Toast.makeText(MainActivity.this, "admin is Logging", Toast.LENGTH_SHORT).show();
+                    mAuth.signInWithEmailAndPassword(Email, password);
+                }else{
                     mAuth.signInWithEmailAndPassword(Email, password);
                 }
             }
