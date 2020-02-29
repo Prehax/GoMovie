@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:padding="15dp">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Register: "
-        android:textSize="30sp"
-        android:textColor="#000000"
-        android:gravity="center_vertical"
-        android:layout_marginTop="30dp"/>
 
     <TextView
         android:id="@+id/tv_emailTitle"
@@ -21,7 +12,7 @@
         android:text="E-mail: "
         android:textSize="20sp"
         android:gravity="center_vertical"
-        android:layout_marginTop="120dp"/>
+        android:layout_marginTop="80dp"/>
     <EditText
         android:id="@+id/et_remail"
         android:layout_width="match_parent"
@@ -30,7 +21,7 @@
         android:background="@drawable/et_style1"
         android:padding="10dp"
         android:layout_toRightOf="@+id/tv_emailTitle"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         android:inputType="textEmailAddress"/>
 
     <TextView

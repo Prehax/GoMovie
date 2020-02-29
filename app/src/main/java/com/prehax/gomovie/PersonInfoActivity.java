@@ -58,21 +58,21 @@ public class PersonInfoActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null){
                     Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
-                    Toast.makeText(PersonInfoActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PersonInfoActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
                 } else{
                     Log.d(TAG,"onAuthStateChanged:Signed_out");
-                    Toast.makeText(PersonInfoActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PersonInfoActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
                 }
             }
         };
-
+/*
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
+                Object value = dataSnapshot.getValue(String.class);
                 Log.d(TAG, "Value is: " + value);
             }
 
@@ -82,7 +82,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
+*/
 
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                 String Zip = etZip.getText().toString().trim();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID  = user.getUid();
-                Toast.makeText(PersonInfoActivity.this, myRef.toString(), Toast.LENGTH_SHORT).show();
+
                 myRef.child("MovieGoers").child(userID).child("Fname").setValue(Fname);
                 myRef.child("MovieGoers").child(userID).child("Lname").setValue(Lname);
                 myRef.child("MovieGoers").child(userID).child("Address").setValue(Address);
@@ -105,7 +105,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                 myRef.child("MovieGoers").child(userID).child("State").setValue(State);
                 myRef.child("MovieGoers").child(userID).child("Zip").setValue(Zip);
 
-                //Toast.makeText(PersonInfoActivity.this, "Save Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PersonInfoActivity.this, "Save Successfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

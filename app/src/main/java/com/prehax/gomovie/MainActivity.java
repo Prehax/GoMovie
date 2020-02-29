@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else{
                     Log.d(TAG,"onAuthStateChanged:Signed_out");
-                    Toast.makeText(MainActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         mAuth.addAuthStateListener(mAuthListener);
     }
 

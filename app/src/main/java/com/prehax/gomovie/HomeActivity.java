@@ -29,7 +29,8 @@ public class HomeActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
                     Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
-                } else{
+                    //Toast.makeText(HomeActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(HomeActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         btn_personInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, PersonInfoActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ShowInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -60,9 +61,13 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        // Modify later!!!!!!!!!!
+        mAuth.signOut();
+        // Modify later!!!!!!!!!!
         super.onStop();
         if(mAuthListener != null){
             mAuth.removeAuthStateListener(mAuthListener);
         }
+
     }
 }
