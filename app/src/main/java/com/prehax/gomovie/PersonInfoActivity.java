@@ -30,6 +30,8 @@ public class PersonInfoActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
+    private String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,9 @@ public class PersonInfoActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         //Authentication
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID=user.getUid();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -84,6 +89,28 @@ public class PersonInfoActivity extends AppCompatActivity {
         });
 */
 
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                // showData(dataSnapshot);
+                try {
+                    MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
+                    etFname.setText(movieGoer.getFname());
+                    etLname.setText(movieGoer.getLname());
+                    etAddress.setText(movieGoer.getAddress());
+                    etCity.setText(movieGoer.getCity());
+                    etState.setText(movieGoer.getState());
+                    etZip.setText(movieGoer.getZip());
+                } catch (NullPointerException e) {}
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,13 +82,17 @@ public class ShowInfoActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 // showData(dataSnapshot);
-                MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
-                tvFname.setText(movieGoer.getFname());
-                tvLname.setText(movieGoer.getLname());
-                tvAddress.setText(movieGoer.getAddress());
-                tvCity.setText(movieGoer.getCity());
-                tvState.setText(movieGoer.getState());
-                tvZip.setText(movieGoer.getZip());
+                try {
+                    MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
+                    tvFname.setText(movieGoer.getFname());
+                    tvLname.setText(movieGoer.getLname());
+                    tvAddress.setText(movieGoer.getAddress());
+                    tvCity.setText(movieGoer.getCity());
+                    tvState.setText(movieGoer.getState());
+                    tvZip.setText(movieGoer.getZip());
+                } catch (NullPointerException e) {
+                    Toast.makeText(ShowInfoActivity.this, "You don't have info saved yet", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onCancelled(DatabaseError error) {
