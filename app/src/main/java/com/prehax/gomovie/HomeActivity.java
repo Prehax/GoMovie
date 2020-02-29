@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
+
+
     private static final String TAG = "HomeActivity";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -61,9 +63,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        // Modify later!!!!!!!!!!
-        mAuth.signOut();
-        // Modify later!!!!!!!!!!
         super.onStop();
         if(mAuthListener != null){
             mAuth.removeAuthStateListener(mAuthListener);

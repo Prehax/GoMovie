@@ -3,43 +3,43 @@ package com.prehax.gomovie;
 import androidx.annotation.Nullable;
 
 public class MovieGoer {
-    private String firstName, lastName, address, city, state, zipcode;
+    private String FName="", LName="", Address="", City="", State="", Zip="";
 
 
     public String getAddress() {
-        return address;
+        return Address;
     }
     public String getCity() {
-        return city;
+        return City;
     }
     public String getFirstName() {
-        return firstName;
+        return FName;
     }
     public String getLastName() {
-        return lastName;
+        return LName;
     }
     public String getState() {
-        return state;
+        return State;
     }
     public String getZipcode() {
-        return zipcode;
+        return Zip;
     }
     public void setAddress(String address) {
-        this.address = address;
+        this.Address = address;
     }
     public void setCity(String city) {
-        this.city = city;
+        this.City = city;
     }
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.FName = firstName;
     }
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.LName = lastName;
     }
     public void setState(String state) {
-        this.state = state;
+        this.State = state;
     }
     public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+        this.Zip = zipcode;
     }
 }
