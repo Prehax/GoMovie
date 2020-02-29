@@ -49,15 +49,14 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         //Firebase stuff
-//错误出在这里， 两句
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("/GoMovie/MovieGoer");
+        myRef = mFirebaseDatabase.getReference();
         //Authentication
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null){
                     Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
                     Toast.makeText(PersonInfoActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
@@ -67,6 +66,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                 }
             }
         };
+
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,6 +84,8 @@ public class PersonInfoActivity extends AppCompatActivity {
             }
         });
 
+
+
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +98,12 @@ public class PersonInfoActivity extends AppCompatActivity {
                 String Zip = etZip.getText().toString().trim();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID  = user.getUid();
-                myRef.child(userID).child("Fname").setValue(Fname);
-                myRef.child(userID).child("Lname").setValue(Lname);
-                myRef.child(userID).child("Adress").setValue(Address);
-                myRef.child(userID).child("City").setValue(City);
-                myRef.child(userID).child("State").setValue(State);
-                myRef.child(userID).child("Zip").setValue(Zip);
+                myRef.child("MovieGoers").child(userID).child("Fname").setValue(Fname);
+                myRef.child("MovieGoers").child(userID).child("Lname").setValue(Lname);
+                myRef.child("MovieGoers").child(userID).child("Adress").setValue(Address);
+                myRef.child("MovieGoers").child(userID).child("City").setValue(City);
+                myRef.child("MovieGoers").child(userID).child("State").setValue(State);
+                myRef.child("MovieGoers").child(userID).child("Zip").setValue(Zip);
 
                 finish();
             }
