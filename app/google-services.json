@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "956304174237",
-    "firebase_url": "https://gomovie-4aa0c.firebaseio.com",
-    "project_id": "gomovie-4aa0c",
-    "storage_bucket": "gomovie-4aa0c.appspot.com"
+    "project_number": "1042329658889",
+    "firebase_url": "https://gomovie-b9428.firebaseio.com",
+    "project_id": "gomovie-b9428",
+    "storage_bucket": "gomovie-b9428.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:956304174237:android:d94ca7d7b83b309244f874",
+        "mobilesdk_app_id": "1:1042329658889:android:a92384f13c2fcb8589fad8",
         "android_client_info": {
           "package_name": "com.prehax.gomovie"
         }
       },
       "oauth_client": [
         {
-          "client_id": "956304174237-enenk9hqlt9jj9dqf557089oaq967ap4.apps.googleusercontent.com",
+          "client_id": "1042329658889-kascdl3h7hbd01ug2fse05m29jtqt40c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.prehax.gomovie",
-            "certificate_hash": "37eafe972411c3d8ec93e21fd57f84dffaef7826"
+            "certificate_hash": "518658cace233fa6bedd43045306fcfe83ee059d"
           }
         },
         {
-          "client_id": "956304174237-caaoipn7m2tad6ngqchv5u5m9d07erjg.apps.googleusercontent.com",
+          "client_id": "1042329658889-jrab925h6ckdt2iq47jkvm10vbdsm0vd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyACYVd2sDePZfd0PNts6LhDB4Tp-HTm_vk"
+          "current_key": "AIzaSyC4uJ4gOjDWMENuYAbCtse0Cr_RnL9OzNE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "956304174237-caaoipn7m2tad6ngqchv5u5m9d07erjg.apps.googleusercontent.com",
+              "client_id": "1042329658889-jrab925h6ckdt2iq47jkvm10vbdsm0vd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
