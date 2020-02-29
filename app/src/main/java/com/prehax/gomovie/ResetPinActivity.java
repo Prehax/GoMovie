@@ -26,7 +26,7 @@ public class ResetPinActivity extends AppCompatActivity {
         btnConfirm = findViewById(R.id.btn_resetConfirm);
         btnCancel = findViewById(R.id.btn_resetCancel);
 
-        etResetEmail=findViewById(R.id.et_remail);
+        etResetEmail=findViewById(R.id.et_resetEmail);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
