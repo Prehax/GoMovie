@@ -23,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 public class PersonInfoActivity extends AppCompatActivity {
 
     private static final String TAG = "PersonInfoActivity";
-
     private EditText etFname, etLname, etAddress, etCity, etState, etZip;
     // Objects for Database
     private FirebaseDatabase mFirebaseDatabase;
@@ -31,7 +30,6 @@ public class PersonInfoActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
-    private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +52,6 @@ public class PersonInfoActivity extends AppCompatActivity {
         myRef = mFirebaseDatabase.getReference();
         //Authentication
 
-        FirebaseUser user = mAuth.getCurrentUser();
-        userID  = user.getUid();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -69,20 +65,15 @@ public class PersonInfoActivity extends AppCompatActivity {
                 }
             }
         };
-
+/*
+        // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                // showData(dataSnapshot);
-                MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
-                etFname.setText(movieGoer.getFname());
-                etLname.setText(movieGoer.getLname());
-                etAddress.setText(movieGoer.getAddress());
-                etCity.setText(movieGoer.getCity());
-                etState.setText(movieGoer.getState());
-                etZip.setText(movieGoer.getZip());
+                Object value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
             }
 
             @Override
@@ -91,6 +82,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+*/
 
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +95,8 @@ public class PersonInfoActivity extends AppCompatActivity {
                 String City = etCity.getText().toString().trim();
                 String State = etState.getText().toString().trim();
                 String Zip = etZip.getText().toString().trim();
-
-
+                FirebaseUser user = mAuth.getCurrentUser();
+                String userID  = user.getUid();
 
                 myRef.child("MovieGoers").child(userID).child("Fname").setValue(Fname);
                 myRef.child("MovieGoers").child(userID).child("Lname").setValue(Lname);
