@@ -45,10 +45,9 @@ public class PersonInfoActivity extends AppCompatActivity {
         // Bind Button variable to ID
         Button btn_confirm = findViewById(R.id.btn_pinfo_confirm);
         Button btn_cancel = findViewById(R.id.btn_pinfo_cancel);
-        //database
 
+        //database
         mAuth = FirebaseAuth.getInstance();
-        //Firebase stuff
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         //Authentication
@@ -98,13 +97,22 @@ public class PersonInfoActivity extends AppCompatActivity {
                 String Zip = etZip.getText().toString().trim();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID  = user.getUid();
+                Toast.makeText(PersonInfoActivity.this, myRef.toString(), Toast.LENGTH_SHORT).show();
                 myRef.child("MovieGoers").child(userID).child("Fname").setValue(Fname);
                 myRef.child("MovieGoers").child(userID).child("Lname").setValue(Lname);
-                myRef.child("MovieGoers").child(userID).child("Adress").setValue(Address);
+                myRef.child("MovieGoers").child(userID).child("Address").setValue(Address);
                 myRef.child("MovieGoers").child(userID).child("City").setValue(City);
                 myRef.child("MovieGoers").child(userID).child("State").setValue(State);
                 myRef.child("MovieGoers").child(userID).child("Zip").setValue(Zip);
 
+                //Toast.makeText(PersonInfoActivity.this, "Save Successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

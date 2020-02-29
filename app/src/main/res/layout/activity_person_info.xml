@@ -32,7 +32,6 @@
             android:id="@+id/et_pinfo_Fname"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:hint="Longlong"
             android:background="@drawable/et_style1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
@@ -56,7 +55,6 @@
             android:id="@+id/et_pinfo_Lname"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:hint="Xu"
             android:background="@drawable/et_style1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
@@ -79,7 +77,6 @@
             android:id="@+id/et_pinfo_address"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:hint="300 Boston Post Rd"
             android:background="@drawable/et_style1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
@@ -102,7 +99,6 @@
             android:id="@+id/et_pinfo_city"
             android:layout_width="130dp"
             android:layout_height="36dp"
-            android:hint="West Haven"
             android:background="@drawable/et_style1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
@@ -119,7 +115,6 @@
             android:id="@+id/et_pinfo_state"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:hint="CT"
             android:background="@drawable/et_style1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
@@ -143,7 +138,6 @@
             android:id="@+id/et_pinfo_zip"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:hint="06516"
             android:background="@drawable/et_style1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />

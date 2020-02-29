@@ -48,8 +48,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent intent = new Intent(HomeActivity.this,MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
