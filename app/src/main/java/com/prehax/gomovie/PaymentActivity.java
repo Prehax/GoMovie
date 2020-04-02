@@ -1,5 +1,6 @@
 package com.prehax.gomovie;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;
@@ -17,6 +25,9 @@ public class PaymentActivity extends AppCompatActivity {
     private Spinner spinMethod;
     private int numOfPop=0, numOfCok=0;
     private double tAmount=0;
+    private double cokeprice=0,popprice=0;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +51,25 @@ public class PaymentActivity extends AppCompatActivity {
         tvNumOfPop = findViewById(R.id.tv_pay_numPop);
         // Spinner Find ID
         spinMethod = findViewById(R.id.spin_pay_method);
+        //database
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Snacks snacks = dataSnapshot.child("Theaters").child("1").child("Snacks").getValue(Snacks.class);
+                assert snacks != null;
+                cokeprice = snacks.getCoke();
+                System.out.println(cokeprice);
+                System.out.println(popprice);
+                popprice = snacks.getPopcorn();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         btnAcok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +77,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfCok<1000) numOfCok++;
                 tvNumOfCok.setText(Integer.toString(numOfCok));
                 numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
-                tAmount = (1.99 * numOfCok) + (2.99 * numOfPop);
+                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -60,7 +89,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfPop<1000) numOfPop++;
                 tvNumOfPop.setText(Integer.toString(numOfPop));
                 numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
-                tAmount = (1.99 * numOfCok) + (2.99 * numOfPop);
+                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -72,7 +101,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfCok>0) numOfCok--;
                 tvNumOfCok.setText(Integer.toString(numOfCok));
                 numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
-                tAmount = (1.99 * numOfCok) + (2.99 * numOfPop);
+                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -84,7 +113,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfPop>0) numOfPop--;
                 tvNumOfPop.setText(Integer.toString(numOfPop));
                 numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
-                tAmount = (1.99 * numOfCok) + (2.99 * numOfPop);
+                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
