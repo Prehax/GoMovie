@@ -140,25 +140,22 @@
             android:textSize="20sp"
             android:textColor="@color/colorBlack"
             />
-        <Spinner
-            android:id="@+id/spin_pay_numOfPop"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            />
+
         <Button
+            android:id="@+id/btn_pay_mpop"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:text="-"
             android:background="@drawable/btn_style2"/>
-        <EditText
+        <TextView
+            android:id="@+id/tv_pay_numPop"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:text="0"
             android:gravity="center"
-            android:inputType="number"
             android:background="@drawable/et_style2"/>
         <Button
+            android:id="@+id/btn_pay_apop"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:text="+"
@@ -176,26 +173,22 @@
             android:textSize="20sp"
             android:textColor="@color/colorBlack"
             />
-        <Spinner
-            android:id="@+id/spin_pay_numOfCok"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            />
 
         <Button
+            android:id="@+id/btn_pay_mcok"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:text="-"
             android:background="@drawable/btn_style2"/>
-        <EditText
+        <TextView
+            android:id="@+id/tv_pay_numCok"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:text="0"
             android:gravity="center"
-            android:inputType="number"
             android:background="@drawable/et_style2"/>
         <Button
+            android:id="@+id/btn_pay_acok"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:text="+"
@@ -245,7 +238,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
         <Button
-            android:id="@+id/btn_paymentp"
+            android:id="@+id/btn_pay_Confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
