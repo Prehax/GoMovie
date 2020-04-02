@@ -249,6 +249,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:text="Confirm"
             android:textColor="@color/colorBlack"
             android:background="@drawable/btn_style1"
