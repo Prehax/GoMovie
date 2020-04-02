@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.prehax.gomovie.HomeActivity;
 import com.prehax.gomovie.R;
@@ -25,9 +26,10 @@ public class showActivity extends AppCompatActivity {
         show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(showActivity.this,"position:"+position,Toast.LENGTH_SHORT).show();
                 Intent intent;
-//                intent = new Intent(showActivity.this, chooseActivity.class);
-//                startActivity(intent);
+                intent = new Intent(showActivity.this, chooseActivity.class);
+                startActivity(intent);
             }
         });
     }
