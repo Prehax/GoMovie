@@ -5,7 +5,7 @@
     android:padding="15dp">
 
     <ListView
-        android:id="@+id/lv_cinema"
+        android:id="@+id/lv_show"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -37,6 +37,7 @@ public class Adapter extends BaseAdapter {
        public TextView cname;
        public TextView caddress;
        public TextView cshowtime;
+       public String [] cinema;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -54,7 +55,7 @@ public class Adapter extends BaseAdapter {
         // give value
         holder.cname.setText("Name");
         holder.caddress.setText("Address");
-        holder.cshowtime.setText("4-1 2:00PM");
+        holder.cshowtime.setText("Rate:5.0");
 
         return convertView;
     }
