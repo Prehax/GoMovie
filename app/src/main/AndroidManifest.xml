@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ListViewC.chooseActivity"></activity>
         <activity
             android:name=".PaymentActivity"
             android:label="Payment"></activity>
@@ -24,20 +25,21 @@
         </activity>
         <activity
             android:name=".ShowInfoActivity"
-            android:label="Personal Information" />
+            android:label="Personal Information"/>
         <activity
             android:name=".PersonInfoActivity"
-            android:label="Modify Personal Information" />
-        <activity android:name=".HomeActivity" />
+            android:label="Modify Personal Information"/>
+        <activity
+            android:name=".HomeActivity"/>
         <activity
             android:name=".ResetPinActivity"
-            android:label="Reset Password" />
+            android:label="Reset Password"/>
         <activity
             android:name=".SignupActivity"
-            android:label="Register" />
+            android:label="Register"/>
         <activity
             android:name=".MainActivity"
-            android:label="Login" />
+            android:label="Login"/>
     </application>
 
 </manifest>

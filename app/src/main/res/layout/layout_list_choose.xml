@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/Lcname"
+        android:layout_width="129dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/cinema_name"
+        android:textColor="#000"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/Lcaddress"
+            android:text="@string/cinema_address"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/Lcshowtime"
+            android:textSize="16sp"
+            android:text="@string/showtime"
+            android:layout_marginTop="10dp"
+
+            />
+    </LinearLayout>
+</LinearLayout>
