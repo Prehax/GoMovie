@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.prehax.gomovie.ListViewC.chooseActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -53,6 +54,14 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        Button btn_jump = findViewById(R.id.btn_jump);
+        btn_jump.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(HomeActivity.this, chooseActivity.class);
+                startActivity(intent);
             }
         });
     }

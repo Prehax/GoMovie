@@ -28,4 +28,15 @@
         android:textSize="20sp"
         android:textColor="#000000" />
 
+    <Button
+        android:id="@+id/btn_jump"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn_style1"
+        android:layout_below="@id/btn_logout"
+        android:text="@string/jump"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
 </RelativeLayout>
