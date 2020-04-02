@@ -37,7 +37,6 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#000000" />
-
     <Button
         android:id="@+id/btn_jump"
         android:layout_width="match_parent"
@@ -45,7 +44,18 @@
         android:layout_marginTop="120dp"
         android:background="@drawable/btn_style1"
         android:layout_below="@id/btn_logout"
-        android:text="@string/jump"
+        android:text="@string/choose"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+    <Button
+        android:id="@+id/btn_showtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_style1"
+        android:layout_below="@id/btn_jump"
+        android:text="@string/showtime"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#000000" />

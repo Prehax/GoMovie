@@ -3,11 +3,16 @@ package com.prehax.gomovie.ListViewC;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.prehax.gomovie.HomeActivity;
 import com.prehax.gomovie.R;
 
 
@@ -24,6 +29,12 @@ public class chooseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose);
         mLv1 = (ListView) findViewById(R.id.lv_cinema);
         mLv1.setAdapter(new Adapter(chooseActivity.this));
-
+        mLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(chooseActivity.this,showActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

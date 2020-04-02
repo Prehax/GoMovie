@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.prehax.gomovie.ListViewC.chooseActivity;
+import com.prehax.gomovie.ListViewC.showActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -71,6 +72,14 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent;
                 intent = new Intent(HomeActivity.this, chooseActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button btn_showtime = findViewById(R.id.btn_showtime);
+        btn_showtime.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(HomeActivity.this, showActivity.class);
                 startActivity(intent);
             }
         });
