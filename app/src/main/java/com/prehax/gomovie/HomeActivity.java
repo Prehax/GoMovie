@@ -58,6 +58,14 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Button btn_card = findViewById(R.id.btn_card);
+        btn_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ShowCardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnPayment = findViewById(R.id.btn_testpayment);
         btnPayment.setOnClickListener(new View.OnClickListener() {

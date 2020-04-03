@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_cardnametitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_cname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/et_style1"
+        android:hint="Enter Card Holder Name"
+        android:inputType="textPersonName"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/tv_cardnumbertitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/et_cnum"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter Card Number"
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_below="@+id/et_cname"
+        android:layout_marginTop="30dp"
+        android:inputType="number"
+        android:maxLength="19"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tv_expdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_exp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:hint="    MM/YY  "
+        android:background="@drawable/et_style1"
+        android:padding="10dp"
+        android:layout_below="@+id/et_cnum"
+        android:layout_marginTop="30dp"
+        android:inputType="date"
+        android:maxLength="5"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tv_cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/et_cnum"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="50dp"
+        android:layout_toEndOf="@+id/et_exp"
+        android:layout_toRightOf="@id/et_exp"
+        android:background="@drawable/et_style1"
+        android:hint="   CVV   "
+        android:inputType="numberPassword"
+        android:maxLength="3"
+        android:maxLines="1"
+        android:padding="10dp" />
+    <Button
+        android:id="@+id/btn_card"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_style1"
+        android:text="Save Card"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_marginBottom="70dp" />
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_style1"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

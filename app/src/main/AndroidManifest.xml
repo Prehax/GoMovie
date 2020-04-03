@@ -42,6 +42,18 @@
         <activity
             android:name=".MainActivity"
             android:label="Login" />
+        <activity
+            android:name=".CardActivity"
+            android:label="Add Card Details"
+            android:exported="true"/>
+        <activity
+            android:name=".ShowCardActivity"
+            android:label="Show Saved Cards"
+            android:exported="true"/>
+        <activity
+            android:name=".PaywithcvvActivity"
+            android:label="Use CVV"
+            android:exported="true"/>
     </application>
 
 </manifest>
