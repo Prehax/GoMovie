@@ -2,6 +2,7 @@ package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.prehax.gomovie.ListViewC.showActivity;
 
 public class TheaterActivity extends AppCompatActivity {
     private static final String TAG = "TheaterActivity";
@@ -52,17 +55,24 @@ public class TheaterActivity extends AppCompatActivity {
                 // showData(dataSnapshot);
                 try {
                     System.out.println("开始读取数据");
-                    Theater theater = dataSnapshot.child("Theaters").child("1").getValue(Theater.class);
-                    Tname.add(theater.getName());
-                    Taddress.add(theater.getAddress());
-                    Trate.add(String.format("%.1f", theater.getRate()));
-                    System.out.println("读取数据完成, 读到了以下数据: ");
-                    System.out.println(theater.getName()+" "+theater.getAddress()+" "+String.format("%.1f", theater.getRate()));
+                    long numOfTheaters=dataSnapshot.child("Theaters").getChildrenCount();
+                    System.out.println(numOfTheaters);
+                    for (long i = 0; i<numOfTheaters; i++) {
+                        Theater theater = dataSnapshot.child("Theaters").child(Long.toString(i)).getValue(Theater.class);
+                        Tname.add(theater.getName());
+                        Taddress.add(theater.getAddress());
+                        Trate.add(String.format("%.1f", theater.getRate()));
+                        System.out.println("读取数据完成, 读到了以下数据: ");
+                        System.out.println(theater.getName() + " " + theater.getAddress());
+                    }
                     // 测试专用数据
+                    /*
                     System.out.println("现在开始加入第2条数据");
                     Taddress.add("I'm an address");
                     Tname.add("Caonima");
                     Trate.add("3.9");
+                     */
+
                     // Generate array
                     ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
                     for (int i = 0; i < Tname.size(); i++) {
@@ -83,8 +93,7 @@ public class TheaterActivity extends AppCompatActivity {
                     // Set Adapter
                     listView.setAdapter(listItemAdapter);
                 } catch (NullPointerException e) {
-                    Log.w(TAG, "No values to read");
-                    System.out.println("读取数据未完成, 遭遇空指针错误");
+                    Log.w(TAG, "读取数据未完成, 遭遇空指针错误");
                 }
             }
             @Override
@@ -98,7 +107,15 @@ public class TheaterActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setTitle("OnClick No." + position + " item");
+                // setTitle("OnClick No." + (position+1) + " item");
+                // 传关键信息到下一个界面并且启动
+                Intent intent = new Intent(TheaterActivity.this, showActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("theaterID", position);
+                bundle.putString("theaterName", Tname.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+                //-----------------------------
             }
         });
         // On Hold

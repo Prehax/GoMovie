@@ -22,66 +22,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="60dp"
         android:background="@drawable/btn_style1"
         android:text="@string/log_out"
         android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-    <Button
-        android:id="@+id/btn_testpayment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:background="@drawable/btn_style1"
-        android:text="Payment"
-        android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#000000" />
+
     <Button
         android:id="@+id/btn_jump"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btn_style1"
         android:layout_below="@id/btn_logout"
         android:text="@string/choose"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#000000" />
-    <Button
-        android:id="@+id/btn_showtime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_style1"
-        android:layout_below="@id/btn_jump"
-        android:text="@string/showtime"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textColor="#000000" />
-    <Button
-        android:id="@+id/btn_seats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_style1"
-        android:layout_below="@id/btn_jump"
-        android:text="Seats"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textColor="#000000" />
-    <Button
-        android:id="@+id/btn_fortheater"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_style1"
-        android:layout_below="@id/btn_seats"
-        android:text="Theaters (A new try)"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textColor="#000000" />
+
     <Button
         android:id="@+id/btn_card"
         android:layout_width="30dp"
@@ -89,4 +47,5 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="40dp"
         android:background="@drawable/btn_style1" />
+
 </RelativeLayout>

@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.prehax.gomovie.ListViewC.chooseActivity;
 import com.prehax.gomovie.ListViewC.showActivity;
 
@@ -21,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;// ...
     private Button btnPayment, btnSeats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,50 +70,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btnPayment = findViewById(R.id.btn_testpayment);
-        btnPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, PaymentActivity.class);
-                startActivity(intent);
-            }
-        });
         Button btn_jump = findViewById(R.id.btn_jump);
         btn_jump.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(HomeActivity.this, chooseActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button btn_showtime = findViewById(R.id.btn_showtime);
-        btn_showtime.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(HomeActivity.this, showActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnSeats = findViewById(R.id.btn_seats);
-        btnSeats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(HomeActivity.this, SeatsActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button btnTheater = findViewById(R.id.btn_fortheater);
-        btnTheater.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 Intent intent;
                 intent = new Intent(HomeActivity.this, TheaterActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
     @Override
     protected void onStart() {

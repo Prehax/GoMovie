@@ -51,6 +51,13 @@ public class PaymentActivity extends AppCompatActivity {
         tvNumOfPop = findViewById(R.id.tv_pay_numPop);
         // Spinner Find ID
         spinMethod = findViewById(R.id.spin_pay_method);
+        // Ticket Information
+        final Bundle bundle = getIntent().getExtras();
+        //tvMovie=...
+        tvTheater.setText(bundle.getString("theaterName"));
+        tvTime.setText(bundle.getString("showTimeName"));
+        tvSeat.setText(bundle.getString("seatCode"));
+        tvNum.setText(Integer.toString(bundle.getInt("numOfTic")));
         //database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();

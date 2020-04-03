@@ -14,15 +14,13 @@ import java.util.HashMap;
 
 
 public class chooseActivity extends AppCompatActivity {
-
-
-
-
+    private int theaterID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
+
         ListView mLv1 = (ListView) findViewById(R.id.lv_cinema);
         mLv1.setAdapter(new Adapter(chooseActivity.this));
         mLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
