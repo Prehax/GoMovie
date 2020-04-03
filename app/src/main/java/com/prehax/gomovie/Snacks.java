@@ -1,18 +1,21 @@
 package com.prehax.gomovie;
 
 public class Snacks {
-        private Double Coke,Popcorn;
+    private Double coke, popcorn;
 
-        public Double getCoke(){
-            return Coke;
-        }
-        public Double getPopcorn(){
-            return Popcorn;
-        }
-    public void setcoke(Double coke) {
-        this.Coke = coke;
+    public Double getCoke() {
+        return coke;
     }
-    public void setpopcorn(Double popCorn) {
-        this.Popcorn = popCorn;
+
+    public void setCoke(Double coke) {
+        this.coke = coke;
+    }
+
+    public Double getPopcorn() {
+        return popcorn;
+    }
+
+    public void setPopcorn(Double popcorn) {
+        this.popcorn = popcorn;
     }
 }
