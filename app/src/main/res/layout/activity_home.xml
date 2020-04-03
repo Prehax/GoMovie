@@ -70,4 +70,15 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#000000" />
+    <Button
+        android:id="@+id/btn_fortheater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_style1"
+        android:layout_below="@id/btn_seats"
+        android:text="Theaters (A new try)"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
 </RelativeLayout>

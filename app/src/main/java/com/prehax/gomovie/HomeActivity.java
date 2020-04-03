@@ -92,11 +92,23 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button btnTheater = findViewById(R.id.btn_fortheater);
+        btnTheater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(HomeActivity.this, TheaterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
