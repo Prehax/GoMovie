@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private Button btnPayment;
+    private Button btnPayment, btnSeats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +80,15 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent;
                 intent = new Intent(HomeActivity.this, showActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnSeats = findViewById(R.id.btn_seats);
+        btnSeats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(HomeActivity.this, SeatsActivity.class);
                 startActivity(intent);
             }
         });
