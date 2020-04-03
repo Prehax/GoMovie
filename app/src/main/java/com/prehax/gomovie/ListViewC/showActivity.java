@@ -10,9 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.prehax.gomovie.HomeActivity;
+import com.prehax.gomovie.GridView.GridViewActivity;
 import com.prehax.gomovie.R;
-import com.prehax.gomovie.SeatsActivity;
+
 
 public class showActivity extends AppCompatActivity {
     private ListView show;
@@ -32,7 +32,7 @@ public class showActivity extends AppCompatActivity {
                 Toast.makeText(showActivity.this,"position:"+position,Toast.LENGTH_SHORT).show();
 
                 // 传关键信息到下一个界面并且启动
-                Intent intent = new Intent(showActivity.this, SeatsActivity.class);
+                Intent intent = new Intent(showActivity.this, GridViewActivity.class);
                 // ShowTime Information
                 bundle.putInt("showTimeID", position);
                 bundle.putString("showTimeName", showtime[position]);

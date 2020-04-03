@@ -19,7 +19,7 @@ import com.prehax.gomovie.ListViewC.showActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
-/*tested....*/
+    /*tested....*/
     private static final String TAG = "HomeActivity";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
