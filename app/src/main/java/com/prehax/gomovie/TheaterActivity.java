@@ -21,10 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.prehax.gomovie.ListViewC.showActivity;
 
 public class TheaterActivity extends AppCompatActivity {
     private static final String TAG = "TheaterActivity";

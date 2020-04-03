@@ -13,9 +13,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.prehax.gomovie.ListViewC.chooseActivity;
-import com.prehax.gomovie.ListViewC.showActivity;
 
 public class HomeActivity extends AppCompatActivity {
 

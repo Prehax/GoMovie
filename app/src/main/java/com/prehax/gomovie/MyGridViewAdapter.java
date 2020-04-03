@@ -1,4 +1,4 @@
-package com.prehax.gomovie.GridView;
+package com.prehax.gomovie;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -56,21 +56,21 @@ public class MyGridViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if (clickTemp == location) {
+        if (clickTemp == position) {
             System.out.println("我运行了么？");
+            System.out.println(location);
+            System.out.println(clickTemp);
             if (clickedList[position] == 0) {
                 System.out.println("我运行了么if？");
-                //convertView.setBackgroundColor(Color.RED);
+//                convertView.setBackgroundColor(Color.RED);
                 clickedList[position] = 1;
             } else {
                 System.out.println("我运行了么else？");
-                //convertView.setBackgroundColor(Color.TRANSPARENT);
+//                convertView.setBackgroundColor(Color.TRANSPARENT);
                 clickedList[position] = 0;
             }
         }
         if(convertView == null){
-            System.out.println(position);
-            System.out.println(location);
                 convertView = mLayoutInflater.inflate(R.layout.layout_grid_item,null);
                 holder = new ViewHolder();
                 holder.imageView = convertView.findViewById(R.id.seat);

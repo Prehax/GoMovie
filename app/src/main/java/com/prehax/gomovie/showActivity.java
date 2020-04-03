@@ -1,4 +1,4 @@
-package com.prehax.gomovie.ListViewC;
+package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,9 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.prehax.gomovie.GridView.GridViewActivity;
-import com.prehax.gomovie.R;
 
 
 public class showActivity extends AppCompatActivity {

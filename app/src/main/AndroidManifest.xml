@@ -11,10 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".TheaterActivity"
             android:label="Theaters" />
-        <activity android:name=".GridView.GridViewActivity" />
-        <activity android:name=".ListViewC.showActivity" />
-        <activity android:name=".ListViewC.chooseActivity" />
-        <activity
+        <activity android:name=".GridViewActivity" />
+        <activity android:name=".showActivity" />
+          <activity
             android:name=".PaymentActivity"
             android:label="Payment" />
         <activity
