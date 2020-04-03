@@ -22,7 +22,7 @@ import com.prehax.gomovie.Theater;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+//这是最最最最最奇怪的东西
 public class Adapter extends BaseAdapter {
     private static final String TAG = "Adapter";
     private Context mContext;
