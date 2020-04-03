@@ -1,6 +1,7 @@
 package com.prehax.gomovie.ListViewC;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +28,8 @@ public class Adapter extends BaseAdapter {
     private static final String TAG = "Adapter";
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
     private String tempName, tempAddress, tempRate;
+
     /*
     private ArrayList<String> Tname = new ArrayList<String>();
     private ArrayList<String> Taddress = new ArrayList<String>();
@@ -47,16 +47,15 @@ public class Adapter extends BaseAdapter {
         final ArrayList<String> Trate = new ArrayList<String>();
 
 
-        Taddress.add("I'm an address");
-        Tname.add("Cinemark");
-        Trate.add("3.4");
+//        Taddress.add("I'm an address");
+//        Tname.add("Cinemark");
+//        Trate.add("3.4");
 
         /*
         读数据从这开始
          */
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mFirebaseDatabase.getReference();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,12 +63,14 @@ public class Adapter extends BaseAdapter {
                 // whenever data at this location is updated.
                 // showData(dataSnapshot);
                 try {
+                    System.out.println("我开始读数据了！");
                     Theater theater = dataSnapshot.child("Theaters").child("a3").getValue(Theater.class);
                     tempName=theater.getName();
                     tempAddress=theater.getAddress();
                     tempRate=String.format("%.1f", theater.getRate());
                     System.out.println("现在我在读取数据后, 读到了以下数据: ");
                     System.out.println(tempName+" "+tempAddress+" "+tempRate);
+                    notifyDataSetChanged();
                 } catch (NullPointerException e) {
                     Log.w(TAG, "No values to read");
                 }
@@ -80,11 +81,13 @@ public class Adapter extends BaseAdapter {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
 /*
         Taddress.add("I'm 2 address");
         Tname.add("Caonima");
         Trate.add("3.9");
  */
+
         System.out.println("现在我在掺入数据前, 插入以下数据: ");
         System.out.println(tempName+" "+tempAddress+" "+tempRate);
         Tname.add(tempName);
@@ -106,18 +109,18 @@ public class Adapter extends BaseAdapter {
         mLayoutInflater = LayoutInflater.from(context);
     }
 
-    @Override
+
     public int getCount() {
         return getData().size();
         //data length
     }
 
-    @Override
+
     public Object getItem(int position) {
         return null;
     }
 
-    @Override
+
     public long getItemId(int position) {
         return 0;
     }
@@ -128,13 +131,15 @@ public class Adapter extends BaseAdapter {
        public TextView cshowtime;
     }
 
-    @Override
+
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if(convertView == null){
+            System.out.println("我运行了么？");
             convertView = mLayoutInflater.inflate(R.layout.layout_list_choose,null);
             holder = new ViewHolder();
             holder.cname = convertView.findViewById(R.id.Lcname);
+//            holder.cname.setText("cao");
             holder.caddress = convertView.findViewById(R.id.Lcaddress);
             holder.cshowtime= convertView.findViewById(R.id.Lcshowtime);
             convertView.setTag(holder);

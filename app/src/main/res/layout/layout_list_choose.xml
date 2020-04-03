@@ -10,7 +10,6 @@
         android:layout_width="135dp"
         android:layout_height="100dp"
         android:layout_marginStart="5dp"
-        android:text="@string/cinema_name"
         android:textColor="#000"
         android:textSize="30sp" />
 
@@ -23,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/Lcaddress"
-            android:text="@string/cinema_address"
             android:textSize="16sp"
             />
         <TextView
@@ -31,7 +29,6 @@
             android:layout_height="match_parent"
             android:id="@+id/Lcshowtime"
             android:textSize="16sp"
-            android:text="@string/showtime"
             android:layout_marginTop="10dp"
 
             />
