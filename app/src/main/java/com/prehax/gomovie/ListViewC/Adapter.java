@@ -6,7 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.prehax.gomovie.R;
+import com.prehax.gomovie.Theaters;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,19 +24,43 @@ import java.util.HashMap;
 public class Adapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+
+
     ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
-    private ArrayList<HashMap<String, Object>> getDate() {
+
+    private ArrayList<HashMap<String, Object>> getData() {
 
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
-        String[] name = {"Cinemark", "Wanda", "17.5", "xintiandi", "leina", "6", "1213"};
-        String[] address = {"I am an address1", "I am an address2", "I am an address3", "I am an address4", "I am an address5", "I am an address6", "I am an address7"};
-        String[] rate = {"3.0", "3.3", "4.3", "4.9", "3.5", "2.3", "1.2"};
-        /*为动态数组添加数据*/
-        for (int i = 0; i < name.length; i++) {
+        final ArrayList<String> Tname = new ArrayList<String>();
+        final ArrayList<String> Taddress = new ArrayList<String>();
+        final ArrayList<String> Trate = new ArrayList<String>();
+        Taddress.add("I'm an address");
+        Tname.add("Cinemark");
+        Trate.add("3.4");
+//        mFirebaseDatabase = FirebaseDatabase.getInstance();
+//        myRef = mFirebaseDatabase.getReference();
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Theaters theaters = dataSnapshot.child("Theaters").child("1").child("Detail").getValue(Theaters.class);
+//                Tname.add(theaters.getName());
+//                Taddress.add(theaters.getAddress());
+//                Trate.add(theaters.getRate());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+        /*add data*/
+        for (int i = 0; i < Tname.size(); i++) {
             HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("Name", name[i]);
-            map.put("Address", address[i]);
-            map.put("Rate", "Rate"+rate[i]);
+            map.put("Name", Tname.get(i));
+            map.put("Address", Taddress.get(i));
+            map.put("Rate", "Rate:"+ Trate.get(i));
             listItem.add(map);
         }
         return listItem;
@@ -38,7 +72,7 @@ public class Adapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return getDate().size();
+        return getData().size();
         //data length
     }
 
@@ -71,12 +105,12 @@ public class Adapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         // give value
-        holder.cname.setText(getDate().get(position).get("Name").toString());
-        holder.caddress.setText(getDate().get(position).get("Address").toString());
-        holder.cshowtime.setText(getDate().get(position).get("Rate").toString());
+
+        holder.cname.setText(getData().get(position).get("Name").toString());
+        holder.caddress.setText(getData().get(position).get("Address").toString());
+        holder.cshowtime.setText(getData().get(position).get("Rate").toString());
 
         return convertView;
     }
-
 
 }
