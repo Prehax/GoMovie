@@ -23,8 +23,6 @@ public class GridViewActivity extends AppCompatActivity {
         // 从上一个界面读取传入的信息
         final Bundle bundle = getIntent().getExtras();
         String temp = bundle.getString("theaterName");
-        Toast.makeText(this, "You chose"+temp, Toast.LENGTH_SHORT);
-        System.out.println("目前在选座界面, 电影院名是: "+temp);
 
         mGv=findViewById(R.id.gv);
         mGv.setAdapter(new MyGridViewAdapter(GridViewActivity.this));

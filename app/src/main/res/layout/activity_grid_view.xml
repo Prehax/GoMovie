@@ -2,20 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     android:orientation="vertical">
 
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="0dp"
+        android:layout_weight="9"
         android:numColumns="10"
+        android:layout_margin="15dp"
         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:layout_weight="1">
         <EditText
             android:id="@+id/et_seats_code"
             android:layout_width="0dp"
@@ -28,7 +30,7 @@
         <Button
             android:id="@+id/btn_seats_confirm"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:text="Confirm"
             android:textColor="@color/colorBlack"
             android:background="@drawable/btn_style3"
