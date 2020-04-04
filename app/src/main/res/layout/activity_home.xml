@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="15dp">
 
+    <TextView
 
-    <ListView
-        android:id="@+id/listTrending"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Home page" />
+
+    <Button
+        android:id="@+id/btn_personInfo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_style1" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/btn_style1"
+        android:text="@string/log_out"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_jump"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_style1"
+        android:layout_below="@id/btn_logout"
+        android:text="@string/choose"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_card"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_style1" />
+
 </RelativeLayout>

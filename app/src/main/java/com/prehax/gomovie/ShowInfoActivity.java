@@ -34,6 +34,7 @@ public class ShowInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_info);
+        // Find ID
         btnModify = findViewById(R.id.btn_sinfo_modify);
         btnBack = findViewById(R.id.btn_sinfo_back);
         tvFname = findViewById(R.id.tv_sinfo_Fname);
@@ -42,6 +43,7 @@ public class ShowInfoActivity extends AppCompatActivity {
         tvCity = findViewById(R.id.tv_sinfo_city);
         tvState = findViewById(R.id.tv_sinfo_state);
         tvZip = findViewById(R.id.tv_sinfo_zip);
+
         btnModify.setOnClickListener(new View.OnClickListener() {
             // Jump to Editable PersonalInfoActivity
             @Override

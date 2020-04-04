@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">GoMovie</string>
     <string name="log_out">Log out</string>
+    <string name="showtime">showtime</string>
+    <string name="cinema_address">cinema address</string>
+    <string name="cinema_name">cinema name</string>
+    <string name="jump">jump</string>
+    <string name="choose">A Movie</string>
+    <string name="test">test</string>
 </resources>

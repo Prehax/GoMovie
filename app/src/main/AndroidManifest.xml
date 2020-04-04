@@ -9,8 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Upcoming_Activity"></activity>
-        <activity android:name=".Trending_Activity" />
+        <activity android:name=".TicketDetailActivity"
+            android:label="Ticket Details"></activity>
+        <activity
+            android:name=".TheaterActivity"
+            android:label="Theaters" />
+        <activity android:name=".GridViewActivity" />
+        <activity android:name=".showActivity" />
+          <activity
+            android:name=".PaymentActivity"
+            android:label="Payment" />
+        <activity
+            android:name=".LaunchActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FullTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ShowInfoActivity"
             android:label="Personal Information" />
@@ -26,13 +44,19 @@
             android:label="Register" />
         <activity
             android:name=".MainActivity"
-            android:label="Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="Login" />
+        <activity
+            android:name=".CardActivity"
+            android:exported="true"
+            android:label="Add Card Details" />
+        <activity
+            android:name=".ShowCardActivity"
+            android:exported="true"
+            android:label="Show Saved Cards" />
+        <activity
+            android:name=".PaywithcvvActivity"
+            android:exported="true"
+            android:label="Use CVV" />
     </application>
 
 </manifest>
