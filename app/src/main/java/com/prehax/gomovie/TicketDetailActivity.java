@@ -3,6 +3,7 @@ package com.prehax.gomovie;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,7 @@ public class TicketDetailActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(TicketDetailActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();

@@ -2,8 +2,15 @@ package com.prehax.gomovie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.service.autofill.OnClickAction;
 import android.view.View;
@@ -37,7 +44,7 @@ public class PaymentActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private String userID;
-    private String cardNumber;
+    private String cardNumber, notiMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +96,10 @@ public class PaymentActivity extends AppCompatActivity {
         tvSeat.setText(position);
         tvNum.setText(Integer.toString(numOfTic));
 
+        // This String is for notification Msg
+        notiMsg="Movie Name: A Movie\nTheater Name: " + bundle.getString("theaterName") + "\nTime: "
+        + bundle.getString("showTimeName") + "\nSeats: " + position
+                + "\nGet in the app to see more information!";
 
         //database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -186,6 +197,8 @@ public class PaymentActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendTicketMsg(v);
+
                 Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class);
                 bundle.putString("totalAmount", String.format("%.2f", tAmount));
                 bundle.putString("numOfCok", Integer.toString(numOfCok));
@@ -211,6 +224,35 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "ticket";
+            String channelName = "Ticket Message";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            createNotificationChannel(channelId, channelName, importance);
+        }
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private void createNotificationChannel(String channelId, String channelName, int importance) {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(
+                NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
+    }
+
+    public void sendTicketMsg(View view) {
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Notification notification = new NotificationCompat.Builder(this, "chat")
+                .setContentTitle("You booked a ticket!")
+                .setContentText(notiMsg)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.icon_main)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_main))
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(notiMsg))
+                .build();
+        manager.notify(1, notification);
     }
 
 }
