@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class GridViewActivity extends AppCompatActivity {
     private GridView mGv;
     private TextView tvSeatmapCode;
+    private ArrayList<Integer> record = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +31,6 @@ public class GridViewActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MyGridViewAdapter myGridViewAdapter = new MyGridViewAdapter();
                         myGridViewAdapter.setSeclection(position);
-                        myGridViewAdapter.notifyDataSetChanged();
                         int col = 0,row = 0;
                         if(position>10){
                             col = position%10;
@@ -40,10 +42,21 @@ public class GridViewActivity extends AppCompatActivity {
 
                         String c = String.valueOf(col);
                         String r = String.valueOf(row);
+                        if(!record.contains(position)){
+                            record.add(position);
+                            tvSeatmapCode.setText("Col:"+c+"Rows:"+r+"added");
+                        }else{
+                            for (int i = 0;i<record.size();i++){
+                                if(record.get(i)==position){
+                                    record.remove(i);
+                                    i--;
+                                }
+                            }
 
-                        System.out.println(col);
-                        System.out.println(row);
-                tvSeatmapCode.setText("Col:"+c+"Rows:"+r);
+                            tvSeatmapCode.setText("Col:"+c+"Rows:"+r+"removed");
+                        }
+
+                        myGridViewAdapter.notifyDataSetChanged();
             }
         });
 
