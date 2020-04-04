@@ -9,16 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowInfoActivity"
-            android:label="Personal Information"></activity>
-        <activity android:name=".PersonInfoActivity"
-            android:label="Modify Personal Information"/>
+        <activity android:name=".Upcoming_Activity"></activity>
+        <activity android:name=".Trending_Activity" />
+        <activity
+            android:name=".ShowInfoActivity"
+            android:label="Personal Information" />
+        <activity
+            android:name=".PersonInfoActivity"
+            android:label="Modify Personal Information" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ResetPinActivity"
+        <activity
+            android:name=".ResetPinActivity"
             android:label="Reset Password" />
-        <activity android:name=".SignupActivity"
-            android:label="Register"/>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".SignupActivity"
+            android:label="Register" />
+        <activity
+            android:name=".MainActivity"
             android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
