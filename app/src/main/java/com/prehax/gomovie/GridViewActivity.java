@@ -24,6 +24,8 @@ public class GridViewActivity extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         String temp = bundle.getString("theaterName");
         tvSeatmapCode = findViewById(R.id.tv_seatmap_code);
+        setTitle(temp+" "+bundle.getString("showTimeName"));
+
         mGv=findViewById(R.id.gv);
         mGv.setAdapter(new MyGridViewAdapter(GridViewActivity.this));
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

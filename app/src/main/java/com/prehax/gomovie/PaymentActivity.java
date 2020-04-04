@@ -7,17 +7,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.OnClickAction;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;
@@ -28,6 +35,9 @@ public class PaymentActivity extends AppCompatActivity {
     private double cokeprice=0,popprice=0;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
+    private FirebaseAuth mAuth;
+    private String userID;
+    private String cardNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,22 +71,41 @@ public class PaymentActivity extends AppCompatActivity {
         //database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID=user.getUid();
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Snacks snacks = dataSnapshot.child("Theaters").child("1").child("Snacks").getValue(Snacks.class);
+
+                Snacks snacks = dataSnapshot.child("Theaters").child(Integer.toString(bundle.getInt("theaterID"))).child("Snacks").getValue(Snacks.class);
                 assert snacks != null;
                 cokeprice = snacks.getCoke();
-                System.out.println(cokeprice);
-                System.out.println(popprice);
                 popprice = snacks.getPopcorn();
-            }
 
+                MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
+                ArrayList<String> mList = new ArrayList<>();
+                try {
+                    cardNumber = movieGoer.getCardNumber();
+                    if (cardNumber.length() >= 4) { cardNumber = cardNumber.substring(cardNumber.length() - 4); }
+                    mList.add("Card ending with " + cardNumber);
+                } catch (NullPointerException e) {
+                    Toast.makeText(PaymentActivity.this, "You do not have a card stored", Toast.LENGTH_SHORT).show();
+                }
+                mList.add("----Use Another Card----");
+                ArrayAdapter arrayAdapter = new ArrayAdapter(PaymentActivity.this, R.layout.item_select, mList);
+                spinMethod.setAdapter(arrayAdapter);
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                System.out.println("不读数据了");
             }
         });
+        // This value will depend on the price of the ticket, and number of tickets.
+        tAmount = 8;
+        tvTAmount.setText(String.format("%.2f", tAmount));
+        // Above part will be changed later!!!!!!!!!!!!!
         btnAcok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +113,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfCok<1000) numOfCok++;
                 tvNumOfCok.setText(Integer.toString(numOfCok));
                 numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
-                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
+                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -96,7 +125,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfPop<1000) numOfPop++;
                 tvNumOfPop.setText(Integer.toString(numOfPop));
                 numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
-                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
+                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -108,7 +137,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfCok>0) numOfCok--;
                 tvNumOfCok.setText(Integer.toString(numOfCok));
                 numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
-                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
+                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -120,7 +149,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfPop>0) numOfPop--;
                 tvNumOfPop.setText(Integer.toString(numOfPop));
                 numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
-                tAmount = (cokeprice * numOfCok) + (popprice * numOfPop);
+                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -135,7 +164,28 @@ public class PaymentActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class);
+                bundle.putString("totalAmount", String.format("%.2f", tAmount));
+                bundle.putString("numOfCok", Integer.toString(numOfCok));
+                bundle.putString("numOfPop", Integer.toString(numOfPop));
+                intent.putExtras(bundle);
+                startActivity(intent);
                 finish();
+            }
+        });
+
+        spinMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1) {
+                    // Pop a window, allow user to enter Card Details
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 

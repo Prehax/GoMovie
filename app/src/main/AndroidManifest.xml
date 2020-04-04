@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TheaterActivity"
+        <activity android:name=".TicketDetailActivity"
+            android:label="Ticket Details"></activity>
+        <activity
+            android:name=".TheaterActivity"
             android:label="Theaters" />
         <activity android:name=".GridViewActivity" />
         <activity android:name=".showActivity" />
@@ -44,16 +47,16 @@
             android:label="Login" />
         <activity
             android:name=".CardActivity"
-            android:label="Add Card Details"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="Add Card Details" />
         <activity
             android:name=".ShowCardActivity"
-            android:label="Show Saved Cards"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="Show Saved Cards" />
         <activity
             android:name=".PaywithcvvActivity"
-            android:label="Use CVV"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="Use CVV" />
     </application>
 
 </manifest>
