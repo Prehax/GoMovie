@@ -27,11 +27,11 @@ public class GridViewActivity extends AppCompatActivity {
         setTitle(temp+" "+bundle.getString("showTimeName"));
 
         mGv=findViewById(R.id.gv);
-        mGv.setAdapter(new MyGridViewAdapter(GridViewActivity.this));
+        final MyGridViewAdapter myGridViewAdapter = new MyGridViewAdapter(GridViewActivity.this);
+        mGv.setAdapter(myGridViewAdapter);
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyGridViewAdapter myGridViewAdapter = new MyGridViewAdapter();
                         myGridViewAdapter.setSeclection(position);
                         int col = 0,row = 0;
                         if(position>10){
