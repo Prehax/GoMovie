@@ -35,10 +35,10 @@ public class GridViewActivity extends AppCompatActivity {
                         myGridViewAdapter.setSeclection(position);
                         int col = 0,row = 0;
                         if(position>10){
-                            col = position%10;
-                            row = position/10;
+                            col = position%10 + 1;
+                            row = position/10 + 1;
                         }else{
-                            col = position;
+                            col = position + 1;
                             row = 1;
                         }
 
@@ -46,7 +46,7 @@ public class GridViewActivity extends AppCompatActivity {
                         String r = String.valueOf(row);
                         if(!record.contains(position)){
                             record.add(position);
-                            tvSeatmapCode.setText("Col:"+c+"Rows:"+r+"added");
+                            tvSeatmapCode.setText("Col:"+c+" Row:"+r+" added");
                         }else{
                             for (int i = 0;i<record.size();i++){
                                 if(record.get(i)==position){
@@ -55,7 +55,7 @@ public class GridViewActivity extends AppCompatActivity {
                                 }
                             }
 
-                            tvSeatmapCode.setText("Col:"+c+"Rows:"+r+"removed");
+                            tvSeatmapCode.setText("Col:"+c+" Row:"+r+" removed");
                         }
 
                         myGridViewAdapter.notifyDataSetChanged();
@@ -72,8 +72,7 @@ public class GridViewActivity extends AppCompatActivity {
                 // 传关键信息到下一个界面并且启动
                 Intent intent = new Intent(GridViewActivity.this, PaymentActivity.class);
                 // Seat Code
-                bundle.putString("seatCode", tvSeatmapCode.getText().toString());
-                bundle.putInt("numOfTic", 1);
+                bundle.putIntegerArrayList("seatCode", record);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 //-----------------------------

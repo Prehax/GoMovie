@@ -62,14 +62,17 @@ public class MyGridViewAdapter extends BaseAdapter {
             System.out.println(clickTemp);
             if (clickedList[position] == 0) {
                 System.out.println("我运行了么if？");
-//                convertView.setBackgroundColor(Color.RED);
+                convertView.setBackgroundColor(Color.RED);
                 clickedList[position] = 1;
             } else {
                 System.out.println("我运行了么else？");
-//                convertView.setBackgroundColor(Color.TRANSPARENT);
+                convertView.setBackgroundColor(Color.TRANSPARENT);
                 clickedList[position] = 0;
             }
+        } else {
+            System.out.println("目前没有通过第一级条件判断");
         }
+
         if(convertView == null){
                 convertView = mLayoutInflater.inflate(R.layout.layout_grid_item,null);
                 holder = new ViewHolder();

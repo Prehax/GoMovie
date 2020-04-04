@@ -20,11 +20,12 @@
         android:layout_weight="1">
         <TextView
             android:id="@+id/tv_seatmap_code"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:textSize="16sp"
             android:textColor="#000000"
             android:layout_width="0dp"
             android:layout_weight="2"
+            android:gravity="center"
             android:background="@drawable/et_style2"
             />
         <Button

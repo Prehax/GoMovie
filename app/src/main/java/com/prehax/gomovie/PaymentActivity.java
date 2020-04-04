@@ -66,8 +66,30 @@ public class PaymentActivity extends AppCompatActivity {
         //tvMovie=...
         tvTheater.setText(bundle.getString("theaterName"));
         tvTime.setText(bundle.getString("showTimeName"));
-        tvSeat.setText(bundle.getString("seatCode"));
-        tvNum.setText(Integer.toString(bundle.getInt("numOfTic")));
+
+
+//        tvSeat.setText(bundle.getString("seatCode"));
+        String position="";
+        ArrayList<Integer> record = bundle.getIntegerArrayList("seatCode");
+        final int numOfTic = record.size();
+        int col, row;
+        for (int i = 0; i<numOfTic; i++) {
+            if (record.get(i)>10) {
+                col = record.get(i)%10 + 1;
+                row = record.get(i)/10 + 1;
+            } else {
+                col = record.get(i) + 1;
+                row = 1;
+            }
+            position += "Col:"+col+" Row:"+row;
+            position += "; ";
+        }
+        bundle.putString("position", position);
+        bundle.putInt("numOfTic", numOfTic);
+        tvSeat.setText(position);
+        tvNum.setText(Integer.toString(numOfTic));
+
+
         //database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
@@ -103,7 +125,7 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
         // This value will depend on the price of the ticket, and number of tickets.
-        tAmount = 8;
+        tAmount = 8*numOfTic;
         tvTAmount.setText(String.format("%.2f", tAmount));
         // Above part will be changed later!!!!!!!!!!!!!
         btnAcok.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +135,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfCok<1000) numOfCok++;
                 tvNumOfCok.setText(Integer.toString(numOfCok));
                 numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
-                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
+                tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -125,7 +147,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfPop<1000) numOfPop++;
                 tvNumOfPop.setText(Integer.toString(numOfPop));
                 numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
-                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
+                tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -137,7 +159,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfCok>0) numOfCok--;
                 tvNumOfCok.setText(Integer.toString(numOfCok));
                 numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
-                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
+                tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
@@ -149,7 +171,7 @@ public class PaymentActivity extends AppCompatActivity {
                 if (numOfPop>0) numOfPop--;
                 tvNumOfPop.setText(Integer.toString(numOfPop));
                 numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
-                tAmount = 8+popprice*numOfPop+cokeprice*numOfCok;
+                tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
