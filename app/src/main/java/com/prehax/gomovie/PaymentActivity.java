@@ -243,7 +243,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     public void sendTicketMsg(View view) {
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Notification notification = new NotificationCompat.Builder(this, "chat")
+        Notification notification = new NotificationCompat.Builder(this, "ticket")
                 .setContentTitle("You booked a ticket!")
                 .setContentText(notiMsg)
                 .setWhen(System.currentTimeMillis())

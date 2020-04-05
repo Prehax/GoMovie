@@ -35,7 +35,7 @@ public class TicketDetailActivity extends AppCompatActivity {
         //tvMovie.setText(...);
         tvTheater.setText(bundle.getString("theaterName"));
         tvTime.setText(bundle.getString("showTimeName"));
-        tvSeat.setText(bundle.getString("seatCode"));
+        tvSeat.setText(bundle.getString("position"));
         tvNum.setText(Integer.toString(bundle.getInt("numOfTic")));
         tvNumOfCok.setText(bundle.getString("numOfCok"));
         tvNumOfPop.setText(bundle.getString("numOfPop"));
