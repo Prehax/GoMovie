@@ -79,4 +79,5 @@ public class GridViewActivity extends AppCompatActivity {
             }
         });
     }
+
 }

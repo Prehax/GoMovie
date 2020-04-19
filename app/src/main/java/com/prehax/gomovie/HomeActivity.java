@@ -12,14 +12,23 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
 
     /*tested....*/
     private static final String TAG = "HomeActivity";
+    private String userID;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
     private DatabaseReference mDatabase;// ...
     private Button btnPayment, btnSeats;
     @Override
@@ -27,6 +36,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -75,6 +88,54 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button btn_sign = findViewById(R.id.btn_sign);
+        btn_sign.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+                    myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Long i = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
+                        boolean a;
+                        a = Check(i);
+                        if(a){
+                            Toast.makeText(HomeActivity.this, "Already signed today", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(HomeActivity.this, "sign success", Toast.LENGTH_SHORT).show();
+                            Calendar calendar = Calendar.getInstance();
+                            int day = calendar.get(Calendar.DAY_OF_MONTH)-1;
+                            myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);
+                            myRef.child("MovieGoers").child(userID).child("Signeddays").setValue(+1);
+                            Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
+//                            if(days>=7){
+//                                //coupon+1
+//                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+            }
+        });
+
+    }
+
+    private boolean Check(Long i){
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH)-1;
+        System.out.println(day);
+        if(i == day){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     @Override
     protected void onStart() {

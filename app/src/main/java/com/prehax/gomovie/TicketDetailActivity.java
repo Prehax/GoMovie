@@ -1,7 +1,12 @@
 package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -12,6 +17,9 @@ import android.widget.TextView;
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
     private Button btnConfirm;
+
+    NotificationManager notificationManager =
+            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
