@@ -83,7 +83,5 @@ public class TicketDetailActivity extends AppCompatActivity {
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Integer.toString(ticNum[3])).child("status").setValue("REFUNDED");
             }
         });
-
-
     }
 }
