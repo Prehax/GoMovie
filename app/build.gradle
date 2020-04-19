@@ -50,7 +50,7 @@ dependencies {
     // Recyclerview Library
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
-
+    implementation 'com.android.support:design:29.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
