@@ -90,7 +90,7 @@ public class PaymentActivity extends AppCompatActivity {
                 col = record.get(i) + 1;
                 row = 1;
             }
-            seatPosition += "Col:"+col+" Row:"+row+";";
+            seatPosition += "Col:"+col+" Row:"+row+"; ";
         }
 
         // show the seat information in the software
@@ -205,7 +205,7 @@ public class PaymentActivity extends AppCompatActivity {
                 // Send a message to notification bar
                 sendTicketMsg(v);
 
-                Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class);
+                Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
                 // 0: numOfTic; 1: numOfCok; 2: numOfPop; 3: ticID
                 String[] ticInfo = {"A Movie", bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
@@ -222,11 +222,13 @@ public class PaymentActivity extends AppCompatActivity {
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfCok").setValue(ticNum[1]);
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfPop").setValue(ticNum[2]);
 
+                // put necessary data in bundle and pass it into next page
                 bundle.clear();
                 bundle.putStringArray("ticInfo", ticInfo);
                 bundle.putIntArray("ticNum", ticNum);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                // If confirm, terminate all activity related to this ticket.
                 finish();
             }
         });

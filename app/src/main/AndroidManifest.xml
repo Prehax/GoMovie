@@ -11,6 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MovieTrailerActivity"></activity>
         <activity
+            android:name=".TicketHistoryActivity"
+            android:label="Purchase History"></activity>
+        <activity
             android:name=".TicketDetailActivity"
             android:label="Ticket Details" />
         <activity

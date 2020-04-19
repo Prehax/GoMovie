@@ -51,6 +51,10 @@ public class TheaterActivity extends AppCompatActivity {
                     System.out.println("开始读取数据");
                     long numOfTheaters=dataSnapshot.child("Theaters").getChildrenCount();
                     System.out.println(numOfTheaters);
+                    // The following 3 line are prevent it from reading multiple times
+                    Tname.clear();
+                    Taddress.clear();
+                    Trate.clear();
                     for (long i = 0; i<numOfTheaters; i++) {
                         Theater theater = dataSnapshot.child("Theaters").child(Long.toString(i)).getValue(Theater.class);
                         Tname.add(theater.getName());

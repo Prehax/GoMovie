@@ -23,6 +23,7 @@ import java.util.HashMap;
 
 public class TicketHistoryActivity extends AppCompatActivity {
 
+    private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class TicketHistoryActivity extends AppCompatActivity {
         final FirebaseAuth myAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = myAuth.getCurrentUser();
         // Data part
-        final ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -41,6 +42,7 @@ public class TicketHistoryActivity extends AppCompatActivity {
                     long numOfTickets = dataSnapshot.child("MovieGoers").child(user.getUid()).child("Tickets").getChildrenCount();
                     System.out.println(numOfTickets);
                     Ticket ticket = new Ticket();
+                    tickets.clear();
                     for (long i = 0; i<numOfTickets; i++) {
                         ticket = dataSnapshot.child("MovieGoers").child(user.getUid()).child("Tickets").child(Long.toString(i)).getValue(Ticket.class);
                         // Put each one ticket from database into arraylist
@@ -65,6 +67,7 @@ public class TicketHistoryActivity extends AppCompatActivity {
                             new int[] { R.id.tv_th_movieName, R.id.tv_th_theaterName, R.id.tv_th_seatCode });
                     // Set Adapter
                     lvTickets.setAdapter(listItemAdapter);
+
                 } catch (NullPointerException e) {
                     System.out.println("读取未完成, 遭遇空指针错误");
                 }

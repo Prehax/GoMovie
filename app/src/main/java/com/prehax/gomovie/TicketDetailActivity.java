@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
-    private Button btnConfirm, btnRefund;
+    private Button btnConfirm, btnRefund, btnRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class TicketDetailActivity extends AppCompatActivity {
         // Find ID for Button
         btnConfirm = findViewById(R.id.btn_td_confirm);
         btnRefund = findViewById(R.id.btn_td_refund);
+        btnRate = findViewById(R.id.btn_td_rate);
         // Get Bundle
         Bundle bundle = getIntent().getExtras();
         // 0: movieName; 1: theatername; 2: showTime; 3: seatCode; 4: status; 5: Amount
@@ -81,7 +82,16 @@ public class TicketDetailActivity extends AppCompatActivity {
                 String userID = user.getUid();
 
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Integer.toString(ticNum[3])).child("status").setValue("REFUNDED");
+                finish();
             }
         });
+
+        btnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 }
