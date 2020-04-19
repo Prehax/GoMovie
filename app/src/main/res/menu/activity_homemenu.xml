@@ -12,4 +12,6 @@
         android:title="Theater"/>
     <item android:id="@+id/logout"
         android:title="Logout" />
+    <item android:id="@+id/sign"
+        android:title="Sign" />
 </menu>

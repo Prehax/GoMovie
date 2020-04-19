@@ -1,5 +1,6 @@
 package com.prehax.gomovie;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,8 +26,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.prehax.gomovie.Adapaters.RecyclerViewAdapter;
 import com.prehax.gomovie.Models.Movie;
 
@@ -33,8 +42,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    private DatabaseReference myRef;
+    private DatabaseReference mDatabase;
+    private String userID;
     private final String JSON_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=142f01f330865c87d1523d3051162c8b&language=en-US&page=1";
     private JsonArrayRequest request;
     private RequestQueue requestQueue;
@@ -50,7 +62,26 @@ public class HomeActivity extends AppCompatActivity {
         listMovie = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
         jsonRequest();
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
+                    //Toast.makeText(HomeActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(HomeActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
     }
+
 
     private void jsonRequest(){
         StringRequest request = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
@@ -122,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.Showcard:
                     Intent intent3 = new Intent(HomeActivity.this, ShowCardActivity.class);
                     startActivity(intent3);
-                    return  true;
+                    return true;
                 case R.id.Theater:
                     intent = new Intent(HomeActivity.this, TheaterActivity.class);
                     startActivity(intent);
@@ -130,8 +161,51 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.logout:
                     mAuth.signOut();
                     finish();
+                case R.id.sign:
+                    myRef = mFirebaseDatabase.getReference();
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Long i = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
+                            boolean a;
+                            a = Check(i);
+                            if (a) {
+                                Toast.makeText(HomeActivity.this, "Already signed today", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(HomeActivity.this, "Sign success", Toast.LENGTH_SHORT).show();
+                                Calendar calendar = Calendar.getInstance();
+                                int day = calendar.get(Calendar.DAY_OF_MONTH) - 1;
+                                try {
+                                    myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);
+                                    myRef.child("MovieGoers").child(userID).child("Signeddays").setValue(+1);
+                                    Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
+                                } catch (NullPointerException e) {
+                                }
+
+//                            if(days>=7){
+//                                //coupon+1
+//                            }
+                            }
+                        }
+
+                        private boolean Check(Long i) {
+                            Calendar calendar = Calendar.getInstance();
+                            int day = calendar.get(Calendar.DAY_OF_MONTH) - 1;
+                            System.out.println(day);
+                            if (i == day) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 default:
                     return super.onOptionsItemSelected(item);
             }
-    }
+        }
 }
