@@ -44,7 +44,9 @@ public class PaymentActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private String userID;
-    private String cardNumber, notiMsg;
+    private String cardNumber, notiMsg, seatPosition="";
+    private long numOfRecord=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +78,7 @@ public class PaymentActivity extends AppCompatActivity {
 
 
 //        tvSeat.setText(bundle.getString("seatCode"));
-        String position="";
+
         ArrayList<Integer> record = bundle.getIntegerArrayList("seatCode");
         final int numOfTic = record.size();
         int col, row;
@@ -88,17 +90,16 @@ public class PaymentActivity extends AppCompatActivity {
                 col = record.get(i) + 1;
                 row = 1;
             }
-            position += "Col:"+col+" Row:"+row;
-            position += "; ";
+            seatPosition += "Col:"+col+" Row:"+row+";";
         }
-        bundle.putString("position", position);
-        bundle.putInt("numOfTic", numOfTic);
-        tvSeat.setText(position);
+
+        // show the seat information in the software
+        tvSeat.setText(seatPosition);
         tvNum.setText(Integer.toString(numOfTic));
 
         // This String is for notification Msg
         notiMsg="Movie Name: A Movie\nTheater Name: " + bundle.getString("theaterName") + "\nTime: "
-        + bundle.getString("showTimeName") + "\nSeats: " + position
+        + bundle.getString("showTimeName") + "\nSeats: " + seatPosition
                 + "\nGet in the app to see more information!";
 
         //database
@@ -111,13 +112,17 @@ public class PaymentActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 Snacks snacks = dataSnapshot.child("Theaters").child(Integer.toString(bundle.getInt("theaterID"))).child("Snacks").getValue(Snacks.class);
                 assert snacks != null;
                 cokeprice = snacks.getCoke();
                 popprice = snacks.getPopcorn();
 
                 MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
+                try {
+                    numOfRecord = dataSnapshot.child("MovieGoers").child(userID).child("Tickets").getChildrenCount();
+                } catch (NullPointerException e) {
+                    numOfRecord = 0;
+                }
                 ArrayList<String> mList = new ArrayList<>();
                 try {
                     cardNumber = movieGoer.getCardNumber();
@@ -132,13 +137,14 @@ public class PaymentActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("不读数据了");
+                System.out.println("Fail to read data");
             }
         });
         // This value will depend on the price of the ticket, and number of tickets.
         tAmount = 8*numOfTic;
         tvTAmount.setText(String.format("%.2f", tAmount));
         // Above part will be changed later!!!!!!!!!!!!!
+        // Following are + and - buttons
         btnAcok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,7 +156,6 @@ public class PaymentActivity extends AppCompatActivity {
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
-
         btnApop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,7 +167,6 @@ public class PaymentActivity extends AppCompatActivity {
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
-
         btnMcok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +178,6 @@ public class PaymentActivity extends AppCompatActivity {
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
         });
-
         btnMpop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +190,7 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
 
+        // Cancel button
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,20 +198,39 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
 
+        // Confirm button
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Send a message to notification bar
                 sendTicketMsg(v);
 
                 Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class);
-                bundle.putString("totalAmount", String.format("%.2f", tAmount));
-                bundle.putString("numOfCok", Integer.toString(numOfCok));
-                bundle.putString("numOfPop", Integer.toString(numOfPop));
+                // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
+                // 0: numOfTic; 1: numOfCok; 2: numOfPop
+                String[] ticInfo = {"A Movie", bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
+                int[] ticNum = {numOfTic, numOfCok, numOfPop};
+
+                // 将ticket信息写入数据库里面
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("movieName").setValue(ticInfo[0]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("theaterName").setValue(ticInfo[1]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("showTime").setValue(ticInfo[2]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("seat").setValue(ticInfo[3]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("status").setValue(ticInfo[4]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("tAmount").setValue(ticInfo[5]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfTic").setValue(ticNum[0]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfCok").setValue(ticNum[1]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfPop").setValue(ticNum[2]);
+
+                bundle.clear();
+                bundle.putStringArray("ticInfo", ticInfo);
+                bundle.putIntArray("ticNum", ticNum);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             }
         });
+
 
         spinMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

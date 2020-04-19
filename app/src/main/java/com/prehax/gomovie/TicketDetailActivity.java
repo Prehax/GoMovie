@@ -1,12 +1,6 @@
 package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -17,9 +11,6 @@ import android.widget.TextView;
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
     private Button btnConfirm;
-
-    NotificationManager notificationManager =
-            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +31,29 @@ public class TicketDetailActivity extends AppCompatActivity {
         btnConfirm = findViewById(R.id.btn_td_confirm);
         // Get Bundle
         Bundle bundle = getIntent().getExtras();
+        // 0: movieName; 1: theatername; 2: showTime; 3: seatCode; 4: status; 5: Amount
+        String[] ticInfo = bundle.getStringArray("ticInfo");
+        // 0: numOfTic; 1: numOfCok; 2: numOfpop
+        int[] ticNum = bundle.getIntArray("ticNum");
         //tvMovie.setText(...);
-        tvTheater.setText(bundle.getString("theaterName"));
-        tvTime.setText(bundle.getString("showTimeName"));
-        tvSeat.setText(bundle.getString("position"));
-        tvNum.setText(Integer.toString(bundle.getInt("numOfTic")));
-        tvNumOfCok.setText(bundle.getString("numOfCok"));
-        tvNumOfPop.setText(bundle.getString("numOfPop"));
-        //tvStatus.setText("PAID");
-        tvTAmount.setText(bundle.getString("totalAmount"));
+        /*
+        System.out.println("从上个界面获取的两个数组中的数据为: ");
+        for (int i=0; i<6; i++) {
+            System.out.println(ticInfo[i]);
+        }
+        for (int i=0; i<3; i++) {
+            System.out.println(ticNum[i]);
+        }
+         */
+        tvMovie.setText(ticInfo[0]);
+        tvTheater.setText(ticInfo[1]);
+        tvTime.setText(ticInfo[2]);
+        tvSeat.setText(ticInfo[3]);
+        tvNum.setText(Integer.toString(ticNum[0]));
+        tvNumOfCok.setText(Integer.toString(ticNum[1]));
+        tvNumOfPop.setText(Integer.toString(ticNum[2]));
+        tvStatus.setText(ticInfo[4]);
+        tvTAmount.setText(ticInfo[5]);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
