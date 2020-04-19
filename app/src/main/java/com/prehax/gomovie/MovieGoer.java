@@ -52,3 +52,63 @@ public class MovieGoer {
     public void setExpDate(String ExpDate){this.ExpDate = ExpDate;}
     public void setCvv(String CVV){this.CVV = CVV;}
 }
+
+class Ticket {
+    private String movieName, theaterName, showTime, seat, tAmount, status;
+    private int numOfTic, numOfCok, numOfPop;
+
+    public String getMovieName() {
+        return movieName;
+    }
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+    public String getTheaterName() {
+        return theaterName;
+    }
+    public void setTheaterName(String theaterName) {
+        this.theaterName = theaterName;
+    }
+    public String getShowTime() {
+        return showTime;
+    }
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
+    }
+    public String getSeat() {
+        return seat;
+    }
+    public void setSeat(String seat) {
+        this.seat = seat;
+    }
+    public String gettAmount() {
+        return tAmount;
+    }
+    public void settAmount(String tAmount) {
+        this.tAmount = tAmount;
+    }
+    public int getNumOfTic() {
+        return numOfTic;
+    }
+    public void setNumOfTic(int numOfTic) {
+        this.numOfTic = numOfTic;
+    }
+    public int getNumOfCok() {
+        return numOfCok;
+    }
+    public void setNumOfCok(int numOfCok) {
+        this.numOfCok = numOfCok;
+    }
+    public int getNumOfPop() {
+        return numOfPop;
+    }
+    public void setNumOfPop(int numOfPop) {
+        this.numOfPop = numOfPop;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

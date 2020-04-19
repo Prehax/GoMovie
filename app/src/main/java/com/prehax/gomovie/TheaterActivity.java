@@ -30,8 +30,6 @@ public class TheaterActivity extends AppCompatActivity {
     private ArrayList<String> Trate = new ArrayList<String>();
 
     private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
     @Override
