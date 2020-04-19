@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TicketDetailActivity"
-            android:label="Ticket Details"></activity>
+        <activity android:name=".MovieTrailerActivity"></activity>
+        <activity
+            android:name=".TicketDetailActivity"
+            android:label="Ticket Details" />
         <activity
             android:name=".TheaterActivity"
             android:label="Theaters" />
         <activity android:name=".GridViewActivity" />
         <activity android:name=".showActivity" />
-          <activity
+        <activity
             android:name=".PaymentActivity"
             android:label="Payment" />
         <activity
@@ -57,6 +59,12 @@
             android:name=".PaywithcvvActivity"
             android:exported="true"
             android:label="Use CVV" />
+        <activity
+            android:name=".Trending_Activity"
+            android:label="Trending Movies" />
+        <activity
+            android:name=".Upcoming_Activity"
+            android:label="Upcoming Movies" />
     </application>
 
 </manifest>

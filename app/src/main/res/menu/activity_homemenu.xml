@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/trending"
+        android:title="Trending" />
+    <item android:id="@+id/upcoming"
+        android:title="Upcoming" />
+    <item android:id="@+id/ShowInfo"
+        android:title="Profile"/>
+    <item android:id="@+id/Showcard"
+        android:title="CardInfo"/>
+    <item android:id="@+id/Theater"
+        android:title="Theater"/>
+    <item android:id="@+id/logout"
+        android:title="Logout" />
+</menu>
