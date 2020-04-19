@@ -85,9 +85,9 @@ public class TicketHistoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(TicketHistoryActivity.this, TicketDetailActivity.class);
                 Ticket ticket = tickets.get(position);
                 // 0: movieName; 1: theatername; 2: showTime; 3: seatCode; 4: status; 5: Amount
-                // 0: numOfTic; 1: numOfCok; 2: numOfpop
+                // 0: numOfTic; 1: numOfCok; 2: numOfpop; 3: ticID
                 String[] ticInfo = {ticket.getMovieName(), ticket.getTheaterName(), ticket.getShowTime(), ticket.getSeat(), ticket.getStatus(), ticket.gettAmount()};
-                int[] ticNum = {ticket.getNumOfTic(), ticket.getNumOfCok(), ticket.getNumOfPop()};
+                int[] ticNum = {ticket.getNumOfTic(), ticket.getNumOfCok(), ticket.getNumOfPop(), position};
                 Bundle bundle = new Bundle();
                 bundle.putStringArray("ticInfo", ticInfo);
                 bundle.putIntArray("ticNum", ticNum);

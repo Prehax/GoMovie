@@ -207,9 +207,9 @@ public class PaymentActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class);
                 // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
-                // 0: numOfTic; 1: numOfCok; 2: numOfPop
+                // 0: numOfTic; 1: numOfCok; 2: numOfPop; 3: ticID
                 String[] ticInfo = {"A Movie", bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
-                int[] ticNum = {numOfTic, numOfCok, numOfPop};
+                int[] ticNum = {numOfTic, numOfCok, numOfPop, (int)numOfRecord};
 
                 // 将ticket信息写入数据库里面
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("movieName").setValue(ticInfo[0]);

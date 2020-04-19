@@ -219,4 +219,15 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_td_refund"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_style1"
+        android:text="Refund"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
 </LinearLayout>

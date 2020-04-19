@@ -8,9 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
-    private Button btnConfirm;
+    private Button btnConfirm, btnRefund;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +34,13 @@ public class TicketDetailActivity extends AppCompatActivity {
         tvTAmount = findViewById(R.id.tv_td_tAmount);
         // Find ID for Button
         btnConfirm = findViewById(R.id.btn_td_confirm);
+        btnRefund = findViewById(R.id.btn_td_refund);
         // Get Bundle
         Bundle bundle = getIntent().getExtras();
         // 0: movieName; 1: theatername; 2: showTime; 3: seatCode; 4: status; 5: Amount
         String[] ticInfo = bundle.getStringArray("ticInfo");
-        // 0: numOfTic; 1: numOfCok; 2: numOfpop
-        int[] ticNum = bundle.getIntArray("ticNum");
+        // 0: numOfTic; 1: numOfCok; 2: numOfpop 3: ticID
+        final int[] ticNum = bundle.getIntArray("ticNum");
         //tvMovie.setText(...);
         /*
         System.out.println("从上个界面获取的两个数组中的数据为: ");
@@ -64,6 +70,20 @@ public class TicketDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btnRefund.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
+                final DatabaseReference myRef = mFirebaseDatabase.getReference();
+                final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+                final FirebaseUser user = myAuth.getCurrentUser();
+                String userID = user.getUid();
+
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Integer.toString(ticNum[3])).child("status").setValue("REFUNDED");
+            }
+        });
+
 
     }
 }
