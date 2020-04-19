@@ -7,6 +7,7 @@
     <string name="jump">jump</string>
     <string name="choose">A Movie</string>
     <string name="test">test</string>
+    <string name="history">Ticket History</string>
     <string name="title_activity_signin">SigninActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

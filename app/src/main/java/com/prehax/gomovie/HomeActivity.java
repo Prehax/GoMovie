@@ -88,11 +88,20 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button btn_tHistory = findViewById(R.id.btn_ticketHistory);
+        btn_tHistory.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(HomeActivity.this, TicketHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
         Button btn_sign = findViewById(R.id.btn_sign);
         btn_sign.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-                    myRef.addValueEventListener(new ValueEventListener() {
+                myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Long i = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
@@ -101,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                         if(a){
                             Toast.makeText(HomeActivity.this, "Already signed today", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(HomeActivity.this, "sign success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HomeActivity.this, "Sign success", Toast.LENGTH_SHORT).show();
                             Calendar calendar = Calendar.getInstance();
                             int day = calendar.get(Calendar.DAY_OF_MONTH)-1;
                             myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);

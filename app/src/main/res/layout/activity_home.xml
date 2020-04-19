@@ -18,6 +18,14 @@
         android:background="@drawable/btn_style1" />
 
     <Button
+        android:id="@+id/btn_card"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_style1" />
+
+    <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,11 +60,17 @@
         android:textColor="#000000" />
 
     <Button
-        android:id="@+id/btn_card"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/btn_style1" />
+        android:id="@+id/btn_ticketHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_style1"
+        android:layout_below="@id/btn_sign"
+        android:text="@string/history"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+
 
 </RelativeLayout>
