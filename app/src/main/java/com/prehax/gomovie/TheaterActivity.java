@@ -128,7 +128,7 @@ public class TheaterActivity extends AppCompatActivity {
 
 
     }
-
+    // click on menu's item
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         setTitle("On Click the menu " + item.getItemId());

@@ -1,21 +1,33 @@
 package com.prehax.gomovie;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
     private Button btnConfirm, btnRefund, btnRate;
+    private final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
+    private final DatabaseReference myRef = mFirebaseDatabase.getReference();
+    private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private final FirebaseUser user = myAuth.getCurrentUser();
+    private String userID = user.getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,23 +87,38 @@ public class TicketDetailActivity extends AppCompatActivity {
         btnRefund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
-                final DatabaseReference myRef = mFirebaseDatabase.getReference();
-                final FirebaseAuth myAuth = FirebaseAuth.getInstance();
-                final FirebaseUser user = myAuth.getCurrentUser();
-                String userID = user.getUid();
-
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Integer.toString(ticNum[3])).child("status").setValue("REFUNDED");
                 finish();
             }
         });
+    }
 
-        btnRate.setOnClickListener(new View.OnClickListener() {
+    public void rateDialog(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Rating");
+        final View view = getLayoutInflater().inflate(R.layout.rating_layout,null);
+        builder.setView(view);
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(DialogInterface dialog, int which) {
+                RatingBar rbStars = view.findViewById(R.id.rb_stars);
+                float numOfStars = rbStars.getRating();
+                // 读取当前电影院评价人数n与当前评分a, n*a+numOfStars / n+1, n++;
+                DataSnapshot dataSnapshot;
+                //myRef.child("Theaters").child("1").child("rateNum").
+                Toast.makeText(TicketDetailActivity.this, Float.toString(numOfStars), Toast.LENGTH_SHORT).show();
+                dialog.cancel();
             }
         });
 
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 }

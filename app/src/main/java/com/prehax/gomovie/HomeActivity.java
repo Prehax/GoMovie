@@ -158,6 +158,9 @@ public class HomeActivity extends AppCompatActivity {
                     intent = new Intent(HomeActivity.this, TheaterActivity.class);
                     startActivity(intent);
                     return true;
+                case R.id.purchaseHistory:
+                    startActivity(new Intent(HomeActivity.this, TicketHistoryActivity.class));
+                    return true;
                 case R.id.logout:
                     mAuth.signOut();
                     finish();

@@ -3,7 +3,7 @@ package com.prehax.gomovie;
 public class Theater {
     private String address = "", name = "";
     private double rate=0;
-    private int numCol=0, numRows=0;
+    private int numCol=0, numRows=0, rateNum=0;
 
     public String getAddress() {
         return address;
@@ -43,6 +43,14 @@ public class Theater {
 
     public void setNumRows(int numRows) {
         this.numRows = numRows;
+    }
+
+    public int getRateNum() {
+        return rateNum;
+    }
+
+    public void setRateNum(int rateNum) {
+        this.rateNum = rateNum;
     }
 }
 
