@@ -121,7 +121,7 @@ public class TheaterActivity extends AppCompatActivity {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                 menu.setHeaderTitle("Menu");
-                menu.add(0,0,0, "PopUp menu 1");
+                menu.add(0,0,0, "Facilities");
                 menu.add(0,1,0, "PopUp menu 2");
             }
         });
@@ -132,6 +132,14 @@ public class TheaterActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         setTitle("On Click the menu " + item.getItemId());
+//        if(item.getItemId() == 0){
+//            Intent intent = new Intent(TheaterActivity.this, showActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("tposition", Tname.get(position));
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//        }
+
         return super.onContextItemSelected(item);
     }
 }
