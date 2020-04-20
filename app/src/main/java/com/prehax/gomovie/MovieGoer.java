@@ -55,7 +55,7 @@ public class MovieGoer {
 
 class Ticket {
     private String movieName, theaterName, showTime, seat, tAmount, status;
-    private int numOfTic, numOfCok, numOfPop;
+    private int numOfTic, numOfCok, numOfPop, theaterID;
 
     public String getMovieName() {
         return movieName;
@@ -110,5 +110,11 @@ class Ticket {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public int getTheaterID() {
+        return theaterID;
+    }
+    public void setTheaterID(int theaterID) {
+        this.theaterID = theaterID;
     }
 }

@@ -22,12 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
-    private Button btnConfirm, btnRefund, btnRate;
+    private Button btnConfirm, btnRefund;
     private final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
     private final DatabaseReference myRef = mFirebaseDatabase.getReference();
     private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
     private final FirebaseUser user = myAuth.getCurrentUser();
     private String userID = user.getUid();
+    private String[] ticInfo;
+    // 0: numOfTic; 1: numOfCok; 2: numOfpop 3: ticID; 4: theaterID; 5: rateNum
+    private int[] ticNum;
+    private double rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +51,14 @@ public class TicketDetailActivity extends AppCompatActivity {
         // Find ID for Button
         btnConfirm = findViewById(R.id.btn_td_confirm);
         btnRefund = findViewById(R.id.btn_td_refund);
-        btnRate = findViewById(R.id.btn_td_rate);
         // Get Bundle
-        Bundle bundle = getIntent().getExtras();
-        // 0: movieName; 1: theatername; 2: showTime; 3: seatCode; 4: status; 5: Amount
-        String[] ticInfo = bundle.getStringArray("ticInfo");
-        // 0: numOfTic; 1: numOfCok; 2: numOfpop 3: ticID
-        final int[] ticNum = bundle.getIntArray("ticNum");
+        final Bundle bundle = getIntent().getExtras();
+        // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
+        ticInfo = bundle.getStringArray("ticInfo");
+        // 0: numOfTic; 1: numOfCok; 2: numOfpop 3: ticID; 4: theaterID; 5: rateNum
+        ticNum = bundle.getIntArray("ticNum");
+        rate = bundle.getDouble("rate");
+
         //tvMovie.setText(...);
         /*
         System.out.println("从上个界面获取的两个数组中的数据为: ");
@@ -105,8 +110,10 @@ public class TicketDetailActivity extends AppCompatActivity {
                 RatingBar rbStars = view.findViewById(R.id.rb_stars);
                 float numOfStars = rbStars.getRating();
                 // 读取当前电影院评价人数n与当前评分a, n*a+numOfStars / n+1, n++;
-                DataSnapshot dataSnapshot;
-                //myRef.child("Theaters").child("1").child("rateNum").
+                double newRate = calculate(ticNum[5], rate, numOfStars);
+                ticNum[5]++;
+                myRef.child("Theaters").child(Integer.toString(ticNum[4])).child("rate").setValue(newRate);
+                myRef.child("Theaters").child(Integer.toString(ticNum[4])).child("rateNum").setValue(ticNum[5]);
                 Toast.makeText(TicketDetailActivity.this, Float.toString(numOfStars), Toast.LENGTH_SHORT).show();
                 dialog.cancel();
             }
@@ -118,7 +125,15 @@ public class TicketDetailActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
         builder.show();
+    }
+    //传值
+    //double a=calculate(n,a,numberofStars);
+    //0是影院id
+    //myRef.child("theaters").child("0").child("rate").setValue(a);
+    private double calculate(int n,double a,float numofStars){
+        double a1 = numofStars;
+        double result = (n*a+a1)/(n+1);
+        return result;
     }
 }

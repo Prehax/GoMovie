@@ -22,17 +22,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TicketHistoryActivity extends AppCompatActivity {
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
+    private DatabaseReference myRef = mFirebaseDatabase.getReference();
+    private FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private FirebaseUser user = myAuth.getCurrentUser();
 
     private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+    private ArrayList<Theater> theaters = new ArrayList<Theater>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_history);
         final ListView lvTickets = findViewById(R.id.lv_tickets);
-        final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
-        final DatabaseReference myRef = mFirebaseDatabase.getReference();
-        final FirebaseAuth myAuth = FirebaseAuth.getInstance();
-        final FirebaseUser user = myAuth.getCurrentUser();
         // Data part
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -68,6 +69,16 @@ public class TicketHistoryActivity extends AppCompatActivity {
                     // Set Adapter
                     lvTickets.setAdapter(listItemAdapter);
 
+                    // Get all of theater's information
+                    long numOfTheaters=dataSnapshot.child("Theaters").getChildrenCount();
+                    theaters.clear();
+                    for (long i = 0; i<numOfTheaters; i++) {
+                        Theater theater = dataSnapshot.child("Theaters").child(Long.toString(i)).getValue(Theater.class);
+                        theaters.add(theater);
+                        System.out.println("读取数据完成, 读到了以下数据: ");
+                        System.out.println(theater.getName() + " " + theater.getAddress());
+                    }
+
                 } catch (NullPointerException e) {
                     System.out.println("读取未完成, 遭遇空指针错误");
                 }
@@ -87,13 +98,19 @@ public class TicketHistoryActivity extends AppCompatActivity {
                 // 传关键信息到下一个界面并且启动
                 Intent intent = new Intent(TicketHistoryActivity.this, TicketDetailActivity.class);
                 Ticket ticket = tickets.get(position);
+                int theaterID, rateNum;
+                double rate;
+                theaterID = ticket.getTheaterID();
+                rate = theaters.get(theaterID).getRate();
+                rateNum = theaters.get(theaterID).getRateNum();
                 // 0: movieName; 1: theatername; 2: showTime; 3: seatCode; 4: status; 5: Amount
-                // 0: numOfTic; 1: numOfCok; 2: numOfpop; 3: ticID
+                // 0: numOfTic; 1: numOfCok; 2: numOfpop; 3: ticID; 4: theaterID; 5: rateNum
                 String[] ticInfo = {ticket.getMovieName(), ticket.getTheaterName(), ticket.getShowTime(), ticket.getSeat(), ticket.getStatus(), ticket.gettAmount()};
-                int[] ticNum = {ticket.getNumOfTic(), ticket.getNumOfCok(), ticket.getNumOfPop(), position};
+                int[] ticNum = {ticket.getNumOfTic(), ticket.getNumOfCok(), ticket.getNumOfPop(), position, ticket.getTheaterID(), rateNum};
                 Bundle bundle = new Bundle();
                 bundle.putStringArray("ticInfo", ticInfo);
                 bundle.putIntArray("ticNum", ticNum);
+                bundle.putDouble("rate", rate);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 //-----------------------------
