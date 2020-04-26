@@ -154,10 +154,13 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent3 = new Intent(HomeActivity.this, ShowCardActivity.class);
                     startActivity(intent3);
                     return true;
+                    /*
                 case R.id.Theater:
                     intent = new Intent(HomeActivity.this, TheaterActivity.class);
                     startActivity(intent);
                     return true;
+
+                     */
                 case R.id.purchaseHistory:
                     startActivity(new Intent(HomeActivity.this, TicketHistoryActivity.class));
                     return true;

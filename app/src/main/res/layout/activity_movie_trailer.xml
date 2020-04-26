@@ -82,5 +82,6 @@
         android:text="BookTickets"
         android:textAllCaps="false"
         android:textSize="20sp"
+        android:onClick="selTheater"
         android:layout_marginTop="560dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

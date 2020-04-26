@@ -2,7 +2,9 @@ package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,5 +52,13 @@ public class MovieTrailerActivity extends AppCompatActivity {
         textViewTitle.setText(description);
         collapsingToolbarLayout.setTitle(title);
 
+    }
+
+    public void selTheater(View view) {
+        Intent intent = new Intent(MovieTrailerActivity.this, TheaterActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("movieName", getIntent().getExtras().getString("movie_name"));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -44,7 +44,7 @@ public class PaymentActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
     private String userID;
-    private String cardNumber, notiMsg, seatPosition="";
+    private String cardNumber, notiMsg, seatPosition="", movieName;
     private long numOfRecord=0;
 
     @Override
@@ -72,7 +72,8 @@ public class PaymentActivity extends AppCompatActivity {
         spinMethod = findViewById(R.id.spin_pay_method);
         // Ticket Information
         final Bundle bundle = getIntent().getExtras();
-        //tvMovie=...
+        movieName = bundle.getString("movieName");
+        tvMovie.setText(movieName);
         tvTheater.setText(bundle.getString("theaterName"));
         tvTime.setText(bundle.getString("showTimeName"));
 
@@ -98,7 +99,7 @@ public class PaymentActivity extends AppCompatActivity {
         tvNum.setText(Integer.toString(numOfTic));
 
         // This String is for notification Msg
-        notiMsg="Movie Name: A Movie\nTheater Name: " + bundle.getString("theaterName") + "\nTime: "
+        notiMsg="Movie Name: "+ movieName + "\nTheater Name: " + bundle.getString("theaterName") + "\nTime: "
         + bundle.getString("showTimeName") + "\nSeats: " + seatPosition
                 + "\nGet in the app to see more information!";
 
@@ -213,7 +214,7 @@ public class PaymentActivity extends AppCompatActivity {
                 Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
                 // 0: numOfTic; 1: numOfCok; 2: numOfPop; 3: ticID, 4: theaterID; 5: rateNum
-                String[] ticInfo = {"A Movie", bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
+                String[] ticInfo = {bundle.getString("movieName"), bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
                 int[] ticNum = {numOfTic, numOfCok, numOfPop, (int)numOfRecord, bundle.getInt("theaterID"), rateNum};
                 // 将ticket信息写入数据库里面
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("movieName").setValue(ticInfo[0]);

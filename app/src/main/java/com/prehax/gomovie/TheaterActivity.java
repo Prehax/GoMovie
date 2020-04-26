@@ -32,12 +32,17 @@ public class TheaterActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
 
+    private Bundle bundle = new Bundle();
+    private String movieName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theater);
         // Find ID 必须在这里, 不能设置为private member
         final ListView listView = findViewById(R.id.lv_theater);
+        //
+        bundle = getIntent().getExtras();
+        movieName = bundle.getString("movieName");
         // Read data from databese
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
@@ -108,7 +113,7 @@ public class TheaterActivity extends AppCompatActivity {
                 // setTitle("OnClick No." + (position+1) + " item");
                 // 传关键信息到下一个界面并且启动
                 Intent intent = new Intent(TheaterActivity.this, showActivity.class);
-                Bundle bundle = new Bundle();
+
                 bundle.putInt("theaterID", position);
                 bundle.putString("theaterName", Tname.get(position));
                 intent.putExtras(bundle);
