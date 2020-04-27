@@ -1,12 +1,31 @@
 package com.prehax.gomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
+import com.prehax.gomovie.Adapaters.RecyclerViewAdapter;
+import com.prehax.gomovie.Models.Movie;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,39 +33,110 @@ import java.util.List;
 
 public class Upcoming_Activity extends AppCompatActivity {
 
-        private FirebaseAuth mAuth;
-        private FirebaseAuth.AuthStateListener mAuthListener;
+    private static final String TAG = "Upcoming_Activity";
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private final String JSON_URL =  "https://api.themoviedb.org/3/movie/upcoming?api_key=142f01f330865c87d1523d3051162c8b&language=en-US&page=1";
+    private JsonArrayRequest request;
+    private RequestQueue requestQueue;
+    private List<Movie> listMovie;
+    private RecyclerView recyclerView;
 
-        List<HashMap<String, String>> items1 = new ArrayList<>();
-        ListView lvTrending;
-        int[] posterImages = {R.drawable.image8,R.drawable.image7,R.drawable.image5, R.drawable.image10, R.drawable.image3,R.drawable.image1, R.drawable.image4, R.drawable.image6,
-               R.drawable.image9,R.drawable.image2};
-        String[] rating = {"7.3", "7.2", "6.6", "7.4", "7.1", "8.0", "6.8", "6.7", "8.5", "7.8"};
-        String[] genre = {"Comedy","Action", "Drama", "Action", "Action", "Horror", "Adventure", "Action", "Drama", "Action"};
-        String[] date = {"2019-05-30","2020-02-20", "2019-11-08", "2020-01-08", "2020-02-12", "2020-02-26", "2020-02-29", "2020-03-11", "2020-02-19", "2019-12-16"};
-        String[] title = {"The Call of the Wild","The Platform","Onward","Underwater", "Bloodshot","Sonic the Hedgehog", "The Invisible Man", "The Hunt",
-                "기생충","The Gentlemen"};
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_upcoming_);
-            items1.clear();
-            for (int i = 0; i < 10; i++) {
-                HashMap<String, String> hm = new HashMap<>();
-                hm.put("title", title[i]);
-                hm.put("rating", rating[i]);
-                hm.put("genre", genre[i]);
-                hm.put("date", date[i]);
-                hm.put("posterImages", Integer.toString(posterImages[i]));
-                items1.add(hm);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        requestQueue = Volley.newRequestQueue(this);
+        listMovie = new ArrayList<>();
+        recyclerView = findViewById(R.id.recyclerview);
+        jsonRequest();
+    }
+
+
+    private void jsonRequest(){
+        StringRequest request = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Log.d(TAG, "Hello");
+
+                try {
+                    JSONObject jsonObj = new JSONObject(response);
+                    JSONArray result = jsonObj.getJSONArray("results");
+                    for (int i = 0; i < result.length(); i++) {
+                        JSONObject jsonObject = result.getJSONObject(i);
+                        Log.d(TAG, jsonObject.toString());
+                        Movie movie = new Movie();
+                        movie.setId(jsonObject.getString("id"));
+                        movie.setTitle(jsonObject.getString("title"));
+                        movie.setDate(jsonObject.getString("release_date"));
+                        String url = jsonObject.getString("poster_path");
+                        String imageURL = "https://image.tmdb.org/t/p/w500" + url;
+                        movie.setImageurl(imageURL);
+                        String urlback = jsonObject.getString("backdrop_path");
+                        String imagebackURL = "https://image.tmdb.org/t/p/w500" + urlback;
+                        movie.setBackdropurl(imagebackURL);
+                        movie.setRating(jsonObject.getString("vote_average"));
+                        movie.setDescrption(jsonObject.getString("overview"));
+                        listMovie.add(movie);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                setUpRecyclerView(listMovie);
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-            String[] from = {"title", "posterImages", "rating", "genre", "date"};
-            int[] to = {R.id.titleText, R.id.toggle_btn, R.id.ratingText, R.id.genreText, R.id.dateText};
-            SimpleAdapter adapter = new SimpleAdapter(Upcoming_Activity.this, items1, R.layout.activity_moviecell, from, to);
-            lvTrending = findViewById(R.id.listUpcoming);
-            lvTrending.setAdapter(adapter);
-        }
+            }
+        });
+
+        requestQueue = Volley.newRequestQueue(Upcoming_Activity.this);
+        requestQueue.add(request);
+    }
+
+    private void setUpRecyclerView(List<Movie> listMovie) {
+        RecyclerViewAdapter myadapter = new RecyclerViewAdapter(this,listMovie);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(myadapter);
 
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_homemenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.trending:
+                Intent intent = new Intent(Upcoming_Activity.this, Trending_Activity.class);
+                startActivity(intent);
+                return true;
+            case R.id.upcoming:
+                Intent intent1 = new Intent(Upcoming_Activity.this, HomeActivity.class);
+                startActivity(intent1);
+                return true;
+            case R.id.ShowInfo:
+                Intent intent2 = new Intent(Upcoming_Activity.this, ShowInfoActivity.class);
+                startActivity(intent2);
+                return true;
+            case R.id.Showcard:
+                Intent intent3 = new Intent(Upcoming_Activity.this, ShowCardActivity.class);
+                startActivity(intent3);
+                return  true;
+            case R.id.WatchList:
+                Intent intent4 = new Intent(Upcoming_Activity.this, WatchListActivity.class);
+                startActivity(intent4);
+                return true;
+            case R.id.logout:
+                mAuth.signOut();
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}
+
