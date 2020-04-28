@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class WatchListActivity extends AppCompatActivity {
@@ -68,6 +69,10 @@ public class WatchListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d("WatchListActivity","Hello Watch2");
              List<String> value = (List<String>) dataSnapshot.child(userID).getValue();
+                HashSet<String> hashvalue = new HashSet<String>();
+                hashvalue.addAll(value);
+                value.clear();
+                value.addAll(hashvalue);
                  Log.d("WatchListActivity", "Hello Watch3");
                 for (int i = 0; i < value.size(); i++) {
                     Log.d("WatchListActivity", value.get(i));
@@ -88,9 +93,6 @@ public class WatchListActivity extends AppCompatActivity {
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        //    JSONArray result = jsonObj.getJSONArray("results");
-                        //    for (int i = 0; i < result.length(); i++) {
-                        //        JSONObject jsonObject = result.getJSONObject(i);
                         Log.d(TAG, jsonObject.toString());
                         Movie movie = new Movie();
                         movie.setId(jsonObject.getString("id"));
