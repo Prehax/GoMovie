@@ -67,6 +67,9 @@
             android:name=".Trending_Activity"
             android:label="Trending Movies" />
         <activity
+            android:name=".WatchListActivity"
+            android:label="WatchList" />
+        <activity
             android:name=".Upcoming_Activity"
             android:label="Upcoming Movies" />
     </application>

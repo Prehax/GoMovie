@@ -97,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
                         JSONObject jsonObject = result.getJSONObject(i);
                         Log.d(TAG, jsonObject.toString());
                         Movie movie = new Movie();
+                        movie.setId(jsonObject.getString("id"));
                         movie.setTitle(jsonObject.getString("title"));
                         movie.setDate(jsonObject.getString("release_date"));
                         String url = jsonObject.getString("poster_path");
@@ -154,13 +155,10 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent3 = new Intent(HomeActivity.this, ShowCardActivity.class);
                     startActivity(intent3);
                     return true;
-                    /*
-                case R.id.Theater:
-                    intent = new Intent(HomeActivity.this, TheaterActivity.class);
-                    startActivity(intent);
+                case R.id.WatchList:
+                    Intent intent4 = new Intent(HomeActivity.this, WatchListActivity.class);
+                    startActivity(intent4);
                     return true;
-
-                     */
                 case R.id.purchaseHistory:
                     startActivity(new Intent(HomeActivity.this, TicketHistoryActivity.class));
                     return true;

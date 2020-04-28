@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:id="@+id/appbarlayout">
         
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -38,16 +38,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="225dp"
+                android:layout_height="325dp"
                 android:orientation="vertical" >
 
                 <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                     android:id="@+id/youtube_player_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    app:videoId="SyTg7RIn-X8"
-                    app:autoPlay="true"
+                    android:layout_height="match_parent"
+                    app:autoPlay="false"
                     app:showFullScreenButton="true" />
             </LinearLayout>
 

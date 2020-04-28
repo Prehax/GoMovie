@@ -8,12 +8,15 @@ public class Movie {
     private String imageurl;
     private String descrption;
     private String backdropurl;
+    private String id;
 
     public Movie(){
 
     }
 
-    public Movie(String title,String rating,String genre,String date, String imageurl,String descrption,String backdropurl) {
+
+
+    public Movie(String title, String rating, String genre, String date, String imageurl, String descrption, String backdropurl, String id) {
         this.title = title;
         this.date = date;
         this.genre = genre;
@@ -21,6 +24,7 @@ public class Movie {
         this.rating = rating;
         this.descrption = descrption;
         this.backdropurl = backdropurl;
+        this.id = id;
     }
     public String getTitle(){
         return title;
@@ -39,6 +43,7 @@ public class Movie {
     }
     public String getBackdropurl() { return backdropurl; }
     public String getDescrption(){ return descrption; }
+    public String getId() { return id; }
 
     public void setDescrption(String descrption) {
         this.descrption = descrption;
@@ -59,4 +64,5 @@ public class Movie {
         this.imageurl = imageurl;
     }
     public void setBackdropurl(String backdropurl) { this.backdropurl = backdropurl; }
+    public void setId(String id){ this.id = id;}
 }

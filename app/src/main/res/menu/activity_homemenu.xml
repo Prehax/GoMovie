@@ -8,8 +8,8 @@
         android:title="Profile"/>
     <item android:id="@+id/Showcard"
         android:title="CardInfo"/>
-    <item android:id="@+id/Theater"
-        android:title="Theater"/>
+    <item android:id="@+id/WatchList"
+        android:title="Favorites"/>
     <item android:id="@+id/purchaseHistory"
         android:title="Purchase History" />
     <item android:id="@+id/sign"
