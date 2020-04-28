@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.xwray.groupie.OnItemLongClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +131,14 @@ public class TheaterActivity extends AppCompatActivity {
                 menu.add(0,1,0, "PopUp menu 2");
             }
         });
-
+        // OnLong Click
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                setTitle("OnLongClick No." + (position+1) + " item");
+                return false;
+            }
+        });
 
     }
     // click on menu's item
