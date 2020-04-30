@@ -8,8 +8,12 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.service.autofill.OnClickAction;
@@ -32,6 +36,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;

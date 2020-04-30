@@ -182,13 +182,14 @@ public class HomeActivity extends AppCompatActivity {
                                 try {
                                     myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);
                                     myRef.child("MovieGoers").child(userID).child("Signeddays").setValue(+1);
-                                    Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
+                                    Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Signeddays").getValue();
+                                    if(days>=7){
+                                        //coupon+1
+                                    }
                                 } catch (NullPointerException e) {
                                 }
 
-//                            if(days>=7){
-//                                //coupon+1
-//                            }
+
                             }
                         }
 

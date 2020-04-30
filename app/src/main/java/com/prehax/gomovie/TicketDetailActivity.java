@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
-    private Button btnConfirm, btnRefund;
+    private Button btnConfirm, btnRefund,btnRate;
     private final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
     private final DatabaseReference myRef = mFirebaseDatabase.getReference();
     private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
@@ -51,6 +51,7 @@ public class TicketDetailActivity extends AppCompatActivity {
         // Find ID for Button
         btnConfirm = findViewById(R.id.btn_td_confirm);
         btnRefund = findViewById(R.id.btn_td_refund);
+        btnRate = findViewById(R.id.btn_td_rate);
         // Get Bundle
         final Bundle bundle = getIntent().getExtras();
         // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
@@ -125,6 +126,7 @@ public class TicketDetailActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
+
         builder.show();
     }
     //传值
