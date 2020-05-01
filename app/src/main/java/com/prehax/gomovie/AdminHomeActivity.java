@@ -52,6 +52,8 @@ public class AdminHomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.status:
+                Intent intent = new Intent(AdminHomeActivity.this, Upcoming_Activity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.coupons:

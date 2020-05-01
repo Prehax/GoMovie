@@ -56,6 +56,8 @@ public class PaymentActivity extends AppCompatActivity {
     private String cardNumber, notiMsg, seatPosition="", movieName;
     private long numOfRecord=0,Rtime=0;
     private ArrayList<Integer> record;
+    private List<String> couponId;
+    private List<String> couponDiscount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +157,13 @@ public class PaymentActivity extends AppCompatActivity {
                 mList.add("----Use Another Card----");
                 ArrayAdapter arrayAdapter = new ArrayAdapter(PaymentActivity.this, R.layout.item_select, mList);
                 spinMethod.setAdapter(arrayAdapter);
+
+                couponDiscount = (List<String>) dataSnapshot.child(userID).child("CouponDiscount").getValue();
+                for(int i=0;i<couponDiscount.size();i++) {
+                  //  get the coupon id as couponId.get(i) and coupon Discount as couponDiscount.get(i)
+                  // use index to get the exact coupon data
+                }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
