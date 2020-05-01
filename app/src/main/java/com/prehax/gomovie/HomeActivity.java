@@ -165,9 +165,10 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.addShowTime:
                     startActivity(new Intent(HomeActivity.this, AddShowTimeActivity.class));
                     return true;
-                case R.id.logout:
-                    mAuth.signOut();
-                    finish();
+                case R.id.shwCoupon:
+                    Intent intent5 = new Intent(HomeActivity.this,ListCouponActivity.class);
+                    startActivity(intent5);
+                    return true;
                 case R.id.sign:
                     myRef = mFirebaseDatabase.getReference();
                     myRef.addValueEventListener(new ValueEventListener() {
@@ -193,7 +194,6 @@ public class HomeActivity extends AppCompatActivity {
                                 }
                             }
                         }
-
                         private boolean Check(Long i) {
                             Calendar calendar = Calendar.getInstance();
                             int day = calendar.get(Calendar.DAY_OF_MONTH) - 1;
@@ -210,6 +210,9 @@ public class HomeActivity extends AppCompatActivity {
 
                         }
                     });
+                case R.id.logout:
+                    mAuth.signOut();
+                    finish();
                 default:
                     return super.onOptionsItemSelected(item);
             }

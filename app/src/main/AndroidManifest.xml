@@ -113,10 +113,6 @@
             android:name=".ListCouponActivity"
             android:exported="true"
             android:label="Available Coupons" />
-        <activity
-            android:name=".DeleteCouponActivity"
-            android:exported="true"
-            android:label="Delete Coupons" />
     </application>
 
 </manifest>

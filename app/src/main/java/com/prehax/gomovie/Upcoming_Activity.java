@@ -159,6 +159,10 @@ public class Upcoming_Activity extends AppCompatActivity {
                 Intent intent4 = new Intent(Upcoming_Activity.this, WatchListActivity.class);
                 startActivity(intent4);
                 return true;
+            case R.id.shwCoupon:
+                Intent intent5 = new Intent(Upcoming_Activity.this,ListCouponActivity.class);
+                startActivity(intent5);
+                return true;
             case R.id.logout:
                 mAuth.signOut();
                 finish();
