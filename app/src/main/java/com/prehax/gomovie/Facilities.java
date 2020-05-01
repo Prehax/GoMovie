@@ -1,12 +1,15 @@
 package com.prehax.gomovie;
 
 public class Facilities {
-    private String name = "",address="",include = "";
-    private double pay = 0;
+    private String name = "",address="",include = "",pay = "";
+
     public String getAddress(){return address;}
     public void setAddress(String address){this.address = address;}
     public String getName() {
         return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getInclude() {
@@ -17,15 +20,13 @@ public class Facilities {
         this.include = include;
     }
 
-    public double getPay() {
+    public String  getPay() {
         return pay;
     }
 
-    public void setPay(double pay) {
+    public void setPay(String pay) {
         this.pay = pay;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 }

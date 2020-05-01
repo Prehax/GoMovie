@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,7 +25,7 @@ public class FacilitiesActivity extends AppCompatActivity {
     private ArrayList<String> Facname= new ArrayList<String>();
     private ArrayList<String> Facinculde = new ArrayList<String>();
     private ArrayList<String> Facaddress = new ArrayList<String>();
-    private ArrayList<Double> Facpay = new ArrayList<Double>();
+    private ArrayList<String> Facpay = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,16 +43,18 @@ public class FacilitiesActivity extends AppCompatActivity {
                     Facaddress.clear();
                     Facpay.clear();
                     for (long i = 0; i<numOfFacilities; i++) {
-                        Facilities facilities = dataSnapshot.child("Theaters").child("Facilities").child(Long.toString(i)).getValue(Facilities.class);
+                        System.out.println(i);
+                        Facilities facilities = dataSnapshot.child("Theaters").child("0").child("Facilities").child(Long.toString(i)).getValue(Facilities.class);
                         Facname.add(facilities.getName());
                         Facaddress.add(facilities.getAddress());
-                        Facpay.add(Double.valueOf(String.format("%.1f", facilities.getPay())));
+                        Facpay.add(facilities.getPay());
                         Facinculde.add(facilities.getInclude());
                         System.out.println("读取数据完成, 读到了以下数据: ");
                         System.out.println(facilities.getName() + " " + facilities.getAddress());
                     }
                     ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
                     for (int i = 0; i < Facname.size(); i++) {
+                        System.out.println(Facname.get(i));
                         HashMap<String, Object> map = new HashMap<String, Object>();
                         map.put("name", Facname.get(i));
                         map.put("address", Facaddress.get(i));
@@ -60,15 +63,15 @@ public class FacilitiesActivity extends AppCompatActivity {
                         listItem.add(map);
                     }
                     SimpleAdapter listItemAdapter = new SimpleAdapter(FacilitiesActivity.this, listItem,// 数据源
-                            R.layout.layout_list_choose,// ListItem的XML实现
+                            R.layout.layout_facilities,// ListItem的XML实现
                             // 动态数组与Item对应的子项
                             new String[] { "name", "address", "pay" ,"include"},
-                            // XML文件里面的3个TextView ID
+                            // XML文件里面的4个TextView ID
                             new int[] { R.id.Facname, R.id.Facaddress, R.id.Facpaid,R.id.Facinclude });
                     listView.setAdapter(listItemAdapter);
                 }catch(NullPointerException e)
                 {
-                    Log.w(TAG, "读取数据未完成, 遭遇空指针错误");
+                    Log.w(TAG, "读取数据未完成, 遭遇空指针错误fac");
                 }
             }
 

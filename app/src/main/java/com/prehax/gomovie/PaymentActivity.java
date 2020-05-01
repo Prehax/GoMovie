@@ -41,6 +41,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;
@@ -83,16 +85,22 @@ public class PaymentActivity extends AppCompatActivity {
         // Ticket Information
         final Bundle bundle = getIntent().getExtras();
         movieName = bundle.getString("movieName");
+//        movieName = ("Bloodshot");
         tvMovie.setText(movieName);
         tvTheater.setText(bundle.getString("theaterName"));
         tvTime.setText(bundle.getString("showTimeName"));
+//        tvTheater.setText("Nuart");
+//        tvTime.setText("2020-05-01 23:59");
         // Get showTimeID, theaterID
         showTimeID = bundle.getInt("showTimeID");
         theaterID = bundle.getInt("theaterID");
+//        showTimeID = (0);
+//        theaterID = (0);
 
-//        tvSeat.setText(bundle.getString("seatCode"));
-
+        tvSeat.setText(bundle.getString("seatCode"));
         record = bundle.getIntegerArrayList("seatCode");
+//        record = new ArrayList<Integer>();
+//        record.add(12);
         final int numOfTic = record.size();
         int col, row;
         for (int i = 0; i<numOfTic; i++) {
@@ -114,6 +122,9 @@ public class PaymentActivity extends AppCompatActivity {
         notiMsg="Movie Name: "+ movieName + "\nTheater Name: " + bundle.getString("theaterName") + "\nTime: "
         + bundle.getString("showTimeName") + "\nSeats: " + seatPosition
                 + "\nGet in the app to see more information!";
+//        notiMsg="Movie Name: "+ movieName + "\nTheater Name: " + ("Nuart") + "\nTime: "
+//                + ("2020-05-01 23:59") + "\nSeats: " + seatPosition
+//                + "\nGet in the app to see more information!";
 
         //database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -222,7 +233,7 @@ public class PaymentActivity extends AppCompatActivity {
         // Confirm button
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 // Send a message to notification bar
                 sendTicketMsg(v);
                 // put seat in database
@@ -237,14 +248,26 @@ public class PaymentActivity extends AppCompatActivity {
                 Date date = new Date();
                 try {
                     date = simpleDateFormat.parse(ticInfo[2]);
+//                    date = simpleDateFormat.parse("2020-05-05 13:20");
+
                 }catch(ParseException e){
                     e.printStackTrace();
                 }
                 Long showtime = date.getTime();
                 Long ctime = System.currentTimeMillis();
                 Long timeresult = showtime - ctime + (Rtime * 60 * 1000);
+                Timer timer = new Timer();
 
-
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        System.out.println("推送发出去了1/3");
+                        sendReminder(v);
+                    }
+                };
+                System.out.println(timeresult+"毫秒之后发送推送");
+                timer.schedule(timerTask,timeresult);
+                System.out.println("推送发出去了3/3");
                 int[] ticNum = {numOfTic, numOfCok, numOfPop, (int)numOfRecord, theaterID, rateNum};
                 // 将ticket信息写入数据库里面
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("movieName").setValue(ticInfo[0]);
@@ -316,6 +339,24 @@ public class PaymentActivity extends AppCompatActivity {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(notiMsg))
                 .build();
         manager.notify(1, notification);
+    }
+
+    public void sendReminder(View view){
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            channel = new NotificationChannel("Reminder","Movie Start Reminder",NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+        Notification notiReminder = new NotificationCompat.Builder(this,"Reminder")
+                .setContentTitle("Movie Start Reminder")
+                .setContentText("Your movie is About to begin")
+                .setSmallIcon(R.drawable.icon_main)
+                .setAutoCancel(true)
+                .build();
+        notificationManager.notify(2,notiReminder);
+        System.out.println("推送发出去了2/3");
+
     }
 
 }

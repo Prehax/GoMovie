@@ -39,6 +39,8 @@ public class showActivity extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         theaterName = bundle.getString("theaterName");
         theaterID = bundle.getInt("theaterID");
+//        theaterName = ("Nuart");
+//        theaterID = 0;
 
         setTitle(theaterName);
         // Find Id for the listView

@@ -43,6 +43,7 @@ public class TheaterActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.lv_theater);
         //
         bundle = getIntent().getExtras();
+//        movieName = ("Bloodshot");
         movieName = bundle.getString("movieName");
         // Read data from databese
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -128,6 +129,8 @@ public class TheaterActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 setTitle("OnLongClick No." + (position+1) + " item");
+                Intent intent = new Intent(TheaterActivity.this,FacilitiesActivity.class);
+                startActivity(intent);
                 return false;
             }
         });
