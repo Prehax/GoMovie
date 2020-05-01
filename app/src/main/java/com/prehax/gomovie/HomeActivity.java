@@ -162,6 +162,9 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.purchaseHistory:
                     startActivity(new Intent(HomeActivity.this, AddCouponActivity.class));
                     return true;
+                case R.id.addShowTime:
+                    startActivity(new Intent(HomeActivity.this, AddShowTimeActivity.class));
+                    return true;
                 case R.id.logout:
                     mAuth.signOut();
                     finish();

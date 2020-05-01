@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddShowTimeActivity"
+            android:label="Add ShowTime"></activity>
         <activity android:name=".FacilitiesActivity"
             android:exported="true"></activity>
         <activity android:name=".MovieTrailerActivity"

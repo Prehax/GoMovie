@@ -39,7 +39,7 @@ public class TheaterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theater);
-        // Find ID 必须在这里, 不能设置为private member
+        // Find ID 必须在这里, 不能设置为 private member
         final ListView listView = findViewById(R.id.lv_theater);
         //
         bundle = getIntent().getExtras();
@@ -69,14 +69,6 @@ public class TheaterActivity extends AppCompatActivity {
                         System.out.println("读取数据完成, 读到了以下数据: ");
                         System.out.println(theater.getName() + " " + theater.getAddress());
                     }
-                    // 测试专用数据
-                    /*
-                    System.out.println("现在开始加入第2条数据");
-                    Taddress.add("I'm an address");
-                    Tname.add("Caonima");
-                    Trate.add("3.9");
-                     */
-
                     // Generate array
                     ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
                     for (int i = 0; i < Tname.size(); i++) {
@@ -139,7 +131,6 @@ public class TheaterActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
     // click on menu's item
     @Override

@@ -56,6 +56,7 @@ public class MovieGoer {
 class Ticket {
     private String movieName, theaterName, showTime, seat, tAmount, status;
     private int numOfTic, numOfCok, numOfPop, theaterID;
+    private boolean rated;
 
     public String getMovieName() {
         return movieName;
@@ -116,6 +117,12 @@ class Ticket {
     }
     public void setTheaterID(int theaterID) {
         this.theaterID = theaterID;
+    }
+    public boolean isRated() {
+        return rated;
+    }
+    public void setRated(boolean rated) {
+        this.rated = rated;
     }
 }
 
