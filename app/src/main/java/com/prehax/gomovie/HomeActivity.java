@@ -160,7 +160,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent4);
                     return true;
                 case R.id.purchaseHistory:
-                    startActivity(new Intent(HomeActivity.this, TicketHistoryActivity.class));
+                    startActivity(new Intent(HomeActivity.this, AddCouponActivity.class));
                     return true;
                 case R.id.logout:
                     mAuth.signOut();
