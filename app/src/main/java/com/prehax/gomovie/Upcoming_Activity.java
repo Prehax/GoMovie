@@ -1,5 +1,6 @@
 package com.prehax.gomovie;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.prehax.gomovie.Adapaters.RecyclerViewAdapter;
 import com.prehax.gomovie.Models.Movie;
 
@@ -29,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Upcoming_Activity extends AppCompatActivity {
@@ -41,7 +49,9 @@ public class Upcoming_Activity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private List<Movie> listMovie;
     private RecyclerView recyclerView;
-
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +61,42 @@ public class Upcoming_Activity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         listMovie = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
-        jsonRequest();
-    }
 
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        //Authentication
 
-    private void jsonRequest(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        assert user != null;
+        userID=user.getUid();
+        myRef.child("AdminUpcoming").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> value = (List<String>) dataSnapshot.getValue();
+                HashSet<String> hashvalue = new HashSet<String>();
+                hashvalue.addAll(value);
+                value.clear();
+                value.addAll(hashvalue);
+                for (int i = 0; i < value.size(); i++) {
+                    jsonRequest(value.get(i));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+}
+
+    private void jsonRequest(String value){
+        String JSON_URL = "https://api.themoviedb.org/3/movie/" + value + "?api_key=142f01f330865c87d1523d3051162c8b&language=en-US";
         StringRequest request = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                Log.d(TAG, "Hello");
-
                 try {
-                    JSONObject jsonObj = new JSONObject(response);
-                    JSONArray result = jsonObj.getJSONArray("results");
-                    for (int i = 0; i < result.length(); i++) {
-                        JSONObject jsonObject = result.getJSONObject(i);
-                        Log.d(TAG, jsonObject.toString());
+                    JSONObject jsonObject = new JSONObject(response);
                         Movie movie = new Movie();
                         movie.setId(jsonObject.getString("id"));
                         movie.setTitle(jsonObject.getString("title"));
@@ -81,7 +110,6 @@ public class Upcoming_Activity extends AppCompatActivity {
                         movie.setRating(jsonObject.getString("vote_average"));
                         movie.setDescrption(jsonObject.getString("overview"));
                         listMovie.add(movie);
-                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
