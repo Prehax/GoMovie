@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class AddCouponActivity extends AppCompatActivity {
     private static final String TAG = "AddCouponActivity";
     private EditText etcouponName, etcouponId, etcouponDiscount;
     private String userID;
+    private int count,count1,count2;
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
 
@@ -38,42 +42,39 @@ public class AddCouponActivity extends AppCompatActivity {
         myRef = FirebaseDatabase.getInstance().getReference();
 
         Button btn_save = findViewById(R.id.btn_addcoupon1);
-
-
-        btn_save.setOnClickListener(new View.OnClickListener() {
+        myRef.child("Coupon").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                Log.d("AddCouponActivity",userID);
-                Log.d("AddCouponActivity",etcouponName.getText().toString());
-                myRef.child("Coupon").child(userID).child("CouponName").setValue(etcouponName.getText().toString());
-                myRef.child("Coupon").child(userID).child("CouponId").setValue(etcouponId.getText().toString());
-                myRef.child("Coupon").child(userID).child("CouponDiscount").setValue(etcouponDiscount.getText().toString());
-                
-            }
-        });
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> couponName = (List<String>) dataSnapshot.child(userID).child("CouponName").getValue();
+                List<String> couponId = (List<String>) dataSnapshot.child(userID).child("CouponId").getValue();
+                List<String> couponDiscount = (List<String>) dataSnapshot.child(userID).child("CouponDiscount").getValue();
+                 if(couponName!=null) {
+                     count = couponName.size();
+                     count1 = couponId.size();
+                     count2 = couponDiscount.size();
+                 }
 
-
-       /* myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                try {
-                    Coupon coupon = dataSnapshot.child("Coupon").child(userID).getValue(Coupon.class);
-                    etcouponName.setText(coupon.getcouponName());
-                    etcouponId.setText(coupon.getcouponId());
-                    etcouponDiscount.setText((int) coupon.getcouponDiscount());
-                }
-                catch (NullPointerException e) {
-                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+        });
 
-        });*/
-
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("AddCouponActivity",userID);
+                Log.d("AddCouponActivity",etcouponName.getText().toString());
+                myRef.child("Coupon").child(userID).child("CouponName").child(String.valueOf(count)).setValue(etcouponName.getText().toString());
+                myRef.child("Coupon").child(userID).child("CouponId").child(String.valueOf(count1)).setValue(etcouponId.getText().toString());
+                myRef.child("Coupon").child(userID).child("CouponDiscount").child(String.valueOf(count2)).setValue(etcouponDiscount.getText().toString());
+                //System.out.println("count:"+count+"count1:"+count1+"count2:"+count2);
+                Toast.makeText(AddCouponActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
 
     }
 }

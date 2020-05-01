@@ -160,7 +160,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent4);
                     return true;
                 case R.id.purchaseHistory:
-                    startActivity(new Intent(HomeActivity.this, AddCouponActivity.class));
+                    startActivity(new Intent(HomeActivity.this,TicketHistoryActivity.class));
                     return true;
                 case R.id.addShowTime:
                     startActivity(new Intent(HomeActivity.this, AddShowTimeActivity.class));
@@ -186,9 +186,9 @@ public class HomeActivity extends AppCompatActivity {
                                     myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);
                                     myRef.child("MovieGoers").child(userID).child("Signeddays").setValue(+1);
                                     Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Signeddays").getValue();
-                                    if(days>=7){
-                                        //coupon+1
-                                    }
+                                    //if(days>=7){
+                                     //
+                                    //}
                                 } catch (NullPointerException e) {
                                 }
 
