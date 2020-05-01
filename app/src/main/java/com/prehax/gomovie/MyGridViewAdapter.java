@@ -17,6 +17,8 @@ public class MyGridViewAdapter extends BaseAdapter {
     private int clickTemp = -1;
     int location = -1;
     private int[] clickedList = new int[itemLength];
+
+    // Constructor
     public MyGridViewAdapter(Context context){
             this.mContext = context;
             mLayoutInflater = LayoutInflater.from(context);
@@ -24,15 +26,15 @@ public class MyGridViewAdapter extends BaseAdapter {
                 clickedList[i]=0;
             }
     }
-
+    // Empty Constructor
     public MyGridViewAdapter() {
         super();
     }
 
-    public  void setSeclection(int position) {
+
+    public  void setSelection(int position) {
         clickTemp = position;
         System.out.println(clickTemp);
-
     }
     @Override
     public int getCount() {
@@ -62,7 +64,7 @@ public class MyGridViewAdapter extends BaseAdapter {
             System.out.println(clickTemp);
             if (clickedList[position] == 0) {
                 System.out.println("我运行了么if？");
-                convertView.setBackgroundColor(Color.RED);
+                convertView.setBackgroundColor(Color.GREEN);
                 clickedList[position] = 1;
             } else {
                 System.out.println("我运行了么else？");
@@ -71,10 +73,10 @@ public class MyGridViewAdapter extends BaseAdapter {
             }
         }
         if(convertView == null){
-                convertView = mLayoutInflater.inflate(R.layout.layout_grid_item,null);
-                holder = new ViewHolder();
-                holder.imageView = convertView.findViewById(R.id.seat);
-                convertView.setTag(holder);
+            convertView = mLayoutInflater.inflate(R.layout.layout_grid_item,null);
+            holder = new ViewHolder();
+            holder.imageView = convertView.findViewById(R.id.seat);
+            convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
