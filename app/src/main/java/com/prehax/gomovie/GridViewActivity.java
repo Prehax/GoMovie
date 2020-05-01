@@ -32,7 +32,7 @@ public class GridViewActivity extends AppCompatActivity {
         mGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        myGridViewAdapter.setSeclection(position);
+                        myGridViewAdapter.setSelection(position);
                         int col = 0,row = 0;
                         if(position>10){
                             col = position%10 + 1;
@@ -54,15 +54,11 @@ public class GridViewActivity extends AppCompatActivity {
                                     i--;
                                 }
                             }
-
                             tvSeatmapCode.setText("Col:"+c+" Row:"+r+" removed");
                         }
-
                         myGridViewAdapter.notifyDataSetChanged();
             }
         });
-
-
 
 
         Button btnConfirm = findViewById(R.id.btn_seats_confirm);

@@ -37,7 +37,7 @@ public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvNumOfPop, tvNumOfCok;
     private Spinner spinMethod;
-    private int numOfPop=0, numOfCok=0, rateNum;
+    private int numOfPop=0, numOfCok=0, rateNum, showTimeID, theaterID, numOfSeatSed;
     private double tAmount=0, rate;
     private double cokeprice=0,popprice=0;
     private FirebaseDatabase mFirebaseDatabase;
@@ -46,6 +46,7 @@ public class PaymentActivity extends AppCompatActivity {
     private String userID;
     private String cardNumber, notiMsg, seatPosition="", movieName;
     private long numOfRecord=0;
+    private ArrayList<Integer> record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +77,13 @@ public class PaymentActivity extends AppCompatActivity {
         tvMovie.setText(movieName);
         tvTheater.setText(bundle.getString("theaterName"));
         tvTime.setText(bundle.getString("showTimeName"));
-
+        // Get showTimeID, theaterID
+        showTimeID = bundle.getInt("showTimeID");
+        theaterID = bundle.getInt("theaterID");
 
 //        tvSeat.setText(bundle.getString("seatCode"));
 
-        ArrayList<Integer> record = bundle.getIntegerArrayList("seatCode");
+        record = bundle.getIntegerArrayList("seatCode");
         final int numOfTic = record.size();
         int col, row;
         for (int i = 0; i<numOfTic; i++) {
@@ -110,18 +113,20 @@ public class PaymentActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         userID=user.getUid();
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Snacks snacks = dataSnapshot.child("Theaters").child(Integer.toString(bundle.getInt("theaterID"))).child("Snacks").getValue(Snacks.class);
+                Snacks snacks = dataSnapshot.child("Theaters").child(Integer.toString(theaterID)).child("Snacks").getValue(Snacks.class);
                 assert snacks != null;
                 cokeprice = snacks.getCoke();
                 popprice = snacks.getPopcorn();
-                // Read data from theater
-                Theater theater = dataSnapshot.child("Theaters").child(Integer.toString(bundle.getInt("theaterID"))).getValue(Theater.class);
+                // Read rate and rate number from theater
+                Theater theater = dataSnapshot.child("Theaters").child(Integer.toString(theaterID)).getValue(Theater.class);
                 assert theater != null;
                 rate = theater.getRate();
                 rateNum = theater.getRateNum();
+                // Read how many seats are there selected
+                numOfSeatSed = (int)dataSnapshot.child("Theaters").child(Integer.toString(theaterID)).child("ShowTimes").child(Integer.toString(showTimeID)).child("seats").getChildrenCount();
 
                 MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
                 try {
@@ -210,12 +215,15 @@ public class PaymentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Send a message to notification bar
                 sendTicketMsg(v);
-
+                // put seat in database
+                for (int i = 0; i<record.size(); i++) {
+                    myRef.child("Theaters").child(Integer.toString(theaterID)).child("ShowTimes").child(Integer.toString(showTimeID)).child("seats").child(Integer.toString(i+numOfSeatSed)).setValue(record.get(i));
+                }
                 Intent intent = new Intent(PaymentActivity.this, TicketDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
                 // 0: numOfTic; 1: numOfCok; 2: numOfPop; 3: ticID, 4: theaterID; 5: rateNum
                 String[] ticInfo = {bundle.getString("movieName"), bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
-                int[] ticNum = {numOfTic, numOfCok, numOfPop, (int)numOfRecord, bundle.getInt("theaterID"), rateNum};
+                int[] ticNum = {numOfTic, numOfCok, numOfPop, (int)numOfRecord, theaterID, rateNum};
                 // 将ticket信息写入数据库里面
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("movieName").setValue(ticInfo[0]);
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("theaterName").setValue(ticInfo[1]);
