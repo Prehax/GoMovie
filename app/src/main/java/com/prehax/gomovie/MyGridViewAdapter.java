@@ -12,10 +12,10 @@ import com.prehax.gomovie.R;
 
 public class MyGridViewAdapter extends BaseAdapter {
     private Context mContext;
-    final int itemLength = 100;
+    private final int itemLength = 100;
     private LayoutInflater mLayoutInflater;
     private int clickTemp = -1;
-    int location = -1;
+    private int location = -1;
     private int[] clickedList = new int[itemLength];
 
     // Constructor

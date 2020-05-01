@@ -34,8 +34,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,7 +54,7 @@ public class PaymentActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String userID;
     private String cardNumber, notiMsg, seatPosition="", movieName;
-    private long numOfRecord=0;
+    private long numOfRecord=0,Rtime=0;
     private ArrayList<Integer> record;
 
     @Override
@@ -137,6 +140,7 @@ public class PaymentActivity extends AppCompatActivity {
                 MovieGoer movieGoer = dataSnapshot.child("MovieGoers").child(userID).getValue(MovieGoer.class);
                 try {
                     numOfRecord = dataSnapshot.child("MovieGoers").child(userID).child("Tickets").getChildrenCount();
+                    Rtime = Long.parseLong(movieGoer.getTime());
                 } catch (NullPointerException e) {
                     numOfRecord = 0;
                 }
@@ -229,6 +233,18 @@ public class PaymentActivity extends AppCompatActivity {
                 // 0: movieName; 1: theaterName; 2: showTime; 3: seatCode; 4: status; 5: Amount
                 // 0: numOfTic; 1: numOfCok; 2: numOfPop; 3: ticID, 4: theaterID; 5: rateNum
                 String[] ticInfo = {bundle.getString("movieName"), bundle.getString("theaterName"), bundle.getString("showTimeName"), seatPosition, "PAID", String.format("%.2f", tAmount)};
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Date date = new Date();
+                try {
+                    date = simpleDateFormat.parse(ticInfo[2]);
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+                Long showtime = date.getTime();
+                Long ctime = System.currentTimeMillis();
+                Long timeresult = showtime - ctime + (Rtime * 60 * 1000);
+
+
                 int[] ticNum = {numOfTic, numOfCok, numOfPop, (int)numOfRecord, theaterID, rateNum};
                 // 将ticket信息写入数据库里面
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("movieName").setValue(ticInfo[0]);
