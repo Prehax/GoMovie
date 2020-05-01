@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.widget.AppCompatEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,9 +21,7 @@ public class AddCouponActivity extends AppCompatActivity {
     private static final String TAG = "AddCouponActivity";
     private EditText etcouponName, etcouponId, etcouponDiscount;
     private String userID;
-    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +32,26 @@ public class AddCouponActivity extends AppCompatActivity {
         etcouponId = findViewById(R.id.et_couponid);
         etcouponDiscount = findViewById(R.id.et_coupondiscount);
 
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        myRef = FirebaseDatabase.getInstance().getReference();
+
         Button btn_save = findViewById(R.id.btn_addcoupon1);
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
-        myRef = mFirebaseDatabase.getInstance().getReference();
+
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("AddCouponActivity",userID);
+                Log.d("AddCouponActivity",etcouponName.getText().toString());
+                myRef.child("Coupon").child(userID).child("CouponName").setValue(etcouponName.getText().toString());
+                myRef.child("Coupon").child(userID).child("CouponId").setValue(etcouponId.getText().toString());
+                myRef.child("Coupon").child(userID).child("CouponDiscount").setValue(etcouponDiscount.getText().toString());
+                
+            }
+        });
+
 
        /* myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,17 +74,6 @@ public class AddCouponActivity extends AppCompatActivity {
 
         });*/
 
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("AddCouponActivity",userID);
-                Log.d("AddCouponActivity", String.valueOf(etcouponName));
-                myRef.child("Coupon").child(userID).child("Student").setValue(etcouponName);
-
-
-
-            }
-        });
 
     }
 }
