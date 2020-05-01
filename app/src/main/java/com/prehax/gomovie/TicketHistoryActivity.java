@@ -57,19 +57,20 @@ public class TicketHistoryActivity extends AppCompatActivity {
                         map.put("movieName", ticket.getMovieName());
                         map.put("theaterName", ticket.getTheaterName());
                         map.put("seat", ticket.getSeat());
+                        map.put("status", ticket.getStatus());
                         listItem.add(map);
                     }
                     // Items
                     SimpleAdapter listItemAdapter = new SimpleAdapter(TicketHistoryActivity.this, listItem,// 数据源
                             R.layout.layout_tickets,// ListItem的XML实现
                             // 动态数组与Item对应的子项
-                            new String[] { "movieName", "theaterName", "seat" },
+                            new String[] { "movieName", "theaterName", "seat", "status" },
                             // XML文件里面的3个TextView ID
-                            new int[] { R.id.tv_th_movieName, R.id.tv_th_theaterName, R.id.tv_th_seatCode });
+                            new int[] { R.id.tv_th_movieName, R.id.tv_th_theaterName, R.id.tv_th_seatCode, R.id.tv_th_status });
                     // Set Adapter
                     lvTickets.setAdapter(listItemAdapter);
 
-                    // Get all of theater's information
+                    // Get all of theater's information, for rate calculation later
                     long numOfTheaters=dataSnapshot.child("Theaters").getChildrenCount();
                     theaters.clear();
                     for (long i = 0; i<numOfTheaters; i++) {
@@ -107,10 +108,12 @@ public class TicketHistoryActivity extends AppCompatActivity {
                 // 0: numOfTic; 1: numOfCok; 2: numOfpop; 3: ticID; 4: theaterID; 5: rateNum
                 String[] ticInfo = {ticket.getMovieName(), ticket.getTheaterName(), ticket.getShowTime(), ticket.getSeat(), ticket.getStatus(), ticket.gettAmount()};
                 int[] ticNum = {ticket.getNumOfTic(), ticket.getNumOfCok(), ticket.getNumOfPop(), position, ticket.getTheaterID(), rateNum};
+                boolean isRated = ticket.isRated();
                 Bundle bundle = new Bundle();
                 bundle.putStringArray("ticInfo", ticInfo);
                 bundle.putIntArray("ticNum", ticNum);
                 bundle.putDouble("rate", rate);
+                bundle.putBoolean("isRated", isRated);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 //-----------------------------

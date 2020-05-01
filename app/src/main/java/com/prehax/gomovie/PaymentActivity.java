@@ -233,12 +233,13 @@ public class PaymentActivity extends AppCompatActivity {
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfCok").setValue(ticNum[1]);
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("numOfPop").setValue(ticNum[2]);
                 myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("theaterID").setValue(ticNum[4]);
-
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Long.toString(numOfRecord)).child("rated").setValue(false);
                 // put necessary data in bundle and pass it into next page
                 bundle.clear();
                 bundle.putStringArray("ticInfo", ticInfo);
                 bundle.putIntArray("ticNum", ticNum);
                 bundle.putDouble("rate", rate);
+                bundle.putBoolean("isRated", false);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 // If confirm, terminate all activity related to this ticket.

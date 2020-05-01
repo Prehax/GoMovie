@@ -45,11 +45,17 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null){
                     Log.d(TAG,"onAuthStateChanged:Signed_in:"+user.getUid());
                     Toast.makeText(MainActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
-                    // Jump to home page when logged in
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    // Kill current page to avoid user be back
-                    finish();
+                    if(user.getEmail().matches("admin@123.com")){
+                        Intent intent = new Intent(MainActivity.this, AdminHomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else {
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        // Kill current page to avoid user be back
+                        finish();
+                    }
                 } else{
                     Log.d(TAG,"onAuthStateChanged:Signed_out");
                     //Toast.makeText(MainActivity.this, "Successfully signed out.", Toast.LENGTH_SHORT).show();

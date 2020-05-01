@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
-    private Button btnConfirm, btnRefund,btnRate;
+    private Button btnConfirm, btnRefund, btnRate;
     private final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();;
     private final DatabaseReference myRef = mFirebaseDatabase.getReference();
     private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
@@ -97,6 +97,23 @@ public class TicketDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+        // If this ticket is already refunded
+        if (ticInfo[4].equals("REFUNDED")) {
+            // Make refund button unclickable
+            btnRefund.setClickable(false);
+            btnRefund.setText("Refunded");
+            btnRefund.setTextColor(getResources().getColor(R.color.colorLightGrey));
+            // Make rate button unclickable
+            btnRate.setClickable(false);
+            btnRate.setText("Can not rate");
+            btnRate.setTextColor(getResources().getColor(R.color.colorLightGrey));
+        }
+        // If this ticket is already rated
+        if (bundle.getBoolean("isRated")) {
+            btnRate.setClickable(false);
+            btnRate.setText("Rated");
+            btnRate.setTextColor(getResources().getColor(R.color.colorLightGrey));
+        }
     }
 
     public void rateDialog(View v) {
@@ -115,6 +132,7 @@ public class TicketDetailActivity extends AppCompatActivity {
                 ticNum[5]++;
                 myRef.child("Theaters").child(Integer.toString(ticNum[4])).child("rate").setValue(newRate);
                 myRef.child("Theaters").child(Integer.toString(ticNum[4])).child("rateNum").setValue(ticNum[5]);
+                myRef.child("MovieGoers").child(userID).child("Tickets").child(Integer.toString(ticNum[3])).child("rated").setValue(true);
                 Toast.makeText(TicketDetailActivity.this, Float.toString(numOfStars), Toast.LENGTH_SHORT).show();
                 dialog.cancel();
             }
@@ -126,7 +144,6 @@ public class TicketDetailActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
         builder.show();
     }
     //传值

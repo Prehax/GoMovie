@@ -1,5 +1,6 @@
 package com.prehax.gomovie.Adapaters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -71,6 +72,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return viewHolder;
     }
 
+    @SuppressLint("Assert")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
@@ -79,15 +81,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.rating.setText(mData.get(position).getRating());
         holder.releaseDate.setText(mData.get(position).getDate());
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        assert user != null;
-        userID  = user.getUid();
+        final FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
         myRef = FirebaseDatabase.getInstance().getReference();
         myRef.child("LikeMovies").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<String> value = (List<String>) dataSnapshot.child(userID).getValue();
-                count = value.size();
+                if (value != null) {
+                    count = value.size();
+                } else {
+                    userID = user.getUid();
+                    myRef = FirebaseDatabase.getInstance().getReference();
+                    myRef.child("LikeMovies").child(userID);
+                }
             }
 
             @Override
