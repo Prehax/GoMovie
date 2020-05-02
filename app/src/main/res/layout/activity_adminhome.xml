@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BDBDBD"
     android:padding="15dp">
 
     <ImageView
@@ -26,8 +27,9 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
-        android:text="Movie
-        Status"
+        android:background="#263238"
+        android:textColor="#ffffff"
+        android:text="Movie Status"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -36,6 +38,8 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:text="Coupons"
+        android:background="#263238"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/button_MovieStatus"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/button_MovieStatus" />

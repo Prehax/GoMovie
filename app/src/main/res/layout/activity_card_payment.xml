@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#263238"
     android:padding="15dp">
 
     <TextView
@@ -9,6 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="CVV:"
+        android:textColor="#ffffff"
         android:textSize="20sp"
         android:gravity="center_vertical"
         android:layout_marginTop="50dp"/>
@@ -17,10 +19,12 @@
         android:id="@+id/et_cvv1"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:textColor="#ffffff"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
         android:layout_toRightOf="@+id/tv_cvv1"
         android:background="@drawable/et_style1"
+        android:backgroundTint="#455A64"
         android:hint="Enter CVV/CCV"
         android:inputType="numberPassword"
         android:paddingEnd="10dp" />

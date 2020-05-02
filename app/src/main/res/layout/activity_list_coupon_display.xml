@@ -2,32 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#263238"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/lst_couponname"
+        android:layout_width="135dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="5dp"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:orientation="vertical"
         >
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:id="@+id/tv_lcd_cname"
-            android:text="couponName"
-            android:textSize="30sp"
-            android:layout_marginLeft="16dp"
-            android:textColor="@color/colorBlack"
+            android:layout_height="50dp"
+            android:id="@+id/lst_couponid"
+            android:textColor="#ffffff"
+            android:text="couponcode"
+            android:textSize="16sp"
             />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:id="@+id/tv_lcd_cdis"
+            android:layout_height="match_parent"
+            android:id="@+id/lst_coupondiscount"
+            android:textColor="#ffffff"
             android:text="discount"
             android:textSize="16sp"
             android:layout_marginTop="10dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/colorRed"
+
             />
     </LinearLayout>
 </LinearLayout>

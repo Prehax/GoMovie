@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#263238"
     android:padding="15dp">
 
 
@@ -10,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="E-mail: "
+        android:textColor="#ffffff"
         android:textSize="20sp"
         android:gravity="center_vertical"
         android:layout_marginTop="80dp"/>
@@ -17,6 +19,8 @@
         android:id="@+id/et_remail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:backgroundTint="#455A64"
+        android:textColor="#ffffff"
         android:hint="Input your E-mail here"
         android:background="@drawable/et_style1"
         android:padding="10dp"
@@ -29,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="Password: "
+        android:textColor="#ffffff"
         android:textSize="20sp"
         android:gravity="center_vertical"
         android:layout_below="@+id/tv_emailTitle"
@@ -39,6 +44,7 @@
         android:layout_height="50dp"
         android:hint="Set your password"
         android:background="@drawable/et_style1"
+        android:backgroundTint="#455A64"
         android:padding="10dp"
         android:layout_toRightOf="@+id/tv_passTitle1"
         android:layout_below="@+id/et_remail"
@@ -49,6 +55,7 @@
         android:id="@+id/tv_passTitle2"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:textColor="#ffffff"
         android:text="Password: "
         android:textSize="20sp"
         android:gravity="center_vertical"
@@ -60,6 +67,7 @@
         android:layout_height="50dp"
         android:hint="Repeat your password"
         android:background="@drawable/et_style1"
+        android:backgroundTint="#455A64"
         android:padding="10dp"
         android:layout_toRightOf="@+id/tv_passTitle2"
         android:layout_below="@+id/et_rpass1"

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:background="#263238"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name of Card Holder:"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
 
         <TextView
@@ -25,7 +26,7 @@
             android:layout_height="36dp"
             android:paddingEnd="10dp"
             android:text="Name"
-            android:textColor="#666666"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Card Number:"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
 
         <TextView
@@ -48,7 +49,7 @@
             android:layout_height="36dp"
             android:paddingEnd="10dp"
             android:text="Card Number"
-            android:textColor="#666666"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -63,14 +64,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exp Date(MM/YY):"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
         <TextView
             android:id="@+id/tv_expdate"
             android:layout_width="160dp"
             android:layout_height="36dp"
             android:text="Expiry Date"
-            android:textColor="#666666"
+            android:textColor="#ffffff"
             android:textSize="16sp"
             android:paddingEnd="10dp"/>
     </LinearLayout>
@@ -85,14 +86,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CVV/CCV:"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="16sp" />
         <TextView
             android:id="@+id/tv_cvv"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="Cvv"
-            android:textColor="#666666"
+            android:textColor="#ffffff"
             android:textSize="16sp"
             android:paddingEnd="10dp"/>
     </LinearLayout>

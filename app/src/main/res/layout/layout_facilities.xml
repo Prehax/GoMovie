@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="#263238"
     android:padding="15dp">
 
     <TextView
@@ -10,7 +11,7 @@
         android:layout_width="135dp"
         android:layout_height="100dp"
         android:layout_marginStart="5dp"
-        android:textColor="#000"
+        android:textColor="#ffffff"
         android:textSize="25sp" />
 
     <LinearLayout
@@ -28,6 +29,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/Facaddress"
                 android:text="Location"
+                android:textColor="#ffffff"
                 android:textSize="16sp"
                 />
             <TextView
@@ -35,6 +37,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/Facpaid"
                 android:text="paid"
+                android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:layout_marginLeft="10dp"
                 />
@@ -44,6 +47,7 @@
             android:layout_height="match_parent"
             android:id="@+id/Facinclude"
             android:text="inculude"
+            android:textColor="#ffffff"
             android:textSize="16sp"
             android:layout_marginTop="10dp"
 

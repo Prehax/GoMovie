@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="#263238"
     android:padding="15dp">
 
     <TextView
@@ -10,7 +11,7 @@
         android:layout_width="135dp"
         android:layout_height="100dp"
         android:layout_marginStart="5dp"
-        android:textColor="#000"
+        android:textColor="#ffffff"
         android:textSize="25sp" />
 
     <LinearLayout
@@ -23,6 +24,7 @@
             android:layout_height="50dp"
             android:id="@+id/Lcaddress"
             android:text="sample"
+            android:textColor="#ffffff"
             android:textSize="16sp"
             />
         <TextView
@@ -31,6 +33,7 @@
             android:id="@+id/Lcshowtime"
             android:text="showtime sample"
             android:textSize="16sp"
+            android:textColor="#ffffff"
             android:layout_marginTop="10dp"
 
             />

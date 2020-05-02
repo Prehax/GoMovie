@@ -6,7 +6,7 @@
     android:layout_height="150dp"
     android:layout_marginTop="5dp"
     android:padding="8dp"
-    android:background="#ffffff"
+    android:background="#263238"
     android:id="@+id/movieContainer">
     
     <ImageView
@@ -26,18 +26,21 @@
             android:layout_height="wrap_content"
             android:id="@+id/title"
             android:text="Title"
+            android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Genre"
+            android:textColor="#ffffff"
             android:id="@+id/genre"/>
 
         <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text = "Date"
+             android:textColor="#ffffff"
              android:layout_marginTop="5dp"
              android:id="@+id/date"/>
         <TextView

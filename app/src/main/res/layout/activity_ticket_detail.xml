@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:background="#263238"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Movie: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_movieName"
@@ -25,7 +26,7 @@
             android:layout_marginLeft="10dp"
             android:text="MovieName"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
     </LinearLayout>
     <LinearLayout
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Theater: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_theaterName"
@@ -47,7 +48,7 @@
             android:layout_marginLeft="10dp"
             android:text="TheaterName"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
     </LinearLayout>
     <LinearLayout
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="Time: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_time"
@@ -69,7 +70,7 @@
             android:layout_marginLeft="10dp"
             android:text="YYYY/MM/DD"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
     </LinearLayout>
     <LinearLayout
@@ -82,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="Seats: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_seatCode"
@@ -91,7 +92,7 @@
             android:layout_marginLeft="10dp"
             android:text="C4"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
     </LinearLayout>
     <LinearLayout
@@ -104,7 +105,7 @@
             android:layout_height="wrap_content"
             android:text="Number of Tickets: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_numOfTik"
@@ -113,7 +114,7 @@
             android:layout_marginLeft="10dp"
             android:text="0"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
 
     </LinearLayout>
@@ -127,7 +128,7 @@
             android:layout_height="wrap_content"
             android:text="Number of Coke: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_numOfCok"
@@ -136,7 +137,7 @@
             android:layout_marginLeft="10dp"
             android:text="0"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
 
     </LinearLayout>
@@ -150,7 +151,7 @@
             android:layout_height="wrap_content"
             android:text="Number of Popcorn: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_numOfPop"
@@ -159,7 +160,7 @@
             android:layout_marginLeft="10dp"
             android:text="0"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
 
     </LinearLayout>
@@ -173,7 +174,7 @@
             android:layout_height="wrap_content"
             android:text="Status: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#fffffff"
             />
         <TextView
             android:id="@+id/tv_td_status"
@@ -182,7 +183,7 @@
             android:layout_marginLeft="10dp"
             android:text="PAID"
             android:textSize="20sp"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="#B0BEC5"
             />
     </LinearLayout>
     <LinearLayout
@@ -195,7 +196,7 @@
             android:layout_height="wrap_content"
             android:text="Total Amount: "
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="#ffffff"
             />
         <TextView
             android:id="@+id/tv_td_tAmount"
