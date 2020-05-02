@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 //import com.google.firebase.quickstart.database.java.models.Post;
 
 public class ShowInfoActivity extends AppCompatActivity {
@@ -56,7 +58,54 @@ public class ShowInfoActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                myRef = mFirebaseDatabase.getReference();
+
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Long i = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
+                        boolean a;
+                        a = Check(i);
+                        if (a) {
+                            Toast.makeText(ShowInfoActivity.this, "Already signed today", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ShowInfoActivity.this, "Sign success", Toast.LENGTH_SHORT).show();
+                            Calendar calendar = Calendar.getInstance();
+                            int day = calendar.get(Calendar.DAY_OF_MONTH) - 1;
+                            try {
+                                myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);
+                                System.out.println("到这里坏没坏1"+day);
+
+                                Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Signeddays").getValue();
+                                days = days+1;
+                                myRef.child("MovieGoers").child(userID).child("Signeddays").setValue(days);
+                                System.out.println("到这里坏没坏2");
+                                System.out.println("到这里坏没坏3"+days);
+                                if(days+1>=7){
+//添加一个coupon
+                                }
+                            } catch (NullPointerException e) {
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                    private boolean Check(Long i) {
+                        Calendar calendar = Calendar.getInstance();
+                        System.out.println("我是个日子！！！！！"+i);
+                        int day = calendar.get(Calendar.DAY_OF_MONTH)-1;
+                        System.out.println("我也是个日子！！！！！"+day);
+                        if (i == day) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+//                finish();
             }
         });
         // Database stuff

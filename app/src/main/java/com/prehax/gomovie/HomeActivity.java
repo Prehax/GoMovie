@@ -166,47 +166,6 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent5 = new Intent(HomeActivity.this,ListCouponActivity.class);
                     startActivity(intent5);
                     return true;
-                case R.id.sign:
-                    myRef = mFirebaseDatabase.getReference();
-                    myRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Long i = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Sign").getValue();
-                            boolean a;
-                            a = Check(i);
-                            if (a) {
-                                Toast.makeText(HomeActivity.this, "Already signed today", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(HomeActivity.this, "Sign success", Toast.LENGTH_SHORT).show();
-                                Calendar calendar = Calendar.getInstance();
-                                int day = calendar.get(Calendar.DAY_OF_MONTH) - 1;
-                                try {
-                                    myRef.child("MovieGoers").child(userID).child("Sign").setValue(day);
-                                    myRef.child("MovieGoers").child(userID).child("Signeddays").setValue(+1);
-                                    Long days = (Long) dataSnapshot.child("MovieGoers").child(userID).child("Signeddays").getValue();
-                                    //if(days>=7){
-                                     //
-                                    //}
-                                } catch (NullPointerException e) {
-                                }
-                            }
-                        }
-                        private boolean Check(Long i) {
-                            Calendar calendar = Calendar.getInstance();
-                            int day = calendar.get(Calendar.DAY_OF_MONTH) - 1;
-                            System.out.println(day);
-                            if (i == day) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
                 case R.id.logout:
                     mAuth.signOut();
                     Intent intent6 = new Intent(HomeActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

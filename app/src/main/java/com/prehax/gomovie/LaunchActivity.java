@@ -53,24 +53,18 @@ public class LaunchActivity extends AppCompatActivity {
                             pref = movieGoer.getPreference();
 
                             if (pref.equals("Trending")) {
-                                System.out.println(pref);
                                 System.out.println("1");
                                 timer.schedule(timerTask1, 2000);
                             } else if (pref.equals("Upcoming")) {
-                                System.out.println(pref);
                                 System.out.println("2");
                                 timer.schedule(timerTask2, 2000);
                             } else {
-                                System.out.println(pref);
                                 System.out.println("3");
-                                timer.schedule(timerTask, 2000);
                             }
                         }
-                        System.out.println(pref);
 
                     }else {
-                        System.out.println(pref);
-                        System.out.println("3");
+                        System.out.println("0");
                         timer.schedule(timerTask, 2000);
                     }
                 }catch (NullPointerException e){

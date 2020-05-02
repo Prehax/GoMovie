@@ -14,8 +14,6 @@
         android:title="Purchase History" />
     <item android:id="@+id/shwCoupon"
         android:title="Coupons"/>
-    <item android:id="@+id/sign"
-        android:title="Sign" />
     <item android:id="@+id/logout"
         android:title="Logout" />
 </menu>
