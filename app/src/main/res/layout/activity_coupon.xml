@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BDBDBD"
     android:padding="15dp">
 
     <ImageView
@@ -14,6 +15,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
+        android:background="#263238"
+        android:textColor="#ffffff"
         android:text="List Coupons" />
 
     <Button
@@ -22,6 +25,8 @@
         android:layout_height="100dp"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="50dp"
+        android:background="#263238"
+        android:textColor="#ffffff"
         android:layout_toRightOf="@+id/btn_list"
         android:text="Add Coupons" />
 

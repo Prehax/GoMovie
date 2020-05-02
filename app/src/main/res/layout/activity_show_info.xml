@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:background="#263238"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,14 +18,14 @@
             android:layout_height="wrap_content"
             android:text="First Name: "
             android:textSize="16sp"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_sinfo_Fname"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="Test First Name"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
     </LinearLayout>
@@ -40,14 +41,14 @@
             android:layout_height="wrap_content"
             android:text="Last Name: "
             android:textSize="16sp"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_sinfo_Lname"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="Test Last Name"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
     </LinearLayout>
@@ -63,14 +64,14 @@
             android:layout_height="wrap_content"
             android:text="Street Address: "
             android:textSize="16sp"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_sinfo_address"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="Test Address"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
     </LinearLayout>
@@ -86,14 +87,14 @@
             android:layout_height="wrap_content"
             android:text="City: "
             android:textSize="16sp"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_sinfo_city"
             android:layout_width="160dp"
             android:layout_height="36dp"
             android:text="Test City"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
 
@@ -102,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="State: "
             android:textSize="16sp"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:layout_marginStart="15dp"/>
 
         <TextView
@@ -110,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="TS"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
 
@@ -127,14 +128,14 @@
             android:layout_height="wrap_content"
             android:text="Postal Code: "
             android:textSize="16sp"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_sinfo_zip"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="Test Zip"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
     </LinearLayout>
@@ -150,14 +151,14 @@
             android:layout_height="wrap_content"
             android:text="Time to Theater(min): "
             android:textSize="16sp"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_sinfo_Time"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:text="13"
-            android:textColor="#666666"
+            android:textColor="#B0BEC5"
             android:textSize="16sp"
             android:paddingEnd="10dp" />
     </LinearLayout>

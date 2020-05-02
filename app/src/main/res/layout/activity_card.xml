@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#263238"
     android:padding="15dp">
 
     <TextView
         android:id="@+id/tv_cardnametitle"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:textColor="#ffffff"
         android:layout_marginTop="80dp"
         android:gravity="center_vertical"
         android:textSize="20sp" />
@@ -17,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
+        android:backgroundTint="#455A64"
+        android:textColor="#ffffff"
         android:background="@drawable/et_style1"
         android:hint="Enter Card Holder Name"
         android:inputType="textPersonName"
@@ -28,6 +32,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:gravity="center_vertical"
+        android:textColor="#ffffff"
         android:textSize="20sp" />
     <EditText
         android:id="@+id/et_cnum"
@@ -38,6 +43,8 @@
         android:padding="10dp"
         android:layout_below="@+id/et_cname"
         android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
+        android:backgroundTint="#455A64"
         android:inputType="number"
         android:maxLength="19"
         android:maxLines="1"/>
@@ -55,8 +62,10 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:hint="    MM/YY  "
+        android:textColor="#ffffff"
         android:background="@drawable/et_style1"
         android:padding="10dp"
+        android:backgroundTint="#455A64"
         android:layout_below="@+id/et_cnum"
         android:layout_marginTop="30dp"
         android:inputType="date"
@@ -79,7 +88,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="50dp"
+        android:textColor="#ffffff"
         android:layout_marginTop="29dp"
+        android:backgroundTint="#455A64"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="50dp"
         android:layout_toEndOf="@+id/et_exp"

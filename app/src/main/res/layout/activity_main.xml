@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#263238"
     android:padding="15dp">
 
     <ImageView
@@ -18,7 +19,9 @@
         android:background="@drawable/et_style1"
         android:padding="10dp"
         android:layout_marginTop="180dp"
+        android:textColor="#ffffff"
         android:hint="Email"
+        android:backgroundTint="#455A64"
         android:drawableLeft="@drawable/icon_profile"
         android:drawablePadding="10dp"
         android:inputType="textEmailAddress" />
@@ -29,6 +32,8 @@
         android:layout_height="50dp"
         android:background="@drawable/et_style1"
         android:padding="10dp"
+        android:backgroundTint="#455A64"
+        android:textColor="#ffffff"
         android:layout_below="@+id/et_email"
         android:layout_marginTop="30dp"
         android:hint="Password"
@@ -59,6 +64,7 @@
             android:id="@+id/tv_qtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="Don't have an account?"
             android:textSize="16sp" />
 

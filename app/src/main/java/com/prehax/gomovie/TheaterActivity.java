@@ -85,6 +85,7 @@ public class TheaterActivity extends AppCompatActivity {
                             // 动态数组与Item对应的子项
                             new String[] { "name", "address", "rate" },
                             // XML文件里面的3个TextView ID
+
                             new int[] { R.id.Lcname, R.id.Lcaddress, R.id.Lcshowtime });
 
                     // Set Adapter

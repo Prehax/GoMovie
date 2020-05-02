@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#263238"
     android:padding="15dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
             android:id="@+id/tv_th_movieName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000"
+            android:textColor="#ffffff"
             android:text="MovieName"
             android:textSize="25sp"
             android:layout_weight="1"/>
@@ -42,6 +43,7 @@
             android:layout_height="40dp"
             android:id="@+id/tv_th_theaterName"
             android:text="theaterName"
+            android:textColor="#ffffff"
             android:textSize="16sp"
             android:layout_weight="1"
             />
@@ -50,6 +52,7 @@
             android:layout_height="40dp"
             android:id="@+id/tv_th_seatCode"
             android:text="seatCode"
+            android:textColor="#ffffff"
             android:textSize="16sp"
             android:layout_weight="1"
             />

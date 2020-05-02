@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#212121"
     tools:context=".MovieTrailerActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -63,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/MovieDescription"
+            android:textColor="#ffffff"
             android:text="Hello">
 
         </TextView>
@@ -81,5 +83,5 @@
         android:textSize="20sp"
         android:onClick="selTheater"
         android:layout_marginTop="560dp"
-        android:layout_gravity="bottom"/>
+        android:layout_marginBottom="40dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
