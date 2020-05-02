@@ -242,6 +242,7 @@ public class PaymentActivity extends AppCompatActivity {
                     tvNumOfPop.setText(Integer.toString(numOfPop));
                     numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
                     tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok - Integer.parseInt(couponDiscounts.get(position-1));
+
                     tvTAmount.setText(String.format("%.2f", tAmount));
                 }
             }
@@ -373,7 +374,7 @@ public class PaymentActivity extends AppCompatActivity {
         }
         Notification notiReminder = new NotificationCompat.Builder(this,"Reminder")
                 .setContentTitle("Movie Start Reminder")
-                .setContentText("Your movie is About to begin")
+                .setContentText("Your movie is about beginning")
                 .setSmallIcon(R.drawable.icon_main)
                 .setAutoCancel(true)
                 .build();

@@ -209,6 +209,8 @@ public class HomeActivity extends AppCompatActivity {
                     });
                 case R.id.logout:
                     mAuth.signOut();
+                    Intent intent6 = new Intent(HomeActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent6);
                     finish();
                 default:
                     return super.onOptionsItemSelected(item);
