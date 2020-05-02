@@ -47,8 +47,8 @@ import java.util.TimerTask;
 public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvNumOfPop, tvNumOfCok;
-    private Spinner spinMethod;
-    private int numOfPop=0, numOfCok=0, rateNum, showTimeID, theaterID, numOfSeatSed, numOfCol=10;
+    private Spinner spinMethod, spinCoupon;
+    private int numOfPop=0, numOfCok=0, rateNum, showTimeID, theaterID, numOfSeatSed, numOfCol=10, numOfCop=0;
     private double tAmount=0, rate;
     private double cokeprice=0,popprice=0;
     private FirebaseDatabase mFirebaseDatabase;
@@ -58,8 +58,8 @@ public class PaymentActivity extends AppCompatActivity {
     private String cardNumber, notiMsg, seatPosition="", movieName;
     private long numOfRecord=0,Rtime=0;
     private ArrayList<Integer> record;
-    private List<String> couponId;
-    private List<String> couponDiscount;
+    private ArrayList<String> couponNames = new ArrayList<String>();
+    private ArrayList<String> couponDiscounts = new ArrayList<String>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +84,7 @@ public class PaymentActivity extends AppCompatActivity {
         tvNumOfPop = findViewById(R.id.tv_pay_numPop);
         // Spinner Find ID
         spinMethod = findViewById(R.id.spin_pay_method);
+        spinCoupon = findViewById(R.id.spin_pay_coupon);
         // Ticket Information
         final Bundle bundle = getIntent().getExtras();
         movieName = bundle.getString("movieName");
@@ -157,10 +158,18 @@ public class PaymentActivity extends AppCompatActivity {
                 ArrayAdapter arrayAdapter = new ArrayAdapter(PaymentActivity.this, R.layout.item_select, mList);
                 spinMethod.setAdapter(arrayAdapter);
 
-                couponDiscount = (List<String>) dataSnapshot.child("A8bNPGi45tRXkjlCxjzpDCpZPvG2").child("CouponDiscount").getValue();
-                for(int i=0;i<couponDiscount.size();i++) {
-                    System.out.print(couponDiscount.get(i));
+                // Read coupon information and use it in spinner
+                numOfCop = (int) dataSnapshot.child("Coupons").getChildrenCount();
+                ArrayList<String> couponItem = new ArrayList<String>();
+                couponItem.add("None");
+                for (int i = 0; i<numOfCop; i++) {
+                    couponNames.add(dataSnapshot.child("Coupons").child(Integer.toString(i)).child("couponName").getValue(String.class));
+                    couponDiscounts.add(dataSnapshot.child("Coupons").child(Integer.toString(i)).child("couponDiscount").getValue(String.class));
+                    couponItem.add(couponNames.get(i) +" =======> $"+couponDiscounts.get(i)+".00");
                 }
+                ArrayAdapter arrayCouponAdapter = new ArrayAdapter(PaymentActivity.this, R.layout.item_select, couponItem);
+                spinCoupon.setAdapter(arrayCouponAdapter);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -215,6 +224,29 @@ public class PaymentActivity extends AppCompatActivity {
                 tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok;
                 tvTAmount.setText(String.format("%.2f", tAmount));
             }
+        });
+        // Spinner Coupon set Action
+        spinCoupon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
+                    if (numOfPop>0) numOfPop--;
+                    tvNumOfPop.setText(Integer.toString(numOfPop));
+                    numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
+                    tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok;
+                    tvTAmount.setText(String.format("%.2f", tAmount));
+                } else {
+                    numOfPop=Integer.parseInt(tvNumOfPop.getText().toString());
+                    if (numOfPop>0) numOfPop--;
+                    tvNumOfPop.setText(Integer.toString(numOfPop));
+                    numOfCok=Integer.parseInt(tvNumOfCok.getText().toString());
+                    tAmount = 8*numOfTic+popprice*numOfPop+cokeprice*numOfCok - Integer.parseInt(couponDiscounts.get(position-1));
+                    tvTAmount.setText(String.format("%.2f", tAmount));
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         // Cancel button
@@ -295,14 +327,10 @@ public class PaymentActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 1) {
                     // Pop a window, allow user to enter Card Details
-
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
