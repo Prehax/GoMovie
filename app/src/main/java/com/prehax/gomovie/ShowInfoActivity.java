@@ -29,7 +29,7 @@ public class ShowInfoActivity extends AppCompatActivity {
     private String userID;
 
     private Button btnModify, btnBack;
-    private TextView tvFname, tvLname, tvAddress, tvCity, tvState, tvZip, tvTime;
+    private TextView tvFname, tvLname, tvAddress, tvCity, tvState, tvZip, tvTime, tvPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,7 @@ public class ShowInfoActivity extends AppCompatActivity {
         tvState = findViewById(R.id.tv_sinfo_state);
         tvZip = findViewById(R.id.tv_sinfo_zip);
         tvTime = findViewById(R.id.tv_sinfo_Time);
+        tvPref = findViewById(R.id.tv_pref);
         btnModify.setOnClickListener(new View.OnClickListener() {
             // Jump to Editable PersonalInfoActivity
             @Override
@@ -93,6 +94,7 @@ public class ShowInfoActivity extends AppCompatActivity {
                     tvState.setText(movieGoer.getState());
                     tvZip.setText(movieGoer.getZip());
                     tvTime.setText(movieGoer.getTime());
+                    tvPref.setText(movieGoer.getPreference());
                 } catch (NullPointerException e) {
                     Toast.makeText(ShowInfoActivity.this, "You don't have info saved yet", Toast.LENGTH_SHORT).show();
                 }

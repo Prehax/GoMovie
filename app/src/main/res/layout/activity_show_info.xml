@@ -162,6 +162,29 @@
             android:paddingEnd="10dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preference: "
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tv_pref"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="default"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:paddingEnd="10dp" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_sinfo_modify"

@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PersonInfoActivity extends AppCompatActivity {
 
     private static final String TAG = "PersonInfoActivity";
-    private EditText etFname, etLname, etAddress, etCity, etState, etZip, etTime;
+    private EditText etFname, etLname, etAddress, etCity, etState, etZip, etTime, etPref;
     // Objects for Database
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
@@ -45,6 +45,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         etState = findViewById(R.id.et_pinfo_state);
         etZip = findViewById(R.id.et_pinfo_zip);
         etTime = findViewById(R.id.et_time);
+        etPref = findViewById(R.id.et_pref);
         // Bind Button variable to ID
         Button btn_confirm = findViewById(R.id.btn_pinfo_confirm);
         Button btn_cancel = findViewById(R.id.btn_pinfo_cancel);
@@ -88,6 +89,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                     etState.setText(movieGoer.getState());
                     etZip.setText(movieGoer.getZip());
                     etTime.setText(movieGoer.getTime());
+                    etPref.setText(movieGoer.getPreference());
                 } catch (NullPointerException e) {}
             }
             @Override
@@ -108,6 +110,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                 String State = etState.getText().toString().trim();
                 String Zip = etZip.getText().toString().trim();
                 String Time = etTime.getText().toString().trim();
+                String Pref = etPref.getText().toString().trim();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID  = user.getUid();
 
@@ -118,6 +121,8 @@ public class PersonInfoActivity extends AppCompatActivity {
                 myRef.child("MovieGoers").child(userID).child("State").setValue(State);
                 myRef.child("MovieGoers").child(userID).child("Zip").setValue(Zip);
                 myRef.child("MovieGoers").child(userID).child("Time").setValue(Time);
+                myRef.child("MovieGoers").child(userID).child("Preference").setValue(Pref);
+
 
                 Toast.makeText(PersonInfoActivity.this, "Save Successfully", Toast.LENGTH_SHORT).show();
                 finish();

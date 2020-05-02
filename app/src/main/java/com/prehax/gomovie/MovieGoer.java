@@ -3,19 +3,19 @@ package com.prehax.gomovie;
 import androidx.annotation.Nullable;
 
 public class MovieGoer {
-    private String Fname="", Lname="", Address="", City="", State="", Zip="", pref="";
+    private String Fname="", Lname="", Address="", City="", State="", Zip="", Preference="";
 
     private String Time="";
     private String CardHoldername="", CardNumber="", ExpDate="", CVV="";
 
 
 
-    public String getPref() {
-        return pref;
+    public String getPreference() {
+        return Preference;
     }
 
-    public void setPref(String pref) {
-        this.pref = pref;
+    public void setPreference(String preference) {
+        this.Preference = preference;
     }
 
     public String getTime() {
