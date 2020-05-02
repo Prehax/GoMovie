@@ -152,7 +152,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent2);
                     return true;
                 case R.id.Showcard:
-                    Intent intent3 = new Intent(HomeActivity.this, ShowCardActivity.class);
+                    Intent intent3 = new Intent(HomeActivity.this, WatchListActivity.class);
                     startActivity(intent3);
                     return true;
                 case R.id.WatchList:

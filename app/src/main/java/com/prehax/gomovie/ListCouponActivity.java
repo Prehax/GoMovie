@@ -51,7 +51,7 @@ public class ListCouponActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
           @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-             couponId = (List<String>) dataSnapshot.child(userID).child("CouponId").getValue();
+             couponId = (List<String>) dataSnapshot.child("A8bNPGi45tRXkjlCxjzpDCpZPvG2").child("CouponId").getValue();
          //    couponDiscount = (List<String>) dataSnapshot.child(userID).child("CouponDiscount").getValue();
              arrayAdapter.notifyDataSetChanged();
               for(int i=0;i<couponId.size();i++) {

@@ -169,10 +169,9 @@ public class PaymentActivity extends AppCompatActivity {
                 ArrayAdapter arrayAdapter = new ArrayAdapter(PaymentActivity.this, R.layout.item_select, mList);
                 spinMethod.setAdapter(arrayAdapter);
 
-                couponDiscount = (List<String>) dataSnapshot.child(userID).child("CouponDiscount").getValue();
+                couponDiscount = (List<String>) dataSnapshot.child("A8bNPGi45tRXkjlCxjzpDCpZPvG2").child("CouponDiscount").getValue();
                 for(int i=0;i<couponDiscount.size();i++) {
-                  //  get the coupon id as couponId.get(i) and coupon Discount as couponDiscount.get(i)
-                  // use index to get the exact coupon data
+
                 }
 
             }

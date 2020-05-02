@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/status"
-        android:title="Movie Status" />
-    <item android:id="@+id/coupons"
-        android:title="Coupons" />
     <item android:id="@+id/addShowTime"
         android:title="AddShowTime"/>
     <item android:id="@+id/logout"

@@ -133,7 +133,7 @@ public class Upcoming_Activity extends AppCompatActivity {
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_homemenu, menu);
+        getMenuInflater().inflate(R.menu.activity_upcomingmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -143,29 +143,11 @@ public class Upcoming_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Upcoming_Activity.this, Trending_Activity.class);
                 startActivity(intent);
                 return true;
-            case R.id.upcoming:
+            case R.id.Latest:
                 Intent intent1 = new Intent(Upcoming_Activity.this, HomeActivity.class);
                 startActivity(intent1);
                 return true;
-            case R.id.ShowInfo:
-                Intent intent2 = new Intent(Upcoming_Activity.this, ShowInfoActivity.class);
-                startActivity(intent2);
-                return true;
-            case R.id.Showcard:
-                Intent intent3 = new Intent(Upcoming_Activity.this, ShowCardActivity.class);
-                startActivity(intent3);
-                return  true;
-            case R.id.WatchList:
-                Intent intent4 = new Intent(Upcoming_Activity.this, WatchListActivity.class);
-                startActivity(intent4);
-                return true;
-            case R.id.shwCoupon:
-                Intent intent5 = new Intent(Upcoming_Activity.this,ListCouponActivity.class);
-                startActivity(intent5);
-                return true;
-            case R.id.logout:
-                mAuth.signOut();
-                finish();
+
             default:
                 return super.onOptionsItemSelected(item);
         }

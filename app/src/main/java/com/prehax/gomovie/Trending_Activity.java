@@ -102,39 +102,20 @@ public class Trending_Activity extends AppCompatActivity {
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_homemenu, menu);
+        getMenuInflater().inflate(R.menu.activity_trendingmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.trending:
-                Intent intent = new Intent(Trending_Activity.this, HomeActivity.class);
-                startActivity(intent);
-                return true;
             case R.id.upcoming:
                 Intent intent1 = new Intent(Trending_Activity.this, Upcoming_Activity.class);
                 startActivity(intent1);
                 return true;
-            case R.id.ShowInfo:
-                Intent intent2 = new Intent(Trending_Activity.this, ShowInfoActivity.class);
-                startActivity(intent2);
-                return true;
-            case R.id.Showcard:
-                Intent intent3 = new Intent(Trending_Activity.this, ShowCardActivity.class);
-                startActivity(intent3);
-                return  true;
-            case R.id.WatchList:
-                Intent intent4 = new Intent(Trending_Activity.this, WatchListActivity.class);
-                startActivity(intent4);
-                return true;
-            case R.id.shwCoupon:
-                Intent intent5 = new Intent(Trending_Activity.this,ListCouponActivity.class);
+            case R.id.Latest:
+                Intent intent5 = new Intent(Trending_Activity.this,HomeActivity.class);
                 startActivity(intent5);
                 return true;
-            case R.id.logout:
-                mAuth.signOut();
-                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

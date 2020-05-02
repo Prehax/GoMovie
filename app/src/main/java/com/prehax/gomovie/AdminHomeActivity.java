@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,10 +24,15 @@ public class AdminHomeActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     private String userID;
+    private Button buttonMovie , buttonCoupons;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminhome);
+
+        buttonMovie = (Button) findViewById(R.id.button_MovieStatus);
+        buttonCoupons = (Button) findViewById(R.id.button_Coupons);
+
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
@@ -43,7 +50,26 @@ public class AdminHomeActivity extends AppCompatActivity {
                 }
             }
         };
+
+        buttonMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminHomeActivity.this, AdminUpcoimingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonCoupons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(AdminHomeActivity.this, CouponActivity.class);
+                startActivity(intent1);
+            }
+        });
     }
+
+
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_adminhomemenu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -51,15 +77,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
-            case R.id.status:
-                Intent intent = new Intent(AdminHomeActivity.this, Upcoming_Activity.class);
-                startActivity(intent);
-                return true;
 
-            case R.id.coupons:
-                Intent intent1 = new Intent(AdminHomeActivity.this, CouponActivity.class);
-                startActivity(intent1);
-                return true;
             case R.id.addShowTime:
                 Intent intent2 = new Intent(AdminHomeActivity.this, AddShowTimeActivity.class);
                 startActivity(intent2);
