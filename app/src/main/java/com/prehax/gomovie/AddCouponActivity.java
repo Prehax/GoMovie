@@ -23,10 +23,8 @@ import java.util.List;
 public class AddCouponActivity extends AppCompatActivity {
     private static final String TAG = "AddCouponActivity";
     private EditText etcouponName, etcouponId, etcouponDiscount;
-    private String userID;
-    private int count,count1,count2;
-    private FirebaseAuth mAuth;
     private DatabaseReference myRef;
+    private int numOfCop;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,40 +34,25 @@ public class AddCouponActivity extends AppCompatActivity {
         etcouponId = findViewById(R.id.et_couponid);
         etcouponDiscount = findViewById(R.id.et_coupondiscount);
 
-        mAuth = FirebaseAuth.getInstance();
-        final FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
         myRef = FirebaseDatabase.getInstance().getReference();
 
         Button btn_save = findViewById(R.id.btn_addcoupon1);
-        myRef.child("Coupon").addValueEventListener(new ValueEventListener() {
+        myRef.child("Coupons").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> couponName = (List<String>) dataSnapshot.child(userID).child("CouponName").getValue();
-                List<String> couponId = (List<String>) dataSnapshot.child(userID).child("CouponId").getValue();
-                List<String> couponDiscount = (List<String>) dataSnapshot.child(userID).child("CouponDiscount").getValue();
-                 if(couponName!=null) {
-                     count = couponName.size();
-                     count1 = couponId.size();
-                     count2 = couponDiscount.size();
-                 }
-
+                 numOfCop = (int)dataSnapshot.getChildrenCount();
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("AddCouponActivity",userID);
                 Log.d("AddCouponActivity",etcouponName.getText().toString());
-                myRef.child("Coupon").child(userID).child("CouponName").child(String.valueOf(count)).setValue(etcouponName.getText().toString());
-                myRef.child("Coupon").child(userID).child("CouponId").child(String.valueOf(count1)).setValue(etcouponId.getText().toString());
-                myRef.child("Coupon").child(userID).child("CouponDiscount").child(String.valueOf(count2)).setValue(etcouponDiscount.getText().toString());
+                myRef.child("Coupons").child(String.valueOf(numOfCop)).child("couponName").setValue(etcouponName.getText().toString());
+                myRef.child("Coupons").child(String.valueOf(numOfCop)).child("couponId").setValue(etcouponId.getText().toString());
+                myRef.child("Coupons").child(String.valueOf(numOfCop)).child("couponDiscount").setValue(etcouponDiscount.getText().toString());
                 //System.out.println("count:"+count+"count1:"+count1+"count2:"+count2);
                 Toast.makeText(AddCouponActivity.this,"Saved",Toast.LENGTH_SHORT).show();
                 finish();

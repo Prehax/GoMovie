@@ -4,9 +4,6 @@ class Coupon{
 
         private String couponName,couponId,couponDiscount;
 
-
-
-
         public String getcouponName(){ return couponName; }
         public void setCouponName(String CouponName){this.couponName=couponName;}
         public String getcouponId(){return couponId;}

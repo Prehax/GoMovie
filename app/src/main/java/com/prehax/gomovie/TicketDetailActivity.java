@@ -124,10 +124,19 @@ public class TicketDetailActivity extends AppCompatActivity {
             btnRate.setText("Can not rate");
             btnRate.setTextColor(getResources().getColor(R.color.colorLightGrey));
         }
+        if (timeresult<0) {
+            btnRefund.setClickable(false);
+            btnRefund.setTextColor(getResources().getColor(R.color.colorLightGrey));
+        }
+
         // If this ticket is already rated
         if (bundle.getBoolean("isRated")) {
             btnRate.setClickable(false);
             btnRate.setText("Rated");
+            btnRate.setTextColor(getResources().getColor(R.color.colorLightGrey));
+        }
+        if (timeresult>0) {
+            btnRate.setClickable(false);
             btnRate.setTextColor(getResources().getColor(R.color.colorLightGrey));
         }
     }
