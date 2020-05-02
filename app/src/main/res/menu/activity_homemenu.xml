@@ -12,8 +12,6 @@
         android:title="Favorites"/>
     <item android:id="@+id/purchaseHistory"
         android:title="Purchase History" />
-    <item android:id="@+id/addShowTime"
-        android:title="Add ShowTime" />
     <item android:id="@+id/shwCoupon"
         android:title="Coupons"/>
     <item android:id="@+id/sign"

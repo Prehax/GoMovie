@@ -60,6 +60,10 @@ public class AdminHomeActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(AdminHomeActivity.this, CouponActivity.class);
                 startActivity(intent1);
                 return true;
+            case R.id.addShowTime:
+                Intent intent2 = new Intent(AdminHomeActivity.this, AddShowTimeActivity.class);
+                startActivity(intent2);
+                return true;
 
             case R.id.logout:
                 mAuth.signOut();

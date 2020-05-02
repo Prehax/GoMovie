@@ -4,7 +4,10 @@
         android:title="Movie Status" />
     <item android:id="@+id/coupons"
         android:title="Coupons" />
+    <item android:id="@+id/addShowTime"
+        android:title="AddShowTime"/>
     <item android:id="@+id/logout"
         android:title="Logout"/>
+
 
 </menu>

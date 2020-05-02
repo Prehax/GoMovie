@@ -20,6 +20,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvStatus, tvNumOfPop, tvNumOfCok;
     private Button btnConfirm, btnRefund, btnRate;
@@ -98,6 +102,18 @@ public class TicketDetailActivity extends AppCompatActivity {
             }
         });
         // If this ticket is already refunded
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = new Date();
+        try {
+            date = simpleDateFormat.parse(ticInfo[2]);
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+        Long showtime = date.getTime();
+        Long ctime = System.currentTimeMillis();
+        Long timeresult = showtime - ctime;
+
+
         if (ticInfo[4].equals("REFUNDED")) {
             // Make refund button unclickable
             btnRefund.setClickable(false);

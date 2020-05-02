@@ -162,9 +162,6 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.purchaseHistory:
                     startActivity(new Intent(HomeActivity.this,TicketHistoryActivity.class));
                     return true;
-                case R.id.addShowTime:
-                    startActivity(new Intent(HomeActivity.this, AddShowTimeActivity.class));
-                    return true;
                 case R.id.shwCoupon:
                     Intent intent5 = new Intent(HomeActivity.this,ListCouponActivity.class);
                     startActivity(intent5);
