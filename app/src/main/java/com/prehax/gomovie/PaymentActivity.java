@@ -48,7 +48,7 @@ public class PaymentActivity extends AppCompatActivity {
     private Button btnConfirm, btnCancel, btnMpop, btnApop, btnMcok, btnAcok;
     private TextView tvMovie, tvTheater, tvTime, tvSeat, tvNum, tvTAmount, tvNumOfPop, tvNumOfCok;
     private Spinner spinMethod;
-    private int numOfPop=0, numOfCok=0, rateNum, showTimeID, theaterID, numOfSeatSed;
+    private int numOfPop=0, numOfCok=0, rateNum, showTimeID, theaterID, numOfSeatSed, numOfCol=10;
     private double tAmount=0, rate;
     private double cokeprice=0,popprice=0;
     private FirebaseDatabase mFirebaseDatabase;
@@ -87,32 +87,20 @@ public class PaymentActivity extends AppCompatActivity {
         // Ticket Information
         final Bundle bundle = getIntent().getExtras();
         movieName = bundle.getString("movieName");
-//        movieName = ("Bloodshot");
         tvMovie.setText(movieName);
         tvTheater.setText(bundle.getString("theaterName"));
         tvTime.setText(bundle.getString("showTimeName"));
-//        tvTheater.setText("Nuart");
-//        tvTime.setText("2020-05-01 23:59");
         // Get showTimeID, theaterID
         showTimeID = bundle.getInt("showTimeID");
         theaterID = bundle.getInt("theaterID");
-//        showTimeID = (0);
-//        theaterID = (0);
-
+        numOfCol = bundle.getInt("numOfCol");
         tvSeat.setText(bundle.getString("seatCode"));
         record = bundle.getIntegerArrayList("seatCode");
-//        record = new ArrayList<Integer>();
-//        record.add(12);
         final int numOfTic = record.size();
         int col, row;
         for (int i = 0; i<numOfTic; i++) {
-            if (record.get(i)>10) {
-                col = record.get(i)%10 + 1;
-                row = record.get(i)/10 + 1;
-            } else {
-                col = record.get(i) + 1;
-                row = 1;
-            }
+            col = record.get(i)%numOfCol + 1;
+            row = record.get(i)/numOfCol + 1;
             seatPosition += "Col:"+col+" Row:"+row+"; ";
         }
 
@@ -171,9 +159,8 @@ public class PaymentActivity extends AppCompatActivity {
 
                 couponDiscount = (List<String>) dataSnapshot.child("A8bNPGi45tRXkjlCxjzpDCpZPvG2").child("CouponDiscount").getValue();
                 for(int i=0;i<couponDiscount.size();i++) {
-
+                    System.out.print(couponDiscount.get(i));
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

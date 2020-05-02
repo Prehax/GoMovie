@@ -115,15 +115,6 @@ public class TheaterActivity extends AppCompatActivity {
                 //-----------------------------
             }
         });
-        // On Hold
-        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-            @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                menu.setHeaderTitle("Menu");
-                menu.add(0,0,0, "Facilities");
-                menu.add(0,1,0, "PopUp menu 2");
-            }
-        });
         // OnLong Click
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
