@@ -156,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent3);
                     return true;
                 case R.id.WatchList:
-                    Intent intent4 = new Intent(HomeActivity.this, AdminUpcoimingActivity.class);
+                    Intent intent4 = new Intent(HomeActivity.this, WatchListActivity.class);
                     startActivity(intent4);
                     return true;
                 case R.id.purchaseHistory:

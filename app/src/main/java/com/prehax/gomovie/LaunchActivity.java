@@ -33,10 +33,12 @@ public class LaunchActivity extends AppCompatActivity {
         @Override
         public void run() {
             FirebaseUser user = mAuth.getCurrentUser();
-            if (user!=null) {
-                startActivity(new Intent(LaunchActivity.this, HomeActivity.class));
-            } else {
+            if (user==null) {
                 startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+            } else if (user.getUid().equals("A8bNPGi45tRXkjlCxjzpDCpZPvG2")){
+                startActivity(new Intent(LaunchActivity.this, AdminHomeActivity.class));
+            } else {
+                startActivity(new Intent(LaunchActivity.this, HomeActivity.class));
             }
             finish();
         }

@@ -85,6 +85,8 @@ public class AdminHomeActivity extends AppCompatActivity {
 
             case R.id.logout:
                 mAuth.signOut();
+                Intent intent = new Intent(AdminHomeActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
 
             default:
